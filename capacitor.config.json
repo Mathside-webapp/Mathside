@@ -4,5 +4,12 @@
   "webDir": "www",
   "server": {
     "androidScheme": "https"
+  },
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": [
+        "sound"
+      ]
+    }
   }
 }

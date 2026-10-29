@@ -4,7 +4,7 @@
   "private": true,
   "description": "Mathside classroom website and Capacitor Android app with Supabase, Cloudflare R2 and loading-button feedback.",
   "scripts": {
-    "test": "node --test tests/network-button-states.test.cjs tests/r2-storage.test.cjs tests/r2-teacher-attachments.test.cjs",
+    "test": "node --test tests/network-button-states.test.cjs tests/r2-storage.test.cjs tests/r2-teacher-attachments.test.cjs tests/mathside-push.test.cjs",
     "build:web": "node scripts/prepare-web.mjs",
     "android:add": "npm run build:web && npx cap add android",
     "android:sync": "npm run build:web && npx cap sync android",
@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@capacitor/android": "8.5.3",
-    "@capacitor/core": "8.5.3"
+    "@capacitor/core": "8.5.3",
+    "@capacitor/push-notifications": "8.1.3"
   },
   "devDependencies": {
     "@capacitor/cli": "8.5.3"

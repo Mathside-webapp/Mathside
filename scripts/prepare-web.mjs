@@ -44,7 +44,7 @@ if (url || key) {
     console.log('Using existing js/config.js frontend configuration.');
   }
 }
-for (const required of ['js/network-button-states.js','css/network-button-states.css','js/r2-storage.js','js/v10-features.js','js/v15-performance-tasks.js']) {
+for (const required of ['js/network-button-states.js','css/network-button-states.css','js/mathside-push.js','css/mathside-push.css','js/r2-storage.js','js/v10-features.js','js/v15-performance-tasks.js']) {
   if (!existsSync(path.join(web,required))) throw new Error(`Missing required website file: ${required}`);
 }
 console.log('Mathside web bundle ready in www/. (Includes Cloudflare R2 and loading buttons.)');

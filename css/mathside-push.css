@@ -1,0 +1,17 @@
+/* Android-only permission shortcut; hidden on the Mathside website. */
+[data-mathside-push-enable] { display: none !important; }
+.mathside-native-android [data-mathside-push-enable] { display: inline-flex !important; }
+#mathside-push-banner {
+  position: fixed; z-index: 100000; top: max(14px, env(safe-area-inset-top));
+  right: 14px; left: 14px; margin-inline: auto; width: min(460px, calc(100% - 28px));
+  display: grid; gap: 4px; padding: 14px 40px 14px 17px; box-sizing: border-box;
+  background: #fff; color: #243047; border: 1px solid #eed9c8; border-left: 4px solid #ef7600;
+  border-radius: 14px; box-shadow: 0 10px 35px rgb(32 40 55 / 19%); font: 14px/1.45 system-ui,sans-serif;
+}
+#mathside-push-banner strong { font-size: 14px; }
+#mathside-push-banner span { overflow-wrap: anywhere; }
+#mathside-push-banner button {
+  position:absolute; right:8px; top:7px; border:0; background:transparent;
+  font: 22px/1 sans-serif; cursor:pointer; min-height: 32px; min-width: 32px; color:#536070;
+}
+@media (prefers-reduced-motion: reduce) { #mathside-push-banner { transition: none; } }

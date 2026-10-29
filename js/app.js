@@ -927,6 +927,8 @@ async function loadCurrentIdentity() {
 async function routeAuthenticatedUser() {
   if (!db) return;
   await loadCurrentIdentity();
+  // Enable Firebase registration only on native Android. Never block login if offline.
+  window.MathsidePush?.signIn(db, state.user.id).catch(error => console.warn('Push registration:', error));
   if (state.profile.role === 'teacher') {
     await loadTeacherData();
     openTeacherApp();
@@ -947,6 +949,7 @@ async function signOut(message) {
       // Mathside should sign out only this browser/device. Supabase's default
       // JavaScript scope is global, which revokes every active session and can
       // make a simple sign-out feel unnecessarily slow.
+      await window.MathsidePush?.signOut();
       const { error } = await db.auth.signOut({ scope: 'local' });
       if (error) throw error;
       resetState();
@@ -4488,6 +4491,7 @@ $('#gradeForm').addEventListener('submit', async event => {
 if (db) {
   db.auth.onAuthStateChange((event) => {
     if (event === 'SIGNED_OUT') {
+      window.MathsidePush?.localSignOut();
       resetState();
       returnPublic();
     }

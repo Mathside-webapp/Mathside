@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "594836175802",
+    "project_id": "mathside-6171f",
+    "storage_bucket": "mathside-6171f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594836175802:android:b5f267a89fa451c66a7b83",
+        "android_client_info": {
+          "package_name": "com.mathside.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCas2rU3HP_zdG9Sf2Xt8KDZDnvHglAZk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
