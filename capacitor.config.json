@@ -1,0 +1,8 @@
+{
+  "appId": "com.mathside.app",
+  "appName": "Mathside",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

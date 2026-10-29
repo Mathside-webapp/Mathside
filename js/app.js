@@ -416,11 +416,13 @@ async function withLoading(title, message, fn) {
 // APIs so the same flow works in iOS Safari, Android Chrome, and desktop browsers.
 function startActionButton(button, busyText = 'Working…') {
   if (!button || button.dataset.mathsideBusy === '1') return false;
+  window.MathsideNetworkButtons?.handoff(button);
   button.dataset.mathsideBusy = '1';
   button.dataset.mathsideOriginalText = button.textContent || '';
   button.dataset.mathsideOriginalDisabled = button.disabled ? '1' : '0';
   button.disabled = true;
   button.setAttribute('aria-busy', 'true');
+  button.classList.add('mathside-manual-busy');
   button.textContent = busyText;
   return true;
 }
@@ -435,13 +437,14 @@ function resetActionButton(button) {
   button.removeAttribute('data-mathside-busy');
   delete button.dataset.mathsideOriginalText;
   delete button.dataset.mathsideOriginalDisabled;
-  button.classList.remove('action-done');
+  button.classList.remove('action-done', 'mathside-manual-busy');
 }
 
 async function finishActionButton(button, doneText = 'Done', holdMs = 420) {
   if (!button) return;
   button.textContent = doneText;
   button.classList.add('action-done');
+  button.classList.remove('mathside-manual-busy');
   button.setAttribute('aria-busy', 'false');
   if (holdMs > 0) await sleep(holdMs);
   resetActionButton(button);
