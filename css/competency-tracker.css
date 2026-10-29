@@ -1,0 +1,242 @@
+.ct-create-field{margin:16px 0;padding:17px;border:1px solid #f1d6b4;border-radius:17px;background:#fff8f0}.ct-label{display:block;font-weight:750;margin-bottom:9px}.ct-choice{display:flex;gap:9px}.ct-choice select{flex:1;min-width:0;padding:12px;border:1px solid #e9cba7;border-radius:10px}.ct-create-field small{display:block;margin-top:9px;color:#795d40}.ct-dialog{width:min(880px,96vw);max-height:88vh;border:0;border-radius:22px;padding:0}.ct-manager{padding:24px;overflow:auto;max-height:85vh}.ct-head,.ct-new,.ct-bulk,.ct-activity{display:flex;gap:12px;align-items:center}.ct-head{justify-content:space-between}.ct-new,.ct-bulk{margin:18px 0;flex-wrap:wrap}.ct-new input,.ct-bulk input,.ct-bulk select,.ct-row-select{border:1px solid #ead4bc;border-radius:10px;padding:11px;min-width:0}.ct-new input{flex:1}.ct-bulk input{flex:1}.ct-activity{padding:13px 8px;border-bottom:1px solid #f2e8dc}.ct-activity-text{flex:1;min-width:0}.ct-activity-text strong,.ct-activity-text small{display:block}.ct-activity-text small{color:#8a6a4d;margin-top:4px}.ct-row-select{width:34%}.ct-student-content{padding:18px 0}.ct-line-scroll{overflow-x:auto;padding:22px 8px 14px}.ct-line{display:flex;align-items:flex-start;min-width:max-content}.ct-node{width:160px;position:relative;flex-shrink:0;background:none;border:0;display:flex;align-items:center;flex-direction:column;gap:10px;cursor:pointer;color:inherit}.ct-node:not(:last-child):after{content:'';position:absolute;top:25px;left:calc(50% + 27px);width:calc(100% - 54px);height:4px;background:#e8c8a5}.ct-circle{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#ffdfb8;color:#8b480d;border:3px solid #eeb577;font-weight:800;position:relative;z-index:1}.ct-mastered .ct-circle{background:#e88b24;color:white}.ct-unassessed .ct-circle{background:#e9e9e9;color:#777;border-color:#d0d0d0}.ct-selected .ct-circle{outline:3px solid #c06b10;outline-offset:3px}.ct-node-name{font-size:13px;font-weight:650;max-width:135px;text-align:center}.ct-detail{background:white;border:1px solid #f0d8bd;border-radius:18px;padding:22px;margin-top:18px}.ct-score{font-size:32px;color:#b75e0e}.ct-history{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #eee}.ct-empty{padding:24px;border:1px dashed #edc89f;border-radius:16px;color:#75583d}@media(max-width:600px){.ct-activity{flex-wrap:wrap}.ct-row-select{width:100%}.ct-manager{padding:14px}.ct-node{width:140px}}
+
+.ct-page{padding:24px;max-width:1250px;margin:0 auto}.ct-page-hero{padding:32px;border-radius:24px;background:linear-gradient(115deg,#fff0d9,#ffcf94);color:#69330d;margin-bottom:20px}.ct-page-hero h1{font-size:clamp(25px,3vw,36px);margin:8px 0}.ct-page-hero p{max-width:680px}.ct-page-card{background:white;border:1px solid #f2dfc9;border-radius:22px;padding:24px}.ct-page-note{padding:14px 18px;background:#fff7eb;border:1px solid #f4d7b5;border-radius:12px;color:#7c471d;margin:18px 0}.ct-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.ct-filters label{font-weight:700;color:#76471f}.ct-filters select{display:block;width:100%;padding:12px;margin-top:7px;border:1px solid #e7c8a5;border-radius:12px;background:white}.ct-page .ct-head{align-items:flex-start}.ct-page .ct-bulk{background:#fff8f0;padding:14px;border-radius:14px}.ct-page .ct-activity{background:white}.ct-page .ct-teacher-list{max-height:55vh;overflow:auto}@media(max-width:700px){.ct-filters{grid-template-columns:1fr}.ct-page{padding:12px}.ct-page-card{padding:14px}}
+
+.ct-summary-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}.ct-summary-cards>div{border-radius:16px;background:#fff5e9;border:1px solid #f3dfc8;padding:17px;display:flex;flex-direction:column;gap:5px}.ct-summary-cards strong{font-size:25px;color:#a85309}.ct-summary-cards span{font-size:12px;color:#775e49}.ct-dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.ct-dashboard-panel{border:1px solid #f0ddc9;border-radius:18px;padding:18px;min-width:0}.ct-dashboard-panel h3{margin:0 0 6px}.ct-summary-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:13px 0;border-bottom:1px solid #f3e9de}.ct-summary-row small,.ct-student-row small{display:block;color:#8a7463;font-size:12px;margin-top:4px}.ct-summary-row>b{color:#a85309}.ct-bar{grid-column:1/-1;background:#f3e5d6;border-radius:10px;height:9px;overflow:hidden}.ct-bar span{display:block;background:#ee8b22;height:100%;border-radius:10px}.ct-student-row{border-bottom:1px solid #f0e4d8;padding:13px 0}.ct-student-row summary{display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px}.ct-student-row summary b{color:#a85309}.ct-mini-line{display:flex;overflow-x:auto;gap:0;padding:18px 0}.ct-mini-node{min-width:105px;flex:1;text-align:center;position:relative}.ct-mini-node:not(:last-child):after{content:'';position:absolute;top:20px;left:calc(50% + 23px);width:calc(100% - 46px);height:3px;background:#efcfa9}.ct-mini-node>span{position:relative;z-index:1;display:grid;place-items:center;margin:auto;width:42px;height:42px;border-radius:50%;background:#ffddaf;color:#894a12;font-weight:750;font-size:12px}.ct-mini-node>span.mastered{background:#e88b24;color:#fff}.ct-mini-node>span.empty{background:#e5e5e5;color:#777}.ct-mini-node small{padding:0 5px;overflow-wrap:anywhere}.ct-dashboard-footnote{font-size:12px;color:#806b58;margin:18px 0}.ct-manage-details{margin-top:25px;border-top:1px solid #f0ddc9;padding-top:18px}.ct-manage-details>summary{cursor:pointer;font-weight:700;color:#a85309;padding:12px}.ct-dashboard-status{color:#86664c;font-size:13px;margin-top:12px}@media(max-width:850px){.ct-dashboard-grid{grid-template-columns:1fr}.ct-summary-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* v4: competency view is inside teacher workspace, not a detached page */
+#teacherApp #view-competencies.ct-page{width:100%;max-width:100%;min-width:0;margin:0;padding:0;box-sizing:border-box;overflow:visible}
+#teacherApp #view-competencies .ct-manager{max-height:none;overflow:visible;padding:0}
+#teacherApp #view-competencies .ct-page-card{width:100%;min-width:0;box-sizing:border-box}
+#teacherApp #view-competencies .ct-page-hero{box-sizing:border-box}
+#teacherApp #view-competencies .ct-filters{min-width:0}
+@media(max-width:850px){#teacherApp #view-competencies .ct-filters{grid-template-columns:1fr}}
+
+/* Mathside styled competency creation dialog */
+.ct-create-overlay[hidden]{display:none!important}.ct-create-overlay{position:fixed;inset:0;z-index:99999;background:rgba(27,19,13,.65);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}.ct-create-modal{position:relative;background:#fffaf5;border:1px solid #f6d5b1;border-radius:24px;box-shadow:0 24px 70px #24150955;padding:30px;width:min(100%,480px);color:#322116}.ct-create-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#fff0de;color:#f76c00;font-size:32px;font-weight:700}.ct-create-modal h2{font-size:24px;margin:17px 0 6px;color:#301e12}.ct-create-modal p{color:#816b5b;margin:0 0 24px}.ct-create-modal label{display:block;font-weight:750;margin-bottom:9px}.ct-create-modal input{box-sizing:border-box;width:100%;border:1px solid #e9c5a1;border-radius:12px;background:white;padding:14px;font:inherit;color:#2b211c}.ct-create-modal input:focus{outline:3px solid #ffd7ac;border-color:#ff7800}.ct-create-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}.ct-create-actions button{border-radius:12px;padding:12px 18px;font-weight:750;cursor:pointer;border:1px solid #ead8c7}.ct-create-cancel{background:#fff;color:#593b25}.ct-create-submit{background:#ff6b00;color:white;border-color:#ff6b00!important}.ct-create-submit:disabled{opacity:.6}.ct-create-x{position:absolute;right:19px;top:15px;border:0;background:transparent;font-size:28px;cursor:pointer;color:#8a6c52}.ct-create-error{color:#a32d16;margin-top:10px;font-size:13px}
+
+
+/* v10: Nested competency creator uses browser top layer, ABOVE activity/performance dialogs. */
+#ctCreateOverlay.ct-create-overlay:not([open]){display:none!important}
+#ctCreateOverlay.ct-create-overlay[open]{position:fixed!important;inset:0!important;box-sizing:border-box!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-width:none!important;max-height:none!important;margin:0!important;padding:20px!important;border:0!important;border-radius:0!important;background:transparent!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow-y:auto!important;z-index:2147483647!important}
+#ctCreateOverlay.ct-create-overlay::backdrop{background:rgba(27,19,13,.66)!important;backdrop-filter:blur(4px)}
+#ctCreateOverlay.ct-create-overlay .ct-create-modal{flex:0 1 480px;max-height:calc(100dvh - 40px);overflow-y:auto;box-sizing:border-box;margin:auto;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+#ctCreateOverlay.ct-create-overlay .ct-create-modal h2{font-family:Georgia,serif;font-size:clamp(24px,3vw,31px);font-weight:650;line-height:1.16;letter-spacing:-.025em}
+#ctCreateOverlay.ct-create-overlay .ct-create-modal label{display:block;font-size:14px}
+@media(max-width:600px){#ctCreateOverlay.ct-create-overlay[open]{padding:12px!important}#ctCreateOverlay.ct-create-overlay .ct-create-modal{padding:22px;max-height:calc(100dvh - 24px)}}
+
+/* Distinct on-screen marker to identify the fixed extracted copy. */
+.ct-page .ct-build-identifier {display:inline-block;padding:5px 10px;margin-bottom:8px;border-radius:999px;background:#fff4e8;color:#9a4200;border:1px solid #f5b67e;font-size:12px;font-family:inherit;font-weight:700;letter-spacing:.03em;}
+
+
+/* Mathside CT v12: teacher competency library & guarded permanent deletion. */
+#teacherApp #view-competencies .ct-library-details {margin-top:24px;background:#fffdf9;border:1px solid #edd9c6;border-radius:17px;overflow:hidden}
+#teacherApp #view-competencies .ct-library-details>summary {cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 20px;font-size:15px;font-weight:750;color:#663414;list-style-position:inside}
+#teacherApp #view-competencies .ct-library-details>summary small {font-size:12px;font-weight:600;color:#a35a29}
+#teacherApp #view-competencies .ct-library-inner {border-top:1px solid #f0dbc9;padding:18px 20px 20px}
+#teacherApp #view-competencies .ct-library-inner>.muted {font-size:13px;line-height:1.65;margin:0 0 14px;color:#765d4a}
+#teacherApp #view-competencies .ct-library-list {display:grid;gap:9px}
+#teacherApp #view-competencies .ct-library-row {display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff6ec;border:1px solid #f1dac4;border-radius:13px;padding:12px 13px}
+#teacherApp #view-competencies .ct-library-info {min-width:0;display:grid;gap:4px}
+#teacherApp #view-competencies .ct-library-info strong {font-size:14px;color:#50321e;overflow-wrap:anywhere}
+#teacherApp #view-competencies .ct-library-info small {color:#8c705c;font-size:12px}
+#teacherApp #view-competencies .ct-library-delete {flex-shrink:0;display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #edc5c0;color:#a83829;border-radius:10px;padding:9px 12px;font:700 12px Inter,system-ui,sans-serif;cursor:pointer}
+#teacherApp #view-competencies .ct-library-delete:hover {background:#fff0ec;border-color:#ce7c72}
+#teacherApp #view-competencies .ct-library-delete:focus-visible {outline:3px solid #eaa89e;outline-offset:2px}
+#teacherApp #view-competencies .ct-library-delete svg {width:17px;height:17px}
+#teacherApp #view-competencies .ct-library-empty {color:#866851;font-size:13px;line-height:1.65;margin:8px 0}
+#ctDeleteDialog:not([open]),#appLoading:not([open]){display:none!important}
+#ctDeleteDialog[open] {position:fixed;inset:0;margin:auto;border:0;background:transparent;max-width:min(96vw,520px);width:100%;max-height:90dvh;padding:0;overflow:auto;color:#39271a}
+#ctDeleteDialog::backdrop {background:rgba(35,22,14,.65);backdrop-filter:blur(4px)}
+#ctDeleteDialog .ct-delete-card {background:#fffaf5;border:1px solid #f0dbc6;border-radius:22px;box-shadow:0 25px 75px #2b1d1240;padding:28px;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+#ctDeleteDialog .ct-delete-icon {width:48px;height:48px;display:grid;place-items:center;border-radius:14px;color:#bb3f26;background:#fff0ea;font-weight:900;font-size:28px}
+#ctDeleteDialog h2 {font-family:Georgia,serif;font-size:27px;line-height:1.17;margin:16px 0 8px;color:#362116}
+#ctDeleteDialog p {font-size:14px;line-height:1.6;color:#6c5748}
+#ctDeleteDialog .ct-delete-preserve {font-size:13px;line-height:1.65;margin:16px 0;border:1px solid #d7e8d4;background:#f6fff5;color:#376437;border-radius:13px;padding:13px}
+#ctDeleteDialog .ct-delete-preserve strong {display:block}
+#ctDeleteDialog .ct-delete-error {color:#ac352b;font-size:13px;margin:12px 0}
+#ctDeleteDialog .ct-delete-actions {display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px;margin-top:22px}
+#ctDeleteDialog .ct-delete-confirm {background:#b83924;color:#fff;border:1px solid #ad301c;border-radius:11px;padding:12px 16px;cursor:pointer;font-weight:700}
+#ctDeleteDialog .ct-delete-confirm:hover {background:#a93020}
+#ctDeleteDialog button:disabled {opacity:.6;cursor:wait}
+@media(max-width:550px){#ctDeleteDialog .ct-delete-card{padding:22px}#teacherApp #view-competencies .ct-library-inner{padding:14px}#teacherApp #view-competencies .ct-library-delete{padding:9px}}
+
+
+/* CT v13: teacher dashboard searches ONE student at a time; grade summary stays aggregated. */
+#teacherApp #view-competencies select#ctDashboardStudent[hidden] {display:none!important}
+#teacherApp #view-competencies .ct-student-search-group {min-width:0;position:relative;display:flex;flex-direction:column;gap:7px;z-index:3}
+#teacherApp #view-competencies .ct-student-search-group>label {font-size:14px;font-weight:750;color:#76471f;margin:0}
+#teacherApp #view-competencies .ct-student-search-box {position:relative;display:flex;align-items:center;border:1px solid #e7c8a5;border-radius:12px;background:white;height:47px;box-sizing:border-box}
+#teacherApp #view-competencies .ct-student-search-box:focus-within {border-color:#ec8220;box-shadow:0 0 0 3px #ffead8}
+#teacherApp #view-competencies .ct-student-search-box svg {width:18px;height:18px;margin-left:14px;color:#a56f40;flex-shrink:0}
+#teacherApp #view-competencies .ct-student-search-box input {border:0!important;box-shadow:none!important;background:transparent;outline:0;width:100%;min-width:0;padding:10px 9px;font:500 14px Inter,system-ui,sans-serif;color:#35261d}
+#teacherApp #view-competencies .ct-student-search-clear {border:0;background:#fff2e4;border-radius:50%;color:#a45519;cursor:pointer;font-size:19px;width:28px;height:28px;margin-right:8px;flex-shrink:0;display:grid;place-items:center}
+#teacherApp #view-competencies .ct-student-search-clear[hidden] {display:none!important}
+#teacherApp #view-competencies .ct-student-search-help {font:400 12px Inter,system-ui,sans-serif;color:#826b57;line-height:1.4}
+#teacherApp #view-competencies .ct-student-search-results {position:absolute;left:0;right:0;top:calc(100% - 12px);z-index:15;max-height:280px;overflow-y:auto;background:white;border:1px solid #e6d2bd;border-radius:12px;box-shadow:0 12px 35px #3a220d24;padding:5px}
+#teacherApp #view-competencies .ct-student-search-results[hidden] {display:none!important}
+#teacherApp #view-competencies .ct-student-match {cursor:pointer;display:flex;flex-direction:column;width:100%;align-items:flex-start;text-align:left;border:0;background:white;border-radius:8px;padding:11px 12px;gap:3px;color:#30241e}
+#teacherApp #view-competencies .ct-student-match:hover,#teacherApp #view-competencies .ct-student-match:focus-visible {background:#fff1df;outline:0}
+#teacherApp #view-competencies .ct-student-match span {font:700 14px Inter,system-ui,sans-serif}
+#teacherApp #view-competencies .ct-student-match small {font:400 12px Inter,system-ui,sans-serif;color:#846f60}
+#teacherApp #view-competencies .ct-student-match-empty,#teacherApp #view-competencies .ct-student-match-more {font-size:12px;line-height:1.5;color:#816955;padding:11px 12px;margin:0}
+#teacherApp #view-competencies .ct-student-single-head {display:flex;justify-content:space-between;gap:15px;align-items:center;background:#fff7ed;border:1px solid #f2e1cc;border-radius:13px;padding:15px;margin:16px 0}
+#teacherApp #view-competencies .ct-student-overline {font:800 10px Inter,system-ui,sans-serif;letter-spacing:.15em;color:#b8621b}
+#teacherApp #view-competencies .ct-student-single-head h4 {font:700 18px Inter,system-ui,sans-serif;margin:5px 0;color:#2d2119}
+#teacherApp #view-competencies .ct-student-single-head p {font:400 12px Inter,system-ui,sans-serif;color:#826d5b;margin:0}
+#teacherApp #view-competencies .ct-student-overall {flex-shrink:0;text-align:right;display:flex;flex-direction:column;gap:3px}
+#teacherApp #view-competencies .ct-student-overall strong {font:800 24px Inter,system-ui,sans-serif;color:#aa5913}
+#teacherApp #view-competencies .ct-student-overall small {font:400 11px Inter,system-ui,sans-serif;color:#816956}
+#teacherApp #view-competencies .ct-student-competency-list {border-top:1px solid #f0e3d5;padding-top:8px}
+#teacherApp #view-competencies .ct-student-competency-item {padding:11px 0;display:flex;justify-content:space-between;align-items:start;gap:12px;border-bottom:1px solid #f6eadd;font:500 13px Inter,system-ui,sans-serif}
+#teacherApp #view-competencies .ct-student-competency-item strong {white-space:nowrap;color:#995018}
+#teacherApp #view-competencies .ct-single-student-empty {background:#fffaf5;border:1px dashed #e9ccad;border-radius:16px;padding:25px 18px;margin-top:18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+#teacherApp #view-competencies .ct-single-student-icon {font-size:29px;display:grid;place-items:center;width:54px;height:54px;border-radius:16px;background:#ffedda;color:#c26410}
+#teacherApp #view-competencies .ct-single-student-empty strong {font:750 15px Inter,system-ui,sans-serif}
+#teacherApp #view-competencies .ct-single-student-empty p {font:400 13px/1.5 Inter,system-ui,sans-serif;max-width:310px;color:#856d59;margin:0}
+@media(max-width:600px){#teacherApp #view-competencies .ct-student-single-head{align-items:flex-start}#teacherApp #view-competencies .ct-student-single-head h4{font-size:16px}}
+
+/* CT v14: contained manager rows. Reset global form control rules that made
+   the checkbox full-width and left no room for the activity name. */
+#teacherApp #view-competencies .ct-teacher-list {
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  max-height:560px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  border:1px solid #f1dfcd;
+  border-radius:15px;
+  background:#fff;
+}
+#teacherApp #view-competencies .ct-teacher-list .ct-activity {
+  box-sizing:border-box;
+  display:grid !important;
+  grid-template-columns:20px minmax(0,1fr) minmax(210px,340px);
+  gap:14px;
+  align-items:center;
+  width:100%;
+  min-width:0;
+  padding:15px 16px;
+  margin:0;
+  background:#fff;
+  border-bottom:1px solid #f4e8dd;
+}
+#teacherApp #view-competencies .ct-teacher-list .ct-activity:last-child {border-bottom:0}
+#teacherApp #view-competencies .ct-teacher-list .ct-activity:nth-child(even) {background:#fffbf7}
+#teacherApp #view-competencies .ct-teacher-list .ct-activity:hover {background:#fff4e6}
+#teacherApp #view-competencies .ct-teacher-list .ct-activity > input.ct-check {
+  box-sizing:border-box !important;
+  display:block !important;
+  width:19px !important;
+  height:19px !important;
+  min-width:19px !important;
+  min-height:19px !important;
+  max-width:19px !important;
+  max-height:19px !important;
+  padding:0 !important;
+  margin:0 !important;
+  flex:0 0 19px !important;
+  border-radius:5px !important;
+  accent-color:#f37510;
+  appearance:auto;
+  cursor:pointer;
+}
+#teacherApp #view-competencies .ct-teacher-list .ct-activity-text {
+  box-sizing:border-box;
+  display:block;
+  min-width:0;
+  width:100%;
+  overflow-wrap:anywhere;
+}
+#teacherApp #view-competencies .ct-teacher-list .ct-activity-text strong {
+  display:block;
+  font:750 14px/1.45 Inter,system-ui,sans-serif;
+  color:#37261c;
+  white-space:normal;
+}
+#teacherApp #view-competencies .ct-teacher-list .ct-activity-text small {
+  display:block;
+  font:500 12px/1.5 Inter,system-ui,sans-serif;
+  color:#94745c;
+  margin-top:4px;
+}
+#teacherApp #view-competencies .ct-teacher-list select.ct-row-select {
+  box-sizing:border-box;
+  display:block;
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100%;
+  min-height:44px;
+  padding:10px 12px;
+  margin:0;
+  font:600 13px Inter,system-ui,sans-serif;
+  color:#513a2b;
+  background:#fff;
+  border:1px solid #ebcfb3;
+  border-radius:11px;
+}
+#teacherApp #view-competencies .ct-bulk {
+  box-sizing:border-box;
+  min-width:0;
+  gap:12px;
+}
+#teacherApp #view-competencies .ct-bulk > label {
+  display:flex !important;
+  align-items:center;
+  gap:9px;
+  width:auto;
+  max-width:100%;
+  font:600 13px Inter,system-ui,sans-serif;
+  color:#6f4930;
+  white-space:normal;
+}
+#teacherApp #view-competencies .ct-bulk > label > input[type="checkbox"] {
+  box-sizing:border-box;
+  width:18px !important;
+  height:18px !important;
+  min-width:18px !important;
+  min-height:18px !important;
+  max-width:18px;
+  max-height:18px;
+  margin:0;
+  padding:0;
+  flex:0 0 18px;
+  accent-color:#f37510;
+}
+#teacherApp #view-competencies .ct-bulk > input {
+  box-sizing:border-box;
+  min-width:180px;
+  flex:1 1 230px;
+  max-width:100%;
+}
+#teacherApp #view-competencies .ct-bulk > select {
+  box-sizing:border-box;
+  min-width:200px;
+  max-width:100%;
+  flex:1 1 250px;
+}
+#teacherApp #view-competencies .ct-manage-details > .ct-head {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:flex-start;
+}
+#teacherApp #view-competencies .ct-manage-details > .ct-head > div {flex:1 1 250px;min-width:0}
+#teacherApp #view-competencies #ctClose {
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+@media (max-width:760px) {
+  #teacherApp #view-competencies .ct-teacher-list .ct-activity {
+    grid-template-columns:20px minmax(0,1fr);
+    gap:8px 12px;
+    padding:13px;
+  }
+  #teacherApp #view-competencies .ct-teacher-list select.ct-row-select {
+    grid-column:2;
+    width:100% !important;
+    margin-top:2px;
+  }
+  #teacherApp #view-competencies .ct-bulk > label {width:100%}
+}

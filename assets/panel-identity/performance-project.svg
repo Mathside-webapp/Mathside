@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 330" width="640" height="330" role="img" aria-hidden="true">
+    <defs>
+      <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFB044"/><stop offset="1" stop-color="#FF710D"/></linearGradient>
+      <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#263A64"/><stop offset="1" stop-color="#142A4D"/></linearGradient>
+      <linearGradient id="lavender" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B9ACF6"/><stop offset="1" stop-color="#7369BB"/></linearGradient>
+      <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFCF5"/><stop offset="1" stop-color="#FFEBD5"/></linearGradient>
+      <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#72CEC4"/><stop offset="1" stop-color="#2B9EA1"/></linearGradient>
+      <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#729AC8"/><stop offset="1" stop-color="#3B608F"/></linearGradient>
+      <filter id="shadow" x="-30%" y="-40%" width="170%" height="200%"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#9E5625" flood-opacity=".15"/></filter>
+      <filter id="soft" x="-30%" y="-40%" width="170%" height="200%"><feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#5D3C26" flood-opacity=".16"/></filter>
+    </defs>
+    <ellipse cx="330" cy="298" rx="265" ry="18" fill="#BA6E31" opacity=".11"/>
+    <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- working board with neatly designed project -->
+    <g filter="url(#shadow)" transform="translate(227 30) rotate(4 152 130)">
+      <rect x="0" y="0" width="310" height="254" rx="17" fill="#B86C40"/>
+      <rect x="12" y="11" width="286" height="232" rx="10" fill="url(#paper)" stroke="#D9A372" stroke-width="2"/>
+      <rect x="111" y="-12" width="86" height="31" rx="9" fill="#D6843F"/>
+      <rect x="138" y="-21" width="32" height="22" rx="9" fill="#FFBB6B"/>
+      <rect x="43" y="40" width="153" height="11" rx="5.5" fill="#D8C5AC"/>
+      <rect x="43" y="59" width="95" height="7" rx="3.5" fill="#E9D9C9"/>
+      <circle cx="47" cy="100" r="12" fill="#F6A04F"/><path d="M41 99L46 104L54 94" stroke="white" stroke-width="3" fill="none"/>
+      <rect x="72" y="94" width="97" height="8" rx="4" fill="#D3BBA1"/><rect x="72" y="107" width="67" height="6" rx="3" fill="#E5D2BF"/>
+      <circle cx="47" cy="142" r="12" fill="#F6A04F"/><path d="M41 141L46 146L54 136" stroke="white" stroke-width="3" fill="none"/>
+      <rect x="72" y="136" width="108" height="8" rx="4" fill="#D3BBA1"/><rect x="72" y="149" width="78" height="6" rx="3" fill="#E5D2BF"/>
+      <rect x="199" y="77" width="72" height="90" rx="8" fill="#FFF3E3" stroke="#E3C09B" stroke-width="2"/>
+      <path d="M217 150v-28M233 150v-45M249 150v-57" stroke-linecap="round" stroke-width="12" stroke="#F4A45A"/>
+      <path d="M208 157h54" stroke="#9F8F7C" stroke-width="2"/>
+      <rect x="47" y="182" width="217" height="10" rx="5" fill="#ECD9C0"/><rect x="47" y="201" width="166" height="7" rx="4" fill="#E6CAB0"/>
+    </g>
+    <!-- clipboard drawing samples left -->
+    <g filter="url(#soft)" transform="translate(85 108) rotate(-12 60 73)">
+      <rect width="134" height="167" rx="13" fill="#66539B"/>
+      <rect x="11" y="12" width="112" height="142" rx="8" fill="#FFFBF5"/>
+      <circle cx="68" cy="62" r="29" fill="#FFE3BD"/>
+      <path d="M42 77l14-19 11 12 17-26 15 33" fill="none" stroke="#EE8541" stroke-width="5"/>
+      <path d="M32 107H103M32 120H95M32 133H76" stroke="#D9C4B5" stroke-width="5"/>
+      <rect x="43" y="-8" width="48" height="20" rx="7" fill="#BAA7DC"/>
+    </g>
+    <!-- pencils/ruler -->
+    <g transform="translate(525 184)">
+      <path d="M8 30L18 10L33 18L23 41Z" fill="#F7B852"/>
+      <rect x="15" y="30" width="27" height="95" rx="7" fill="#E98A35" transform="rotate(-22 15 30)"/>
+      <path d="M41 38L58 48L17 128L0 118Z" fill="#F8D6A9" stroke="#D8A76B" stroke-width="2"/>
+      <path d="M38 48l8 4M32 61l8 4M24 77l8 4M18 92l8 4M10 108l8 4" stroke="#B78151" stroke-width="2"/>
+    </g>
+    <g fill="#E88A2B"><path d="M565 85l5 12 12 4-12 5-5 12-4-12-13-5 13-4Z"/><circle cx="169" cy="54" r="6"/></g>
+    <path d="M182 48q15-24 28-5" fill="none" stroke="#F4B16A" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    </svg>

@@ -1,0 +1,48 @@
+/* Scoped to teacher creation forms; classroom and student screens keep their theme. */
+.friendly-editor .assignment-editor-box{width:min(860px,calc(100vw - 24px))!important;background:#fffdf9!important;padding:28px!important;border-radius:24px!important}
+.friendly-editor .assignment-editor-heading{margin-bottom:24px;gap:12px}
+.friendly-editor .assignment-editor-heading h2{font-size:30px;line-height:1.2;letter-spacing:-.6px}
+.friendly-editor .assignment-editor-heading .eyebrow{font-size:10px;letter-spacing:1px;color:#9c480e}
+.friendly-editor .muted,.friendly-editor small{line-height:1.5}
+.friendly-editor .assignment-editor-form{gap:16px}
+.friendly-editor .assignment-form-section{padding:20px;border:1px solid #e8e2da;border-radius:16px;box-shadow:none;background:#fff}
+.friendly-editor .assignment-form-section-head h3,.friendly-editor .question-builder-head h3{font-size:19px;letter-spacing:-.2px}
+.friendly-editor .assignment-heading-grid{grid-template-columns:1fr!important;gap:18px!important}
+.friendly-editor .assignment-main-fields{gap:16px}
+.friendly-editor label,.friendly-editor .field-label{font-size:13px}
+.friendly-editor input:not([type=checkbox]):not([type=radio]),.friendly-editor textarea,.friendly-editor select{font-size:14px;min-height:44px;border-radius:10px;box-shadow:none;max-width:100%}
+.friendly-editor textarea{resize:vertical}
+.friendly-editor .editor-required{font-weight:400;color:#78695e;margin-left:6px;font-size:11px}
+.friendly-editor .class-checklist{max-height:180px;overflow:auto}
+.friendly-editor .question-block{background:#faf9f6!important;border:1px solid #e8e2da;box-shadow:none}
+.friendly-editor .question-builder-head{gap:14px;flex-wrap:wrap}
+.friendly-editor .question-builder-head .muted{font-size:12px}
+.friendly-editor .editor-options{border:1px solid #e8e2da;border-radius:14px;background:#fff;min-width:0}
+.friendly-editor .editor-options summary{display:grid;grid-template-columns:1fr auto;gap:3px 14px;padding:16px 18px;cursor:pointer;list-style:none;font-size:14px;font-weight:700;border-radius:14px}
+.friendly-editor .editor-options summary::-webkit-details-marker{display:none}
+.friendly-editor .editor-options summary:after{content:'+';grid-column:2;grid-row:1 / 3;font-size:22px;font-weight:400;align-self:center;color:#9c480e}
+.friendly-editor .editor-options[open] summary:after{content:'−'}
+.friendly-editor .editor-options summary small{font-size:12px;font-weight:400;color:#75685d;grid-column:1}
+.friendly-editor .editor-options summary:hover{background:#fff7ee}
+.friendly-editor .editor-options>.assignment-form-section{border:0;padding:4px 18px 18px;min-height:0}
+.friendly-editor .assignment-import-panel{border:0!important;background:transparent!important;box-shadow:none!important;padding:4px 18px 18px!important}
+.friendly-editor .assignment-file-drop{min-height:105px;background:#faf9f6;border:1px dashed #b9a99c}
+.friendly-editor .assignment-form-actions{background:#fffdf9;padding:16px 0 0;gap:10px}
+.friendly-editor .performance-mode-option>input:focus-visible+span,.friendly-editor :focus-visible{outline:3px solid #326cac;outline-offset:3px}
+.friendly-editor .performance-mode-option>span{box-shadow:none!important}
+.friendly-editor .performance-grouping-options{background:#faf9f6;box-shadow:none}
+@media(max-width:600px){
+ .friendly-editor .assignment-editor-box{padding:20px 14px!important;width:calc(100vw - 16px)!important;border-radius:18px!important}
+ .friendly-editor .assignment-editor-heading h2{font-size:25px}
+ .friendly-editor .assignment-form-section{padding:16px 12px}
+ .friendly-editor .assignment-deadline-field,.friendly-editor .question-type-row{grid-template-columns:1fr!important}
+ .friendly-editor .assignment-form-actions .btn{min-width:0;flex:1;font-size:12px;padding:12px 8px}
+ .friendly-editor .performance-work-mode{grid-template-columns:1fr}
+ .friendly-editor .editor-options summary{padding:14px 12px}
+}
+
+/* Posted activities: safe, editable section targeting */
+.section-edit-note { margin: 10px 0 0; padding: 10px 12px; border: 1px solid #e8dcd2;
+  border-radius: 12px; background: #fffaf5; color: #6f5240; font-size: .82rem; line-height: 1.5; }
+.section-edit-note[hidden] { display: none !important; }
+.class-check-option.editing-class-option { border-color: #e4b18e; background: #fff5ed; }

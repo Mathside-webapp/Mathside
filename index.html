@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ff6b00" name="theme-color"/>
+<title>Mathside</title>
+<meta content="An energetic Mathematics classroom for teachers and students." name="description"/>
+<link href="assets/mathside-icon.svg?v=12.3" rel="icon" type="image/svg+xml"/>
+<script>
+// Retire Mathside's previous PWA worker and cache on browsers used before this update.
+(() => {
+  if (!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', async () => {
+    try {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (const registration of registrations) {
+        const worker = registration.active || registration.waiting || registration.installing;
+        if (worker && new URL(worker.scriptURL).pathname.endsWith('/service-worker.js')) {
+          await registration.unregister();
+        }
+      }
+      if ('caches' in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.filter(key => key.startsWith('mathside-pwa-')).map(key => caches.delete(key)));
+      }
+    } catch (error) { console.warn('Legacy Mathside offline cache cleanup:', error); }
+  }, { once: true });
+})();
+</script>
+<link href="css/styles.css?v=22-github-update" rel="stylesheet"/>
+<link rel="stylesheet" href="css/competency-tracker.css?v=16.0-add-competency"/>
+<link href="css/art-theme.css?v=7.0" rel="stylesheet"/>
+<link href="css/student-v8.css?v=10.7-student-history" rel="stylesheet"/>
+<link href="css/design-v9.css?v=9.1" rel="stylesheet"/>
+<link href="css/v10-features.css?v=11.5" rel="stylesheet"/>
+<link href="css/v12-archive-features.css?v=24.12" rel="stylesheet">
+<link href="css/v14-layout-fixes.css?v=14.0" rel="stylesheet">
+<link href="css/v15-performance-calendar.css?v=15.11" rel="stylesheet"/>
+<link href="css/performance-class-mode.css?v=2" rel="stylesheet"/>
+<link href="css/friendly-editors.css?v=2" rel="stylesheet"/>
+<link href="css/orange-create-panels.css?v=22-github-update" rel="stylesheet"/>
+</link></link><link href="css/panel-identities.css?v=22-github-update" rel="stylesheet"/><link href="css/competency-dashboard-polish.css?v=16" rel="stylesheet"/><link rel="stylesheet" href="css/mobile-header-safety.css?v=19.0"/><link rel="stylesheet" href="css/student-v20-refresh.css?v=20.0"/>
+<link rel="stylesheet" href="css/student-v22-dashboard.css?v=22.2"/>
+<link rel="stylesheet" href="css/mathside-question-tools.css?v=1.1-choice-labels"/>
+</head>
+<body>
+<dialog class="app-loading" hidden="" id="appLoading" aria-labelledby="loadingTitle" aria-describedby="loadingMessage">
+<div class="loading-card">
+<div aria-hidden="true" class="loading-logo"><img alt="" src="assets/mathside-icon.svg?v=12.3"/></div>
+<div class="loading-orbit"><span></span><span></span><span></span></div>
+<h2 id="loadingTitle">Signing you in…</h2>
+<p id="loadingMessage">Preparing your Mathside classroom.</p>
+</div>
+</dialog>
+<div aria-live="polite" class="toast-area" id="toastArea"></div>
+<!-- PUBLIC LANDING -->
+<section id="publicSite">
+<header class="site-header">
+<div class="header-inner">
+<a class="logo" href="#home">
+<img alt="" aria-hidden="true" class="cap-logo" src="assets/mathside-icon.svg?v=12.3"/><span>Mathside</span>
+</a>
+<button aria-label="Open menu" class="menu-toggle icon-button" id="menuToggle">
+<svg aria-hidden="true" class="ui-icon" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+</button>
+<nav class="main-nav" id="mainNav">
+<a href="#home">Home</a>
+<a href="#how">How it works</a>
+<a href="#teacher">For Teachers</a>
+</nav>
+<div class="header-actions">
+<button class="btn btn-ghost" data-open-auth="signin">Log in</button>
+<button class="btn btn-orange" data-open-auth="signup">Teacher sign-up</button>
+</div>
+</div>
+</header>
+<main>
+<section class="hero" id="home">
+<div aria-hidden="true" class="v9-formula f-one">a² + b² = c²</div><div aria-hidden="true" class="v9-formula f-two">y = mx + b</div><div aria-hidden="true" class="v9-formula f-three">x = <span>−b ± √(b² − 4ac)<br/>──────────<br/>2a</span></div><div class="hero-grid">
+<div class="hero-copy">
+<p class="eyebrow">MATHEMATICS, MADE MORE ALIVE.</p><h1>Your next great<br/><span>aha!</span> starts here.</h1>
+<p class="hero-lead">Learn a little. Practice a little. Grow a little. Mathside helps teachers organize learners while giving students a clear place to work and improve.</p>
+<div class="hero-buttons">
+<button class="btn btn-orange btn-large" data-open-auth="signup">Teacher sign-up <span aria-hidden="true">→</span></button>
+<button class="btn btn-light btn-large" data-open-auth="signin">Log in to Mathside</button>
+</div>
+</div>
+<div aria-hidden="true" class="hero-visual">
+<div class="burst burst-one"></div>
+<div class="burst burst-two"></div>
+<div class="math-board">
+<div class="board-top">MATHSIDE</div>
+<div class="equation">2x + 5 = 15</div>
+<div class="solution-line"></div>
+<div class="solution-line short"></div>
+<div class="answer-chip">x = 5</div>
+</div>
+<div class="orange-pencil"></div>
+<div class="sticker">YOU'VE<br/> GOT THIS!</div>
+</div>
+</div>
+</section>
+<section class="feature-band" id="how">
+<div class="section-heading">
+<p class="eyebrow">YOUR LEARNING LOOP</p>
+<h2>Simple enough to use.<br/>Energetic enough to enjoy.</h2>
+</div>
+<div aria-hidden="true" class="v9-hand-note">Small steps.<br/>Big progress.</div><div class="feature-grid">
+<article class="feature-card orange-card"><span>01</span><div aria-hidden="true" class="v9-card-art"><div class="v9-task-paper"><i></i><i></i><div>◒</div></div></div><h3>See the task.</h3><p>Students open assignments, pictures, and questions in one place.</p><button aria-label="Get started" class="v9-card-arrow" data-open-auth="signup">→</button></article>
+<article class="feature-card yellow-card"><span>02</span><div aria-hidden="true" class="v9-card-art"><div class="v9-answer-art"><b>x = 5</b><i>✓</i></div></div><h3>Show the answer.</h3><p>They type answers, upload work, and submit with a clear confirmation.</p><button aria-label="Get started" class="v9-card-arrow" data-open-auth="signup">→</button></article>
+<article class="feature-card pink-card"><span>03</span><div aria-hidden="true" class="v9-card-art"><div class="v9-checklist"><i>✓ <span></span></i><i>✓ <span></span></i><i></i></div></div><h3>Keep moving.</h3><p>Teachers review work while every class stays organized by its selected grade level.</p><button aria-label="Get started" class="v9-card-arrow" data-open-auth="signup">→</button></article>
+</div>
+</section>
+<section class="teacher-teaser" id="teacher">
+<div>
+<p class="eyebrow">FOR TEACHERS</p>
+<h2>Create the classes<br/>you <em>actually teach.</em></h2>
+<p>Create a class, choose its grade level, add learners, generate student login credentials, and post Mathematics assignments in one workspace.</p>
+<button class="btn btn-dark btn-large" data-open-auth="signin" data-role="teacher">Open teacher workspace <span aria-hidden="true">→</span></button>
+</div>
+<div class="class-preview">
+<button class="preview-class-card" data-open-auth="signin" data-role="teacher" type="button"><svg class="preview-icon" viewbox="0 0 24 24"><path d="M4 5.5h16v13H4zM8 5.5V3.5h8v2M8 10h8M8 14h5"></path></svg><div><b>Create a class</b><span>Name it and choose the grade.</span></div><span aria-hidden="true" class="v9-chevron">›</span></button>
+<button class="preview-class-card" data-open-auth="signin" data-role="teacher" type="button"><svg class="preview-icon" viewbox="0 0 24 24"><path d="M16 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM17 8h4M19 6v4"></path></svg><div><b>Add students</b><span>Generate secure student accounts.</span></div><span aria-hidden="true" class="v9-chevron">›</span></button>
+<button class="preview-class-card" data-open-auth="signin" data-role="teacher" type="button"><svg class="preview-icon" viewbox="0 0 24 24"><path d="M6 3h9l3 3v15H6zM14 3v4h4M9 11h6M9 15h6"></path></svg><div><b>Post classwork</b><span>Questions, images, scores, and feedback.</span></div><span aria-hidden="true" class="v9-chevron">›</span></button>
+</div>
+</section>
+</main>
+</section>
+<!-- AUTH -->
+<dialog class="modal auth-modal" id="authDialog">
+<div class="modal-box auth-box">
+<button aria-label="Close" class="modal-close" data-close="authDialog">×</button>
+<div class="auth-logo"><img alt="" aria-hidden="true" class="cap-logo" src="assets/mathside-icon.svg?v=12.3"/><span>Mathside</span></div>
+<p class="eyebrow">WELCOME TO MATHSIDE</p>
+<h2 id="authHeading">Log in</h2>
+<p class="muted" id="authCopy">Continue to your Mathematics classroom.</p>
+<form class="form-stack" id="authForm">
+<label hidden="" id="nameField">Full name<input name="name" placeholder="Your name" type="text"/></label>
+<label>Email or student username<input name="email" placeholder="teacher@example.com or g9.santos.j" required="" type="text"/></label>
+<label>Password<div class="password-input-wrap"><input id="authPasswordInput" minlength="8" name="password" placeholder="At least 8 characters" required="" type="password"/><button aria-label="Show password" aria-pressed="false" class="password-eye-btn" id="toggleAuthPassword" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div></label>
+<label hidden="" id="roleField">Account type
+          <select id="roleSelect" name="role">
+<option value="teacher">Teacher</option>
+<option value="student">Student</option>
+</select>
+</label>
+<button class="btn btn-orange btn-full" id="authSubmit" type="submit">Log in</button>
+</form>
+<button class="link-button" id="switchAuth">Teacher without an account? Sign up</button>
+<p class="tiny-note">Teacher accounts use email and password. Student accounts are generated securely by a teacher and sign in with their Mathside username.</p>
+</div>
+</dialog>
+<!-- TEACHER APP -->
+<section class="workspace" hidden="" id="teacherApp">
+<aside class="sidebar" id="teacherSidebar">
+<div class="sidebar-brand-row">
+<a class="sidebar-logo" href="#"><img alt="" aria-hidden="true" class="cap-logo" src="assets/mathside-icon.svg?v=12.3"/><span class="sidebar-brand-name">Mathside</span></a>
+<button aria-label="Close teacher menu" class="sidebar-close" id="teacherMenuClose" type="button">×</button>
+</div>
+<div class="teacher-mini">
+<div class="avatar">T</div>
+<div><b id="teacherName">Teacher</b><small>Teacher account</small></div>
+</div>
+<nav class="side-nav">
+<button class="side-link active" data-view="dashboard"><svg aria-hidden="true" class="ui-icon" viewbox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5V20h-6v-5h-4v5H4z"></path></svg><span>Dashboard</span></button>
+<button class="side-link" data-view="classes"><svg aria-hidden="true" class="ui-icon" viewbox="0 0 24 24"><path d="M4 5h16v14H4zM8 5V3h8v2M8 10h8M8 14h5"></path></svg><span>Classes</span></button>
+<button class="side-link" data-view="assignments"><svg aria-hidden="true" class="ui-icon" viewbox="0 0 24 24"><path d="M6 3h9l3 3v15H6zM14 3v4h4M9 11h6M9 15h6"></path></svg><span>Activities</span></button>
+<button class="side-link" data-view="performance"><svg aria-hidden="true" class="ui-icon" viewbox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5M7 3v4M17 3v4"></path></svg><span>Performance Tasks</span></button>
+<button class="side-link" data-view="submissions"><svg aria-hidden="true" class="ui-icon" viewbox="0 0 24 24"><path d="M5 12.5 10 17l9-10M4 4h10M4 8h7"></path></svg><span>Submissions</span></button>
+<button class="side-link ct-nav-button" data-view="competencies" id="ctTeacherOpen" type="button"><svg aria-hidden="true" class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg><span>Competencies</span></button><button class="side-link" data-view="archive"><svg aria-hidden="true" class="ui-icon" viewbox="0 0 24 24"><path d="M4 7h16v13H4zM3 4h18v3H3zM9 11h6"></path></svg><span>Archived</span></button>
+</nav>
+<button class="side-link signout" id="teacherSignout"><svg aria-hidden="true" class="ui-icon" viewbox="0 0 24 24"><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"></path></svg><span>Sign out</span></button>
+</aside>
+<button aria-label="Close teacher menu" class="teacher-sidebar-backdrop" id="teacherSidebarBackdrop" tabindex="-1" type="button"></button>
+<div class="workspace-main">
+<header class="workspace-topbar">
+<button aria-label="Open teacher menu" class="mobile-side-toggle icon-button" id="teacherMenuBtn"><svg aria-hidden="true" class="ui-icon" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+<div><p class="eyebrow">TEACHER WORKSPACE</p><h1 id="teacherPageTitle">Dashboard</h1></div>
+
+</header>
+<main class="workspace-content">
+<section class="app-view active" id="view-dashboard">
+<div class="ms-panel-hero ms-hero-dashboard" aria-label="Dashboard introduction">
+<div class="ms-hero-copy">
+<span class="ms-hero-kicker">00 / THE HOME BASE</span>
+<h2>All your teaching,<br/><em>beautifully organized.</em></h2>
+<p>One welcoming space to guide your classes, plan meaningful activities, and celebrate every step of learning.</p>
+<div class="ms-hero-tags"><span>Your daily overview</span><span>Everything in one place</span></div>
+</div>
+<div aria-hidden="true" class="ms-hero-art"><img alt="" src="assets/panel-identity/dashboard-workspace.svg"/></div>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-one"></span>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-two"></span>
+</div>
+<div class="stats-grid">
+<article><span class="stat-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M16 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM17 8h4M19 6v4"></path></svg></span><b id="studentTotal">0</b><small>Students</small></article>
+<article><span class="stat-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 5h16v14H4zM8 5V3h8v2M8 10h8M8 14h5"></path></svg></span><b id="classTotal">0</b><small>Classes</small></article>
+<article><span class="stat-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M6 3h9l3 3v15H6zM14 3v4h4M9 11h6M9 15h6"></path></svg></span><b id="assignmentTotal">0</b><small>Activities</small></article>
+<article><span class="stat-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5M7 3v4M17 3v4"></path></svg></span><b id="performanceTotal">0</b><small>Performance Tasks</small></article>
+</div>
+<div class="section-row ms-dashboard-toolbar"><div><p class="eyebrow">MY CLASSES</p><p class="muted">Quick access to your classes</p></div><div class="row-actions"><button class="btn btn-light" data-go-view="classes">Manage classes</button><button class="btn btn-orange" id="dashboardCreateClass"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>Create class</button></div></div>
+<div class="class-grid" id="dashboardClassGrid"></div>
+</section>
+<section class="app-view" id="view-classes"><div aria-label="Classes introduction" class="ms-panel-hero ms-hero-classes">
+<div class="ms-hero-copy">
+<span class="ms-hero-kicker">01 / THE CLASSROOM</span>
+<h2>A place for every<br/><em>learner.</em></h2>
+<p>Keep every section organized, every learner connected, and each classroom ready for what comes next.</p>
+<div class="ms-hero-tags"><span>Section rosters</span><span>Classroom community</span></div>
+</div>
+<div aria-hidden="true" class="ms-hero-art"><img alt="" src="assets/panel-identity/classes-study.svg"/></div>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-one"></span>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-two"></span>
+</div>
+<div class="section-row ms-panel-toolbar"><span class="ms-toolbar-label">Your classrooms</span><div class="ms-original-heading"><p class="eyebrow">STUDENT ORGANIZATION</p><h2>Classes</h2><p class="muted">Create a class, choose its grade level, then add students to that class.</p></div><button class="btn btn-orange" id="createClassBtn"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>Create class</button></div>
+<div class="class-grid" id="classGrid"></div>
+</section>
+<section class="app-view" id="view-assignments"><div aria-label="Assignments introduction" class="ms-panel-hero ms-hero-assignments">
+<div class="ms-hero-copy">
+<span class="ms-hero-kicker">02 / THE PRACTICE STUDIO</span>
+<h2>Ideas become<br/><em>activities.</em></h2>
+<p>Turn lesson goals into clear, engaging practice. Share questions, track work, and keep learning moving.</p>
+<div class="ms-hero-tags"><span>Written work</span><span>Questions &amp; answers</span></div>
+</div>
+<div aria-hidden="true" class="ms-hero-art"><img alt="" src="assets/panel-identity/activities.svg"/></div>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-one"></span>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-two"></span>
+</div>
+<div class="section-row ms-panel-toolbar"><span class="ms-toolbar-label">Activity library</span><div class="ms-original-heading"><p class="eyebrow">CLASSWORK</p><h2>Activities</h2><p class="muted">Post question-based Mathematics activities to one or more classes.</p></div><div class="row-actions"><button aria-controls="activityFilterPanel" aria-expanded="false" class="btn btn-light compact-filter-button" id="activityFilterBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M4 5h16M7 12h10M10 19h4"></path></svg>Filter <span class="filter-count-badge" hidden="" id="activityFilterBadge">0</span></button><button class="btn btn-orange" id="postAssignmentBtn"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>New activity</button></div></div>
+<div class="compact-filter-wrap">
+<div class="compact-filter-panel" hidden="" id="activityFilterPanel">
+<div class="compact-filter-panel-head"><div><p class="eyebrow">FILTER ACTIVITIES</p><h3>Show only what you need</h3></div><button aria-label="Close filters" class="icon-button compact-filter-close" id="activityFilterClose" type="button">×</button></div>
+<div class="performance-task-filter-grid">
+<label>Section<select id="activitySectionFilter"><option value="all">All sections</option></select></label>
+<label>Status<select id="activityStatusFilter"><option value="all">All statuses</option><option value="posted">Posted</option><option value="scheduled">Scheduled</option></select></label>
+<label>Order<select id="activitySort"><option value="newest">Newest first</option><option value="name">Alphabetical A–Z</option><option value="name-desc">Alphabetical Z–A</option><option value="due">Deadline soonest</option></select></label>
+</div>
+<div class="compact-filter-actions"><button class="btn btn-light" id="activityClearFilters" type="button">Clear filters</button><button class="btn btn-orange" id="activityFilterDone" type="button">Done</button></div>
+</div>
+</div>
+<div class="assignment-list" id="assignmentList"></div>
+</section>
+<section class="app-view" id="view-performance"><div aria-label="Performance introduction" class="ms-panel-hero ms-hero-performance">
+<div class="ms-hero-copy">
+<span class="ms-hero-kicker">03 / THE PROJECT LAB</span>
+<h2>Make room for<br/><em>big ideas.</em></h2>
+<p>Give students space to create, collaborate, and show what they know through meaningful performance tasks.</p>
+<div class="ms-hero-tags"><span>Creative projects</span><span>Rubrics &amp; teamwork</span></div>
+</div>
+<div aria-hidden="true" class="ms-hero-art"><img alt="" src="assets/panel-identity/performance-project.svg"/></div>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-one"></span>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-two"></span>
+</div>
+<div class="section-row ms-panel-toolbar"><span class="ms-toolbar-label">Project collection</span><div class="ms-original-heading"><p class="eyebrow">PERFORMANCE TASK</p><h2>Performance Tasks</h2><p class="muted">Post project-based tasks with instructions, pictures, rubric, deadlines, reminders, and assigned sections.</p></div><div class="row-actions"><button aria-controls="performanceTaskFilterPanel" aria-expanded="false" class="btn btn-light compact-filter-button" id="performanceTaskFilterBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M4 5h16M7 12h10M10 19h4"></path></svg>Filter <span class="filter-count-badge" hidden="" id="performanceTaskFilterBadge">0</span></button><button class="btn btn-orange" id="postPerformanceTaskBtn"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>New performance task</button></div></div>
+<div class="compact-filter-wrap">
+<div class="compact-filter-panel" hidden="" id="performanceTaskFilterPanel">
+<div class="compact-filter-panel-head"><div><p class="eyebrow">FILTER PERFORMANCE TASKS</p><h3>Show only what you need</h3></div><button aria-label="Close filters" class="icon-button compact-filter-close" id="performanceTaskFilterClose" type="button">×</button></div>
+<div class="performance-task-filter-grid">
+<label>Section<select id="performanceTaskSectionFilter"><option value="all">All sections</option></select></label>
+<label>Status<select id="performanceTaskStatusFilter"><option value="all">All statuses</option><option value="posted">Posted</option><option value="scheduled">Scheduled</option></select></label>
+<label>Work setup<select id="performanceTaskModeFilter"><option value="all">All setups</option><option value="individual">Individual</option><option value="pair">Pair</option><option value="group">Group</option><option value="class">Class</option></select></label>
+<label>Order<select id="performanceTaskSort"><option value="newest">Newest first</option><option value="name">Alphabetical A–Z</option><option value="name-desc">Alphabetical Z–A</option><option value="due">Deadline soonest</option></select></label>
+</div>
+<div class="compact-filter-actions"><button class="btn btn-light" id="performanceTaskClearFilters" type="button">Clear filters</button><button class="btn btn-orange" id="performanceTaskFilterDone" type="button">Done</button></div>
+</div>
+</div>
+<div class="assignment-list" id="performanceTaskList"></div>
+</section>
+<section class="app-view" id="view-archive"><div aria-label="Archive introduction" class="ms-panel-hero ms-hero-archive">
+<div class="ms-hero-copy">
+<span class="ms-hero-kicker">06 / THE MEMORY SHELF</span>
+<h2>Past lessons,<br/><em>kept in order.</em></h2>
+<p>Find previously archived classroom work in one calm, organized place whenever you need to revisit it.</p>
+<div class="ms-hero-tags"><span>Archived records</span><span>Class history</span></div>
+</div>
+<div aria-hidden="true" class="ms-hero-art"><img alt="" src="assets/panel-identity/archive-records.svg"/></div>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-one"></span>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-two"></span>
+</div>
+<div class="section-row ms-panel-toolbar"><span class="ms-toolbar-label">Archive library</span><div class="ms-original-heading"><p class="eyebrow">ARCHIVE CENTER</p><h2>Archived</h2><p class="muted">Archived tasks retain student submissions, grades and file references, including solutions for later review.</p></div><div class="row-actions"><button class="btn btn-light" id="retryArchiveCleanupBtn" style="display:none" type="button">Retry file cleanup</button><button aria-controls="archiveFilterPanel" aria-expanded="false" class="btn btn-light compact-filter-button" id="archiveFilterBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M4 5h16M7 12h10M10 19h4"></path></svg>Filter <span class="filter-count-badge" hidden="" id="archiveFilterBadge">0</span></button></div></div>
+<div aria-label="Archive summary" class="archive-summary-grid">
+<article><span>Classes</span><b id="archivedClassCount">0</b></article>
+<article><span>Activities</span><b id="archivedActivityCount">0</b></article>
+<article><span>Performance Tasks</span><b id="archivedPerformanceCount">0</b></article>
+</div>
+<div class="compact-filter-wrap">
+<div class="compact-filter-panel" hidden="" id="archiveFilterPanel">
+<div class="compact-filter-panel-head"><div><p class="eyebrow">FILTER ARCHIVED ITEMS</p><h3>Choose what to show</h3></div><button aria-label="Close archive filters" class="icon-button compact-filter-close" id="archiveFilterClose" type="button">×</button></div>
+<div class="performance-task-filter-grid archive-filter-grid">
+<label>Category<select id="archiveCategoryFilter"><option value="all">All archived</option><option value="class">Classes</option><option value="activity">Activities</option><option value="performance">Performance Tasks</option></select></label>
+<label>Order<select id="archiveSort"><option value="newest">Recently archived</option><option value="oldest">Oldest archived</option><option value="name">Alphabetical A–Z</option><option value="name-desc">Alphabetical Z–A</option></select></label>
+</div>
+<div class="compact-filter-actions"><button class="btn btn-light" id="archiveClearFilters" type="button">Clear filters</button><button class="btn btn-orange" id="archiveFilterDone" type="button">Done</button></div>
+</div>
+</div>
+<div class="archive-center-list" id="archiveList"></div>
+</section>
+<section class="app-view" id="view-submissions"><div aria-label="Submissions introduction" class="ms-panel-hero ms-hero-submissions">
+<div class="ms-hero-copy">
+<span class="ms-hero-kicker">04 / THE REVIEW DESK</span>
+<h2>Every effort<br/><em>deserves a look.</em></h2>
+<p>All your students’ submitted work, organized for thoughtful checking, timely feedback, and fair assessment.</p>
+<div class="ms-hero-tags"><span>Review &amp; feedback</span><span>Student progress</span></div>
+</div>
+<div aria-hidden="true" class="ms-hero-art"><img alt="" src="assets/panel-identity/submissions.svg"/></div>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-one"></span>
+<span aria-hidden="true" class="ms-hero-corner ms-hero-corner-two"></span>
+</div>
+<div class="section-row ms-panel-toolbar"><span class="ms-toolbar-label">Review workspace</span><div class="ms-original-heading"><p class="eyebrow">STUDENT WORK</p><h2>Submissions</h2><p class="muted">Choose Activities or Performance Tasks, then use Filter only when you need it.</p></div><button aria-controls="submissionFilterPanel" aria-expanded="false" class="btn btn-light compact-filter-button" id="submissionFilterBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M4 5h16M7 12h10M10 19h4"></path></svg>Filter <span class="filter-count-badge" hidden="" id="submissionFilterBadge">0</span></button></div>
+<div aria-label="Submission category" class="submission-kind-tabs" id="submissionTypeTabs" role="tablist">
+<button class="submission-kind-tab active" data-submission-type="written_work" type="button">Activities <span id="writtenSubmissionCount">0</span></button>
+<button class="submission-kind-tab" data-submission-type="performance_task" type="button">Performance Tasks <span id="performanceSubmissionCount">0</span></button>
+</div>
+<div class="compact-filter-wrap submission-filter-wrap">
+<div class="compact-filter-panel submission-filter-panel" hidden="" id="submissionFilterPanel">
+<div class="compact-filter-panel-head"><div><p class="eyebrow">FILTER SUBMISSIONS</p><h3>Choose what to show</h3></div><button aria-label="Close filters" class="icon-button compact-filter-close" id="submissionFilterClose" type="button">×</button></div>
+<div class="submission-toolbar">
+<div class="submission-section-control"><span class="field-label">Section</span><div class="submission-section-tabs" id="submissionSectionTabs"></div></div>
+<div class="submission-filter-grid">
+<div class="submission-review-filter">
+<span class="field-label">Review status</span>
+<div aria-label="Filter submissions by review status" class="submission-review-tabs" id="submissionReviewTabs" role="group">
+<button class="submission-review-tab" data-submission-review-filter="all" type="button">All <span data-review-count="all">0</span></button>
+<button class="submission-review-tab active" data-submission-review-filter="new" type="button">New <span data-review-count="new">0</span></button>
+<button class="submission-review-tab" data-submission-review-filter="checked" type="button">Checked <span data-review-count="checked">0</span></button>
+</div>
+</div>
+<label class="submission-sort-field"><span id="submissionActivityFilterLabel">Activity</span>
+<select aria-label="Filter submissions by activity" id="submissionActivityFilter">
+<option selected="" value="all">All activities</option>
+</select>
+</label>
+<label class="submission-sort-field">View
+                    <select id="submissionGroupMode">
+<option selected="" value="section">Separated by section</option>
+<option value="combined">Combined list</option>
+</select>
+</label>
+<label class="submission-sort-field">Order
+                    <select id="submissionSort">
+<option selected="" value="newest">Newest first</option>
+<option value="name">Alphabetical A–Z</option>
+<option value="name-desc">Alphabetical Z–A</option>
+</select>
+</label>
+</div>
+</div>
+<div class="compact-filter-actions"><button class="btn btn-light" id="submissionClearFilters" type="button">Clear filters</button><button class="btn btn-orange" id="submissionFilterDone" type="button">Done</button></div>
+</div>
+</div>
+<div class="submission-section-summary" id="submissionSectionSummary"></div>
+<div class="assignment-list" id="submissionList"></div>
+</section>
+<section id="view-competencies" class="app-view ct-page"><div class="ms-panel-hero ms-hero-competencies ct-page-hero" aria-label="Competency Tracker introduction">
+  <div class="ms-hero-copy">
+    <span class="ms-hero-kicker">05 / THE MASTERY STUDIO</span>
+    <h2>Every skill,<br><em>one step forward.</em></h2>
+    <p>Explore your learners' progress, see where support is needed, and keep every competency within reach.</p>
+    <div class="ct-hero-stats" aria-label="My competency overview">
+      <span class="ct-hero-stat"><strong id="ctHeroCompetencyCount" aria-live="polite">—</strong><small>My competencies</small></span>
+      <span class="ct-hero-stat"><strong id="ctHeroTaggedCount" aria-live="polite">—</strong><small>Tagged activities</small></span>
+    </div>
+  </div>
+  <div class="ms-hero-art ct-hero-art" aria-hidden="true"><img src="assets/panel-identity/competencies.svg" alt=""></div>
+  <span aria-hidden="true" class="ms-hero-corner ms-hero-corner-one"></span>
+  <span aria-hidden="true" class="ms-hero-corner ms-hero-corner-two"></span>
+</div><div class="ct-page-card"><div class="ct-manager"><div class="ct-head ct-dashboard-head"><div><h2>Student Competency Dashboard</h2><p class="muted">Choose a grade and section to review individual and combined competency progress.</p></div><button id="ctDashboardAddCompetency" class="ct-add-competency" type="button" aria-haspopup="dialog" aria-controls="ctCreateOverlay"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><span>Add Competency</span></button></div><div class="ct-filters"><label>Grade level<select id="ctDashboardGrade"><option value="">All grades</option></select></label><label>Section<select id="ctDashboardSection"><option value="">All sections</option></select></label><div class="ct-student-search-group" id="ctStudentSearchGroup">
+  <label for="ctDashboardStudentSearch">Search student</label>
+  <div class="ct-student-search-box">
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+    <input type="search" id="ctDashboardStudentSearch" autocomplete="off" placeholder="Type a student's name" aria-controls="ctDashboardStudentMatches" aria-expanded="false" aria-describedby="ctDashboardStudentHelp">
+    <button type="button" id="ctDashboardStudentClear" class="ct-student-search-clear" aria-label="Clear selected student" title="Clear selected student" hidden>×</button>
+  </div>
+  <select id="ctDashboardStudent" hidden aria-hidden="true" tabindex="-1"><option value="">No student selected</option></select>
+  <div id="ctDashboardStudentMatches" class="ct-student-search-results" aria-label="Matching students" hidden></div>
+  <small id="ctDashboardStudentHelp" class="ct-student-search-help">Choose one student to view their competencies.</small>
+</div></div><div id="ctDashboardStatus" class="ct-dashboard-status" aria-live="polite"></div><div id="ctDashboardContent"></div>
+<details class="ct-library-details" id="ctLibraryDetails">
+  <summary><span>My Competency Library</span> <small id="ctLibraryCount">0 competencies</small></summary>
+  <div class="ct-library-inner">
+    <div class="ct-library-toolbar">
+      <p class="muted">Manage your private competency library. Removing a competency unlinks it from active and archived activities, while preserving student scores, submissions, and class records.</p>
+      <button id="ctLibraryAddCompetency" class="ct-add-competency ct-add-competency-secondary" type="button" aria-haspopup="dialog" aria-controls="ctCreateOverlay"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><span>New Competency</span></button>
+    </div>
+    <div id="ctLibraryList" class="ct-library-list" aria-live="polite"></div>
+  </div>
+</details><details class="ct-manage-details"><summary>Manage activity competency assignments (including archived activities)</summary><div class="ct-head"><div><p class="eyebrow">MATHSIDE · TEACHER DESK</p><h2>Competency Manager</h2><p class="muted">Tag current or archived activities without changing grades.</p></div><button type="button" class="btn btn-light" id="ctClose" aria-label="Close competency assignment manager">Close manager</button></div><div class="ct-page-note">Create a competency using <strong>Add Competency</strong> above, or choose <strong>+ New</strong> while creating an Activity or Performance Task. New names are saved in your private library.</div><div class="ct-filters"><label>Grade level<select id="ctGradeFilter"><option value="">All grades</option></select></label><label>Section<select id="ctSectionFilter"><option value="">All sections</option></select></label><label>Student<select id="ctStudentFilter"><option value="">All students</option></select></label></div><div class="ct-bulk"><label><input id="ctShowArchived" type="checkbox" checked> Include archived activities</label><input id="ctFilter" placeholder="Search activities" aria-label="Search activities"><select id="ctBulkSelect"><option value="">Select competency for checked activities</option></select><button type="button" class="btn btn-orange" id="ctBulkApply">Apply to selected</button></div><div id="ctTeacherList" class="ct-teacher-list"></div></details></div></div></section>
+</main>
+</div>
+</section>
+<!-- STUDENT APP -->
+<section class="v8-shell" data-avatar="neutral" hidden="" id="studentApp">
+<aside aria-label="Student navigation" class="v8-sidebar" id="studentMobileDrawer">
+<div class="v8-mobile-drawer-top">
+<a class="v8-brand" data-student-panel="overview" href="#"><img alt="" aria-hidden="true" class="v8-logo-icon" src="assets/mathside-icon.svg?v=12.3"/><span>Mathside</span></a>
+<button aria-label="Close student menu" class="v8-mobile-drawer-close" id="studentMenuClose" type="button">×</button>
+</div>
+<div aria-label="Student account" class="v8-mobile-tools" id="studentMobileTools"></div>
+<nav aria-label="Student workspace" class="v8-nav"><button class="v8-nav-link active" data-student-panel="overview" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"></path></svg><span>Overview</span></button><button class="v8-nav-link" data-student-panel="activities" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h5"></path></svg><span>Activities</span></button><button class="v8-nav-link" data-student-panel="performance" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5M7 3v4M17 3v4"></path></svg><span>Performance Tasks</span></button><button class="v8-nav-link" data-student-panel="grades" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M3 13h4v8H3zM10 8h4v13h-4zM17 3h4v18h-4z"></path></svg><span>Grades &amp; Feedback</span></button><button class="v8-nav-link" data-student-panel="todo" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M5 12.5 10 17l9-10M4 4h10M4 8h7"></path></svg><span>To-Do</span><span class="v10-nav-badge" hidden="" id="studentTodoNavBadge">0</span></button><button class="v8-nav-link" data-student-panel="calendar" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 2v6M17 2v6M3 11h18"></path></svg><span>Calendar</span></button><button class="v8-nav-link" data-student-panel="feedback" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M3 4h18v14H9l-5 4v-4H3zM7 8h10M7 12h7"></path></svg><span>Feedback Inbox</span><span class="v10-nav-badge" hidden="" id="studentFeedbackNavBadge">0</span></button><button class="v8-nav-link" data-student-panel="account" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><circle cx="12" cy="7" r="4"></circle><path d="M4 22v-3a8 8 0 0 1 16 0v3z"></path></svg><span>Account</span></button></nav><div aria-hidden="true" class="v8-sidebar-sketch"></div></aside>
+<button aria-label="Close student menu" class="v8-student-backdrop" hidden="" id="studentMenuBackdrop" type="button"></button>
+<div class="v8-workspace">
+<header class="v8-topbar"><div aria-hidden="true" class="v8-ribbon"></div><button aria-controls="studentMobileDrawer" aria-expanded="false" aria-label="Open student menu" class="v8-student-menu-toggle" id="studentMenuToggle" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button><button aria-label="Open my account" class="v8-user-menu" data-student-panel="account" type="button"><span aria-hidden="true" class="v8-avatar v8-header-avatar" data-v8-avatar="">ST</span><span><b id="studentWelcome">Student</b><small id="v8HeaderGrade">My classroom</small></span><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg></button></header>
+<main class="v8-main" id="studentMain" tabindex="-1">
+<section aria-label="Overview" class="student-panel-view active v8-overview" data-student-panel-view="overview">
+<div class="v8-hero"><div class="v8-hero-copy"><span class="v20-student-eyebrow"><b>00</b> / YOUR LEARNING HOME</span><h1><span id="v8Greeting">Good morning,</span><br/><span class="v8-greeting-name" id="v8GreetingName">Student!</span> <span aria-hidden="true" class="v8-wave">👋</span></h1><p>Keep going! Every problem you solve<br/>brings you closer to your goals.</p></div><div aria-hidden="true" class="v8-character"><img alt="" hidden="" id="v8HeroCharacter"/><div class="v8-neutral-hero"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="m1 8 11-5 11 5-11 5zM5 11v7l7 4 7-4v-7M22 9v8"></path></svg><span>Let’s learn<br/>something new!</span></div></div><div aria-hidden="true" class="v8-encouragement">Small<br/>Progress<br/>Big Results!<span></span></div><span aria-hidden="true" class="v8-hero-sparks">✦</span></div>
+<section aria-label="Learning summary" class="v8-metrics"><article class="v8-metric"><span class="v8-metric-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="m12 2 3.1 6.3 7 .9-5 4.9 1.2 7L12 18l-6.3 3.1 1.2-7-5-4.9 7-.9z"></path></svg></span><div><h3>Average Grade</h3><strong data-v8-metric="average">—</strong><small data-v8-note="average"></small><span class="v8-micro" data-v8-detail="average"></span></div></article><article class="v8-metric"><span class="v8-metric-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h5"></path></svg></span><div><h3>Total Activities</h3><strong data-v8-metric="total">—</strong><small data-v8-note="total"></small><span class="v8-micro" data-v8-detail="total"></span></div></article><article class="v8-metric"><span class="v8-metric-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M7 3h10v6a5 5 0 0 1-10 0zM7 5H3v3a5 5 0 0 0 5 5M17 5h4v3a5 5 0 0 1-5 5M12 14v6M7 22h10"></path></svg></span><div><h3>Highest Score</h3><strong data-v8-metric="highest">—</strong><small data-v8-note="highest"></small><span class="v8-micro" data-v8-detail="highest"></span></div></article></section>
+<section class="v22-dashboard-competencies v8-paper" aria-labelledby="v22CompetencyHeading">
+<header class="v8-section-heading v22-competency-heading"><div><span class="v22-section-kicker">YOUR LEARNING MILESTONES</span><h2 id="v22CompetencyHeading"><svg aria-hidden="true" class="v8-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>Competencies</h2><p>Follow your skills, scores, and progress in one place.</p></div></header>
+<div id="ctStudentContent" class="ct-student-content" aria-live="polite"><div class="v20-ct-state">Preparing your competency progress…</div></div>
+</section>
+<section class="v8-upcoming v8-paper"><header class="v8-section-heading"><h2><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><rect height="17" rx="2" width="18" x="3" y="5"></rect><path d="M7 2v6M17 2v6M3 11h18M8 16l3 3 5-5"></path></svg>Upcoming Tasks</h2><button data-v8-action="view-tasks" type="button">View All</button></header><div id="v8UpcomingList"></div></section>
+</section>
+<section class="student-panel-view" data-student-panel-view="activities" hidden="">
+<header class="v8-page-heading v20-student-heading"><div class="v22-mobile-illustration" aria-hidden="true"></div><div class="v22-header-label"><span class="v8-page-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h5"></path></svg></span><div><span class="v20-student-eyebrow"><b>01</b> / THE PRACTICE STUDIO</span><h1>Activities</h1><p>Complete your activities and try your best!</p></div></div></header>
+<div aria-label="Filter activities by status" class="student-activity-tabs" role="group"><button class="student-filter active" data-student-filter="ongoing" type="button"><span>To do</span><strong data-student-filter-count="ongoing">0</strong></button><button class="student-filter" data-student-filter="submitted" type="button"><span>Submitted</span><strong data-student-filter-count="submitted">0</strong></button><button class="student-filter" data-student-filter="missed" type="button"><span>Missed</span><strong data-student-filter-count="missed">0</strong></button></div>
+<p aria-live="polite" class="v8-sr" id="studentTaskSummary"></p><div class="v8-activity-list" id="studentAssignmentList"></div>
+</section>
+<section class="student-panel-view" data-student-panel-view="performance" hidden="">
+<header class="v8-page-heading v20-student-heading"><div class="v22-mobile-illustration" aria-hidden="true"></div><div class="v22-header-label"><span class="v8-page-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5M7 3v4M17 3v4"></path></svg></span><div><span class="v20-student-eyebrow"><b>02</b> / THE PROJECT LAB</span><h1>Performance Tasks</h1><p>View instructions, reference pictures and rubrics, then upload pictures of your output.</p></div></div></header>
+<div class="v8-activity-list" id="studentPerformanceList"></div>
+</section>
+<section class="student-panel-view" data-student-panel-view="grades" hidden="">
+<header class="v8-page-heading v20-student-heading"><div class="v22-mobile-illustration" aria-hidden="true"></div><div class="v22-header-label"><span class="v8-page-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M3 13h4v8H3zM10 8h4v13h-4zM17 3h4v18h-4z"></path></svg></span><div><span class="v20-student-eyebrow"><b>03</b> / THE REVIEW DESK</span><h1>Grades &amp; Feedback</h1><p>See how you’re doing and read feedback from your teacher.</p></div></div></header>
+<section aria-label="Learning summary" class="v8-metrics"><article class="v8-metric"><span class="v8-metric-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="m12 2 3.1 6.3 7 .9-5 4.9 1.2 7L12 18l-6.3 3.1 1.2-7-5-4.9 7-.9z"></path></svg></span><div><h3>Average Grade</h3><strong data-v8-metric="average">—</strong><small data-v8-note="average"></small><span class="v8-micro" data-v8-detail="average"></span></div></article><article class="v8-metric"><span class="v8-metric-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M7 3h10v6a5 5 0 0 1-10 0zM7 5H3v3a5 5 0 0 0 5 5M17 5h4v3a5 5 0 0 1-5 5M12 14v6M7 22h10"></path></svg></span><div><h3>Highest Score</h3><strong data-v8-metric="highest">—</strong><small data-v8-note="highest"></small><span class="v8-micro" data-v8-detail="highest"></span></div></article><article class="v8-metric"><span class="v8-metric-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h5"></path></svg></span><div><h3>Total Activities</h3><strong data-v8-metric="total">—</strong><small data-v8-note="total"></small><span class="v8-micro" data-v8-detail="total"></span></div></article></section>
+<section class="v8-feedback v8-paper"><header class="v8-section-heading"><h2><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M3 4h18v14H9l-5 4v-4H3zM7 8h10M7 12h7"></path></svg>Recent Feedback</h2><span class="v8-sr" id="studentGradedCount">0 graded</span></header><div class="v8-feedback-list" id="studentGradeList"></div></section>
+</section>
+<section class="student-panel-view v10-student-feature" data-student-panel-view="todo" hidden="">
+<header class="v8-page-heading v20-student-heading"><div class="v22-mobile-illustration" aria-hidden="true"></div><div class="v22-header-label"><span class="v8-page-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M5 12.5 10 17l9-10M4 4h10M4 8h7"></path></svg></span><div><span class="v20-student-eyebrow"><b>04</b> / YOUR DAILY PLAN</span><h1>To-Do List</h1><p>Your unfinished work, arranged by what needs attention first.</p></div></div></header>
+<div class="v10-todo-summary" id="studentTodoSummary"></div><div class="v10-todo-list" id="studentTodoList"></div>
+</section>
+<section class="student-panel-view v10-student-feature" data-student-panel-view="calendar" hidden="">
+<header class="v8-page-heading v20-student-heading"><div class="v22-mobile-illustration" aria-hidden="true"></div><div class="v22-header-label"><span class="v8-page-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 2v6M17 2v6M3 11h18"></path></svg></span><div><span class="v20-student-eyebrow"><b>05</b> / THE STUDY CALENDAR</span><h1>Student Calendar</h1><p>Highlighted days have deadlines. Tap a day to see the details below.</p></div></div></header>
+<section class="v10-calendar-card v8-paper"><div class="v10-calendar-head"><button aria-label="Previous month" class="v10-calendar-nav" id="calendarPrevBtn" type="button">‹</button><h2 id="calendarMonthLabel">Month</h2><button aria-label="Next month" class="v10-calendar-nav" id="calendarNextBtn" type="button">›</button></div><div class="v10-calendar-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="v10-calendar-grid" id="studentCalendarGrid"></div></section><section class="v10-calendar-agenda v8-paper"><header class="v8-section-heading"><h2 id="studentCalendarAgendaTitle">Deadlines this month</h2><small>Tap a highlighted day to show only that day.</small></header><div id="studentCalendarAgenda"></div></section>
+</section>
+<section class="student-panel-view v10-student-feature" data-student-panel-view="feedback" hidden="">
+<header class="v8-page-heading v20-student-heading"><div class="v22-mobile-illustration" aria-hidden="true"></div><div class="v22-header-label"><span class="v8-page-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M3 4h18v14H9l-5 4v-4H3zM7 8h10M7 12h7"></path></svg></span><div><span class="v20-student-eyebrow"><b>06</b> / TEACHER FEEDBACK</span><h1>Teacher Feedback Inbox</h1><p>All reviewed work and teacher comments in one place.</p></div></div></header>
+<div class="v10-feedback-inbox" id="studentFeedbackInbox"></div>
+</section>
+<section class="student-panel-view" data-student-panel-view="account" hidden="">
+<header class="v8-page-heading v20-student-heading"><div class="v22-mobile-illustration" aria-hidden="true"></div><div class="v22-header-label"><span class="v8-page-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><circle cx="12" cy="7" r="4"></circle><path d="M4 22v-3a8 8 0 0 1 16 0v3z"></path></svg></span><div><span class="v20-student-eyebrow"><b>07</b> / YOUR SPACE</span><h1>Account</h1><p>Your student information.</p></div></div></header>
+<div class="v8-account-layout"><article class="v8-profile v8-paper"><div class="v8-profile-picture"><div aria-hidden="true" class="v8-avatar" data-v8-avatar="">ST</div></div><h2 id="studentAccountName">Student</h2><p>Student account</p><span class="v8-student-badge">STUDENT</span></article>
+<div class="v8-account-details v8-paper"><article><span class="v8-detail-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><circle cx="12" cy="7" r="4"></circle><path d="M4 22v-3a8 8 0 0 1 16 0v3z"></path></svg></span><div><span>Username</span><b id="studentAccountUsername">—</b></div><button aria-label="Copy username" class="v8-copy" data-v8-action="copy-username" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M9 7H5v15h11v-4M9 2h8l4 4v12H9zM17 2v5h4"></path></svg></button></article><article><span class="v8-detail-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="m1 8 11-5 11 5-11 5zM5 11v7l7 4 7-4v-7M22 9v8"></path></svg></span><div><span>Class</span><b id="studentAccountClass">—</b></div></article><article><span class="v8-detail-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M2 4c4-2 7-2 10 0 3-2 6-2 10 0v17c-4-2-7-2-10 0-3-2-6-2-10 0zM12 4v17"></path></svg></span><div><span>Grade Level</span><b id="studentAccountGrade">—</b></div></article><article><span class="v8-detail-icon"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><circle cx="12" cy="7" r="4"></circle><path d="M4 22v-3a8 8 0 0 1 16 0v3z"></path></svg></span><div><span>Gender</span><b id="studentAccountGender">Not specified</b></div></article></div>
+</div><div class="v8-account-footer"><p aria-live="polite" id="v8AccountStatus"></p><button class="v8-signout" id="studentSignout" type="button"><svg aria-hidden="true" class="v8-icon" viewbox="0 0 24 24"><path d="M10 4H4v16h6M13 8l4 4-4 4M8 12h13"></path></svg>Sign out</button></div>
+</section>
+</main>
+</div>
+<div hidden="" id="v8LegacyHooks"><div id="studentFirstName"></div><div id="studentHeroCopy"></div><div id="studentClassChip"></div><div id="studentGradeChip"></div><div id="studentInitials"></div><div id="studentAssignedCount"></div><div id="studentCompletedCount"></div><div id="studentTodoCount"></div><div id="studentAverageScore"></div><div id="studentProgressValue"></div><div id="studentProgressBar"></div><div id="studentProgressCopy"></div><div id="studentNextUpCard"></div><div id="studentNextUp"></div><div id="studentRecentFeedback"></div><div id="studentAccountInitials"></div></div>
+</section>
+<!-- CREATE CLASS MODAL -->
+<dialog class="modal orange-create-modal" id="sectionModal">
+<div class="modal-box">
+<div class="orange-panel-header orange-class-head">
+<div class="orange-class-header-copy">
+<h2>Create Class</h2>
+<p>Set up a new class and start learning together.</p>
+</div>
+</div>
+<button aria-label="Close" class="modal-close" data-close="sectionModal">×</button>
+<form class="form-stack orange-class-form" id="sectionForm">
+<div class="orange-class-field">
+<div class="orange-class-stephead"><span class="orange-step">1</span><div><strong>Select grade level</strong><p>Choose the grade level for this class.</p></div></div>
+<label class="orange-icon-input"><span aria-hidden="true" class="orange-input-symbol"><svg aria-hidden="true" height="27" viewbox="0 0 24 24" width="27"><path d="M12 2 1 8l11 6 9-4.91V17h2V8L12 2Zm-7 10v5l7 4 7-4v-5l-7 4-7-4Z" fill="#fa6706"></path></svg></span><span class="orange-sr-only">Grade level</span>
+<select id="sectionGrade" name="grade_level" required="">
+<option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
+</select>
+</label>
+</div>
+<div class="orange-class-field">
+<div class="orange-class-stephead"><span class="orange-step">2</span><div><strong>Class name</strong><p>Give your class a name.</p></div></div>
+<label class="orange-icon-input"><span aria-hidden="true" class="orange-input-symbol"><svg aria-hidden="true" fill="none" height="26" stroke="#f96a0a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="26"><path d="M12 20h9M3 17l11.7-11.7a2.1 2.1 0 0 1 3 0l1 1a2.1 2.1 0 0 1 0 3L7 21l-4 1 1-5Z"></path></svg></span><span class="orange-sr-only">Class name</span><input maxlength="60" name="name" placeholder="e.g. Beryl" required=""/></label>
+</div>
+<div class="orange-class-field orange-reuse-field">
+<div class="orange-class-stephead"><span class="orange-step">3</span><div><strong>Reuse students from another class</strong><p>You can start with an empty class or copy students from an existing class.</p></div></div>
+<label class="orange-icon-input"><span aria-hidden="true" class="orange-input-symbol"><svg aria-hidden="true" fill="#f96a0a" height="27" viewbox="0 0 24 24" width="27"><circle cx="9" cy="8" r="3.1"></circle><circle cx="17" cy="10" r="2.6"></circle><path d="M2.8 20a6.2 6.2 0 0 1 12.4 0v1H2.8v-1ZM15 15a5.2 5.2 0 0 1 6.2 5v1H17v-1a8 8 0 0 0-2-5Z"></path></svg></span><span class="orange-sr-only">Reuse students from another class</span><select id="importArchivedSection" name="import_archived_section"><option value="">No — start with an empty class</option></select></label>
+<p class="field-help"><span aria-hidden="true">ⓘ</span> Choose any of your existing classes. Mathside will keep the students’ accounts and enroll them in the new class too.</p>
+</div>
+<div class="modal-actions orange-class-actions"><button class="btn btn-light" data-close="sectionModal" type="button">Cancel</button><button class="btn btn-orange" type="submit"><span aria-hidden="true">＋</span> Create class</button></div>
+</form>
+</div>
+</dialog>
+<!-- ADD STUDENTS MODAL -->
+<dialog class="modal wide-modal" id="studentModal">
+<div class="modal-box">
+<button aria-label="Close" class="modal-close" data-close="studentModal">×</button>
+<p class="eyebrow">ADD STUDENTS</p>
+<h2 id="studentModalTitle">Class</h2>
+<p class="muted">Enter student names and gender, or import a DepEd SF1 / Excel class list. Mathside will generate a username and temporary password for each learner.</p>
+<div class="student-import-panel">
+<div class="student-import-copy">
+<strong>Import SF1 / Excel</strong>
+<span>Supports DepEd SF1 <b>.xlsx</b> and simple .xlsx or .csv lists with Name + Sex/Gender columns. Convert legacy .xls to .xlsx before importing. Up to 60 learners.</span>
+</div>
+<button class="btn btn-light" id="importStudentsFileBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"></path></svg>Import file</button>
+<input accept=".xlsx,.csv" hidden="" id="studentsFileInput" type="file"/>
+</div>
+<div class="student-import-status-row">
+<span class="student-import-status" id="studentImportStatus">You can review imported learners before generating accounts.</span>
+<span class="student-entry-count" id="studentEntryCount">0 / 60</span>
+</div>
+<div class="student-table-wrap">
+<table class="student-entry-table">
+<thead><tr><th>#</th><th>Name</th><th>Gender</th><th></th></tr></thead>
+<tbody id="studentEntryBody"></tbody>
+</table>
+</div>
+<div class="modal-actions spaced">
+<button class="btn btn-light" id="addStudentRowBtn"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>Add row</button>
+<button class="btn btn-orange" id="saveStudentsBtn">Generate student accounts</button>
+</div>
+</div>
+</dialog>
+<!-- GENERATED ACCOUNTS MODAL -->
+<dialog class="modal wide-modal" id="accountsModal">
+<div class="modal-box">
+<button aria-label="Close" class="modal-close" data-close="accountsModal">×</button>
+<div class="success-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M5 12.5 10 17l9-10"></path></svg></div>
+<p class="eyebrow">ACCOUNTS GENERATED</p>
+<h2>Student login credentials are ready.</h2>
+<p class="muted">Download a new Excel file and give each student only their own credentials.</p>
+<p class="account-note credential-warning">Temporary passwords are shown only when accounts are generated. Download this sensitive file privately, give each student only their own details, and delete the exported file once credentials have been distributed.</p>
+<div class="student-table-wrap"><table class="student-entry-table"><thead><tr><th>Name</th><th>Gender</th><th>Username</th><th>Temporary password</th></tr></thead><tbody id="generatedAccountsBody"></tbody></table></div>
+<div class="modal-actions"><button class="btn btn-light" data-close="accountsModal">Done</button><button class="btn btn-orange" id="downloadAccountsExcelBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"></path></svg>Download Excel</button></div>
+</div>
+</dialog>
+<!-- DELETE / REMOVE STUDENT MODAL -->
+<dialog class="modal" id="deleteStudentModal">
+<div class="modal-box">
+<button aria-label="Close" class="modal-close" data-close="deleteStudentModal">×</button>
+<p class="eyebrow">STUDENT MANAGEMENT</p>
+<h2 id="deleteStudentTitle">Student</h2>
+<p class="muted" id="deleteStudentClass">Class</p>
+<div class="student-account-summary"><span id="deleteStudentUsernameLabel">Username</span><b id="deleteStudentUsername">—</b></div>
+<div class="delete-choice">
+<h3>What do you want to delete?</h3>
+<p><b>Remove from class</b> removes only this class membership. The student keeps the Mathside login account.</p>
+<p><b>Delete account permanently</b> removes the student's login account and associated Supabase records. Cloudflare R2 file cleanup will be configured separately. This cannot be undone.</p>
+</div>
+<div class="modal-actions student-delete-actions">
+<button class="btn btn-light btn-danger-outline" id="removeStudentOnlyBtn" type="button">Remove from class</button>
+<button class="btn btn-danger" id="deleteStudentAccountBtn" type="button">Delete account permanently</button>
+</div>
+</div>
+</dialog>
+<!-- SECTION STUDENTS MODAL -->
+<dialog class="modal wide-modal" id="classStudentsModal">
+<div class="modal-box roster-modal-box">
+<button aria-label="Close" class="modal-close" data-close="classStudentsModal">×</button>
+<div class="roster-modal-heading">
+<div>
+<p class="eyebrow">CLASS ROSTER</p>
+<h2 id="classStudentsTitle">Students</h2>
+<p class="muted" id="classStudentsMeta">Search, review, and manage learners in this section.</p>
+</div>
+<div class="v10-roster-actions"><button class="btn btn-light" id="downloadRosterAccountsBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"></path></svg>Download accounts</button><button class="btn btn-light" id="exportClassRecordBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"></path></svg>Export class record</button><button class="btn btn-orange roster-add-students-btn" id="rosterAddStudentsBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>Add students</button></div>
+</div>
+<div class="roster-controls">
+<label class="roster-search-field">Search student<input autocomplete="off" id="classStudentSearch" placeholder="Type a student name or username" type="search"/></label>
+<label>Arrange by<select id="classStudentSort"><option value="gender">Gender (Male first), then name</option><option value="name">Name A–Z</option></select></label>
+</div>
+<div class="bulk-toolbar student-bulk-toolbar roster-bulk-toolbar" id="studentBulkToolbar">
+<label class="bulk-select-all"><input class="row-check" id="selectAllStudents" type="checkbox"/><span>Select all shown</span></label>
+<span class="bulk-selected-count" id="selectedStudentCount">0 selected</span>
+<div class="bulk-actions">
+<button class="btn btn-light roster-reset-passwords-btn" disabled="" id="bulkResetPasswordsBtn" type="button">Reset passwords</button>
+<button class="btn btn-light btn-danger-outline" disabled="" id="bulkRemoveStudentsBtn" type="button">Remove selected</button>
+<button class="btn btn-danger" disabled="" id="bulkDeleteStudentsBtn" type="button">Delete selected accounts</button>
+</div>
+</div>
+<div class="roster-list" id="classStudentsList"></div>
+</div>
+</dialog>
+<!-- RESET STUDENT PASSWORDS MODAL -->
+<dialog class="modal wide-modal" id="resetPasswordsModal">
+<div class="modal-box reset-passwords-box">
+<button aria-label="Close" class="modal-close" data-close="resetPasswordsModal">×</button>
+<p class="eyebrow">STUDENT ACCOUNTS</p>
+<h2>Set new password</h2>
+<p class="muted" id="resetPasswordsLead">Choose the new password for the selected learner.</p>
+<form class="form-stack" id="resetPasswordsForm">
+<div class="reset-password-list" id="resetPasswordRows"></div>
+<label class="reset-password-show"><input id="showResetPasswords" type="checkbox"/> <span>Show passwords while typing</span></label>
+<p class="muted reset-password-help">Use at least 12 characters. Mathside does not store readable passwords after the reset, so download the Excel copy before closing the result.</p>
+<div class="modal-actions">
+<button class="btn btn-light" data-close="resetPasswordsModal" type="button">Cancel</button>
+<button class="btn btn-orange" id="confirmResetPasswordsBtn" type="submit">Set new password</button>
+</div>
+</form>
+</div>
+</dialog>
+<!-- RESET PASSWORDS COMPLETE MODAL -->
+<dialog class="modal wide-modal" id="resetPasswordsCompleteModal">
+<div class="modal-box reset-passwords-complete-box">
+<button aria-label="Close" class="modal-close" data-close="resetPasswordsCompleteModal">×</button>
+<div class="success-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M5 12.5 10 17l9-10"></path></svg></div>
+<p class="eyebrow">PASSWORD RESET COMPLETE</p>
+<h2 id="resetPasswordsCompleteTitle">New student passwords are ready.</h2>
+<p class="muted" id="resetPasswordsCompleteLead">Download the Excel file and give each learner only their own credentials.</p>
+<p class="account-note credential-warning" id="resetPasswordsExportStatus">For iPhone/iPad, tap Download Excel below. If Safari opens a preview, use Share → Save to Files.</p>
+<div class="student-table-wrap"><table class="student-entry-table"><thead><tr><th>Name</th><th>Gender</th><th>Username</th><th>New password</th></tr></thead><tbody id="resetPasswordsCompleteBody"></tbody></table></div>
+<div class="modal-actions"><button class="btn btn-light" data-close="resetPasswordsCompleteModal" type="button">Done</button><button class="btn btn-orange" id="downloadResetPasswordsExcelBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"></path></svg>Download Excel</button></div>
+</div>
+</dialog>
+<!-- CLASS RECORD EXPORT READY MODAL -->
+<dialog class="modal wide-modal" id="classRecordExportModal">
+<div class="modal-box reset-passwords-complete-box">
+<button aria-label="Close" class="modal-close" data-close="classRecordExportModal">×</button>
+<div class="success-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M5 12.5 10 17l9-10"></path></svg></div>
+<p class="eyebrow">CLASS RECORD READY</p>
+<h2 id="classRecordExportTitle">Your Excel class record is ready.</h2>
+<p class="muted" id="classRecordExportLead">Tap Download Excel below. You can tap it again if you need another copy.</p>
+<p class="account-note credential-warning">On iPhone/iPad, Safari may open the Excel file in a preview. Use Share → Save to Files if needed.</p>
+<div class="modal-actions"><button class="btn btn-light" data-close="classRecordExportModal" type="button">Done</button><button class="btn btn-orange" id="downloadClassRecordExcelBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"></path></svg>Download Excel</button></div>
+</div>
+</dialog>
+<!-- STUDENT TRACKING MODAL -->
+<dialog class="modal wide-modal" id="studentTrackingModal">
+<div class="modal-box student-tracking-box">
+<button aria-label="Close" class="modal-close" data-close="studentTrackingModal">×</button>
+<p class="eyebrow">STUDENT TRACKING</p>
+<h2 id="studentTrackingName">Student</h2>
+<p class="muted" id="studentTrackingMeta"></p>
+<div class="tracking-stats" id="studentTrackingStats"></div>
+<div class="student-tracking-head"><div><p class="eyebrow">SUBMISSION HISTORY</p><h3>Activities in this section</h3></div></div>
+<div class="tracking-list" id="studentTrackingList"></div>
+</div>
+</dialog>
+<!-- ASSIGNMENT MODAL -->
+<dialog aria-labelledby="assignmentModalTitle" class="modal assignment-modal friendly-editor orange-create-modal" id="assignmentModal">
+<div class="modal-box assignment-editor-box">
+<button aria-label="Close" class="modal-close" data-close="assignmentModal">×</button>
+<div class="assignment-editor-heading orange-assignment-head">
+<div>
+<p class="eyebrow" id="assignmentModalEyebrow">POST CLASSWORK</p>
+<h2 id="assignmentModalTitle">Create assignment</h2>
+<p class="muted" id="assignmentModalLead">Start with the activity and your classes. Add questions below.</p>
+</div>
+</div>
+<form class="form-stack assignment-editor-form" id="assignmentForm">
+<section class="assignment-form-section">
+<div class="assignment-form-section-head"><div><h3><span class="orange-step">1</span> Assignment details</h3></div></div>
+<div class="assignment-heading-grid">
+<div class="assignment-main-fields">
+<label>Title<small class="editor-required">Required</small><input name="title" placeholder="e.g. Linear Equations Practice" required=""/></label>
+<label>Instructions<textarea name="instructions" placeholder="Explain what students should do." rows="3"></textarea></label>
+</div>
+<div class="class-picker-field">
+<span class="field-label"><span class="orange-step">2</span> Select classes <small id="assignmentClassHint">Select one or more</small></span>
+<label aria-label="Search classes" class="orange-search-box"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg><input autocomplete="off" id="assignmentClassSearch" placeholder="Search class name or grade level..." type="search"/></label>
+<div aria-label="Choose classes" class="class-checklist" id="assignmentSectionChecklist" role="group"></div>
+<p class="section-edit-note" hidden="" id="assignmentSectionEditNote">Change the selected classes, then save. New classes receive their own activity copy. Unchecked classes stop receiving it; their existing submissions and scores stay saved, and their copy moves to Archived.</p>
+</div>
+</div>
+<div class="ct-create-field"><label class="ct-label" for="ctAssignmentCompetency">Learning competency (optional)</label><div class="ct-choice"><select id="ctAssignmentCompetency"><option value="">No competency selected</option></select><button type="button" class="btn btn-light" id="ctNewCompetency">+ New</button></div><small>Choose an existing competency or add a name. You can also tag older and archived activities in Competency Manager.</small></div></section><section class="assignment-form-section question-editor-section">
+<div class="question-builder-head"><div><h3><span class="orange-step">3</span> Add questions</h3><p class="muted">Correct answers may be added now or later. Questions without an answer will not be auto-checked.</p></div><button class="btn btn-light" id="addQuestionBtn" type="button"><svg aria-hidden="true" class="btn-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>Add question</button></div>
+<label class="v10-check-option mathside-shuffle-field"><input id="assignmentShuffleQuestions" name="shuffle_questions" type="checkbox"/><span><b>Shuffle question order for each student</b><small>Each learner gets a repeatable randomized arrangement. Answers and scores remain linked to the original question IDs. Works on newly posted and edited activities.</small></span></label>
+<div id="questionBuilder"></div>
+</section>
+<details class="editor-options"><summary><span>Posting &amp; deadline</span><small>Post now · No deadline by default</small></summary><section class="assignment-form-section compact-section">
+<div class="assignment-deadline-field">
+<label>Post assignment <small>Teacher chooses</small>
+<select id="assignmentPublishMode" name="publish_mode">
+<option value="now">Post immediately</option>
+<option value="schedule">Schedule for later</option>
+</select>
+</label>
+<label hidden="" id="assignmentPublishAtWrap">Publish date &amp; time <small>Automatic</small><input id="assignmentPublishAt" name="publish_at" type="datetime-local"/></label>
+<label>Deadline <small>Optional</small><input id="assignmentDueAt" name="due_at" type="datetime-local"/></label>
+<label>Student reminder <small>Optional</small>
+<select id="assignmentReminder" name="reminder_hours_before">
+<option value="0">No reminder</option>
+<option value="24">1 day before</option>
+<option value="48">2 days before</option>
+<option value="72">3 days before</option>
+</select>
+</label>
+<label class="v10-check-option"><input id="assignmentAllowResubmission" name="allow_resubmission" type="checkbox"/><span><b>Allow teacher-approved resubmission</b><small>Students can submit another attempt only after you allow it from their submission review.</small></span></label>
+<p class="muted">Scheduled activities stay hidden from students until the selected posting time. Deadline and reminder work normally after publication.</p>
+</div>
+</section></details>
+<details class="editor-options"><summary><span>Reference pictures</span><small>Optional · Add a visual guide</small></summary><section class="assignment-form-section compact-section">
+<label class="file-drop assignment-file-drop">
+<input accept="image/*" id="assignmentImage" name="image" type="file"/>
+<span>Choose a reference image</span>
+<img alt="Assignment preview" hidden="" id="assignmentImagePreview">
+</img></label>
+</section></details>
+<details class="editor-options"><summary><span>Import from Excel</span><small>Optional · Use an existing worksheet</small></summary><section class="assignment-import-panel">
+<div>
+<p class="eyebrow">EXCEL IMPORT</p>
+<h3>Prepare questions faster</h3>
+<p class="muted">Use the Mathside template to fill title, instructions, class names, questions, choices, answers, and points automatically.</p>
+</div>
+<div class="assignment-import-actions">
+<a class="btn btn-light" download="" href="downloads/Mathside-Assignment-Import-Template.xlsx">Download template</a>
+<button class="btn btn-dark" id="importAssignmentExcelBtn" type="button">Import Excel</button>
+<input accept=".xlsx" hidden="" id="assignmentExcelInput" type="file"/>
+</div>
+</section></details>
+<div class="modal-actions assignment-form-actions"><button class="btn btn-light" data-close="assignmentModal" type="button">Cancel</button><button class="btn btn-orange" id="assignmentSubmitBtn" type="submit">Post assignment</button></div>
+</form>
+</div>
+</dialog>
+<!-- MATH KEYBOARD -->
+<dialog class="modal math-keyboard-modal" id="mathKeyboardModal">
+<div class="modal-box math-keyboard-box">
+<button class="modal-close" id="mathKeyboardCloseBtn" type="button">×</button>
+<p class="eyebrow">MATHSIDE • MATH INPUT</p>
+<h2>Math Keyboard</h2>
+<p class="muted" id="mathKeyboardTargetLabel">Insert a mathematical expression into the selected field.</p>
+<math-field aria-label="Math expression" class="math-keyboard-field" id="mathKeyboardField" math-virtual-keyboard-policy="manual" smart-fence=""></math-field>
+<textarea aria-label="Math expression compatibility editor" autocapitalize="off" autocomplete="off" autocorrect="off" class="math-keyboard-fallback-field" hidden="" id="mathKeyboardFallbackField" spellcheck="false"></textarea>
+<p class="math-keyboard-compat-note" hidden="" id="mathKeyboardCompatibilityNote">Compatibility mode is active for this browser. The Mathside keys below still work normally.</p>
+<div class="math-mobile-entry-panel" id="mathMobileEntryPanel">
+<div aria-label="Math typing keyboard" class="math-mobile-entry-tabs" role="tablist">
+<button aria-selected="true" class="math-entry-tab is-active" data-math-entry-tab="numbers" role="tab" type="button">123</button>
+<button aria-selected="false" class="math-entry-tab" data-math-entry-tab="letters" role="tab" type="button">ABC</button>
+</div>
+<div class="math-mobile-keypad" data-math-entry-panel="numbers">
+<button data-math-type="7" type="button">7</button><button data-math-type="8" type="button">8</button><button data-math-type="9" type="button">9</button><button data-math-type="+" type="button">+</button>
+<button data-math-type="4" type="button">4</button><button data-math-type="5" type="button">5</button><button data-math-type="6" type="button">6</button><button data-math-type="-" type="button">−</button>
+<button data-math-type="1" type="button">1</button><button data-math-type="2" type="button">2</button><button data-math-type="3" type="button">3</button><button data-math-type="=" type="button">=</button>
+<button data-math-type="0" type="button">0</button><button data-math-type="." type="button">.</button><button data-math-type="(" type="button">(</button><button data-math-type=")" type="button">)</button>
+<button aria-label="Move cursor left" data-math-command="moveToPreviousChar" type="button">←</button><button aria-label="Delete previous character" data-math-command="deleteBackward" type="button">⌫</button><button aria-label="Move cursor right" data-math-command="moveToNextChar" type="button">→</button>
+</div>
+<div class="math-mobile-keypad math-letter-keypad" data-math-entry-panel="letters" hidden="">
+<button data-math-type="a" type="button">a</button><button data-math-type="b" type="button">b</button><button data-math-type="c" type="button">c</button><button data-math-type="d" type="button">d</button><button data-math-type="e" type="button">e</button><button data-math-type="f" type="button">f</button>
+<button data-math-type="g" type="button">g</button><button data-math-type="h" type="button">h</button><button data-math-type="i" type="button">i</button><button data-math-type="j" type="button">j</button><button data-math-type="k" type="button">k</button><button data-math-type="l" type="button">l</button>
+<button data-math-type="m" type="button">m</button><button data-math-type="n" type="button">n</button><button data-math-type="o" type="button">o</button><button data-math-type="p" type="button">p</button><button data-math-type="q" type="button">q</button><button data-math-type="r" type="button">r</button>
+<button data-math-type="s" type="button">s</button><button data-math-type="t" type="button">t</button><button data-math-type="u" type="button">u</button><button data-math-type="v" type="button">v</button><button data-math-type="w" type="button">w</button><button data-math-type="x" type="button">x</button>
+<button data-math-type="y" type="button">y</button><button data-math-type="z" type="button">z</button>
+<button aria-label="Move cursor left" data-math-command="moveToPreviousChar" type="button">←</button><button aria-label="Delete previous character" data-math-command="deleteBackward" type="button">⌫</button><button aria-label="Move cursor right" data-math-command="moveToNextChar" type="button">→</button>
+</div>
+<p class="math-mobile-entry-help">Tap <b>123</b> for numbers/operators or <b>ABC</b> for letters. These keys type directly into the Mathside math field.</p>
+</div>
+<div class="math-keyboard-groups">
+<section><b>Common</b><div class="math-key-grid">
+<button data-math-insert="\frac{\placeholder{}}{\placeholder{}}" type="button">a⁄b</button><button data-math-insert="\placeholder{}^{2}" type="button">x²</button><button data-math-insert="\placeholder{}^{\placeholder{}}" type="button">xⁿ</button><button data-math-insert="\sqrt{\placeholder{}}" type="button">√x</button><button data-math-insert="\sqrt[\placeholder{}]{\placeholder{}}" type="button">ⁿ√x</button><button data-math-insert="\left|\placeholder{}\right|" type="button">|x|</button>
+<button data-math-insert="\pm" type="button">±</button><button data-math-insert="\times" type="button">×</button><button data-math-insert="\div" type="button">÷</button><button data-math-insert="\neq" type="button">≠</button><button data-math-insert="\le" type="button">≤</button><button data-math-insert="\ge" type="button">≥</button>
+</div></section>
+<section><b>Constants &amp; functions</b><div class="math-key-grid">
+<button data-math-insert="\pi" type="button">π</button><button data-math-insert="\theta" type="button">θ</button><button data-math-insert="\infty" type="button">∞</button><button data-math-insert="\sin\left(\placeholder{}\right)" type="button">sin</button><button data-math-insert="\cos\left(\placeholder{}\right)" type="button">cos</button><button data-math-insert="\tan\left(\placeholder{}\right)" type="button">tan</button>
+<button data-math-insert="\log_{\placeholder{}}\left(\placeholder{}\right)" type="button">log</button><button data-math-insert="\ln\left(\placeholder{}\right)" type="button">ln</button><button data-math-insert="e^{\placeholder{}}" type="button">eˣ</button><button data-math-insert="\left(\placeholder{}\right)" type="button">( )</button><button data-math-insert="\left[\placeholder{}\right]" type="button">[ ]</button><button data-math-insert="\left\{\placeholder{}\right\}" type="button">{ }</button>
+</div></section>
+<section><b>Advanced</b><div class="math-key-grid">
+<button data-math-insert="\sum_{\placeholder{}}^{\placeholder{}}\placeholder{}" type="button">Σ</button><button data-math-insert="\int_{\placeholder{}}^{\placeholder{}}\placeholder{}\,dx" type="button">∫</button><button data-math-insert="\lim_{\placeholder{}\to\placeholder{}}\placeholder{}" type="button">lim</button><button data-math-insert="\frac{d}{dx}\left(\placeholder{}\right)" type="button">d/dx</button><button data-math-insert="\in" type="button">∈</button><button data-math-insert="\notin" type="button">∉</button>
+<button data-math-insert="\cup" type="button">∪</button><button data-math-insert="\cap" type="button">∩</button><button data-math-insert="\subseteq" type="button">⊆</button><button data-math-insert="\emptyset" type="button">∅</button><button data-math-insert="\mathbb{R}" type="button">ℝ</button><button data-math-insert="\mathbb{N}" type="button">ℕ</button>
+</div></section>
+</div>
+<p class="math-keyboard-tip">Type normally too: <b>sqrt</b>, <b>pi</b>, <b>theta</b>, <b>sin</b>, fractions, exponents, and brackets are formatted as mathematics.</p>
+<div class="modal-actions math-keyboard-actions"><button class="btn btn-light" id="mathKeyboardCancelBtn" type="button">Cancel</button><div><button class="btn btn-light" id="mathKeyboardClearBtn" type="button">Clear</button><button class="btn btn-orange" id="mathKeyboardInsertBtn" type="button">Insert into field</button></div></div>
+</div>
+</dialog>
+<!-- MISSING ANSWER WARNING -->
+<dialog class="modal" id="missingAnswerModal">
+<div class="modal-box assignment-warning-box">
+<button class="modal-close" id="missingAnswerCloseBtn" type="button">×</button>
+<div class="warning-symbol">!</div>
+<p class="eyebrow">CHECK ANSWER KEY</p>
+<h2>Some questions have no correct answer.</h2>
+<p class="muted" id="missingAnswerText">You can still post the activity. Those questions will not be auto-checked until you edit the assignment and add their correct answers.</p>
+<div class="modal-actions missing-answer-actions">
+<button class="btn btn-light" id="continueEditingAssignmentBtn" type="button">Continue editing</button>
+<button class="btn btn-orange" id="proceedPostAssignmentBtn" type="button">Proceed posting</button>
+</div>
+</div>
+</dialog>
+<!-- PERFORMANCE TASK EDITOR -->
+<dialog aria-labelledby="performanceTaskModalTitle" class="modal assignment-modal friendly-editor orange-create-modal" id="performanceTaskModal">
+<div class="modal-box assignment-editor-box performance-editor-box">
+<button aria-label="Close" class="modal-close" data-close="performanceTaskModal">×</button>
+<div class="assignment-editor-heading orange-performance-head"><div><p class="eyebrow">PERFORMANCE TASK</p><h2 id="performanceTaskModalTitle">Create performance task</h2><p class="muted">Tell students what to create, then choose how they will work.</p></div></div>
+<form class="form-stack assignment-editor-form" id="performanceTaskForm">
+<section class="assignment-form-section"><div class="assignment-form-section-head"><div><h3><span class="orange-step">1</span> Task details</h3></div></div><div class="assignment-heading-grid"><div class="assignment-main-fields"><label>Title<small class="editor-required">Required</small><input name="title" placeholder="Performance task title" required=""/></label><label>Instructions<small class="editor-required">Required</small><textarea name="instructions" placeholder="What should students create and submit? Add any materials or steps they need." required="" rows="3"></textarea></label><label>Total points<small class="editor-required">Required</small><input min="1" name="max_points" required="" step="1" type="number" value="100"/></label></div></div></section><section class="assignment-form-section orange-performance-classes"><div class="class-checklist-field"><span class="field-label"><span class="orange-step">2</span> Select classes <small id="performanceClassHint">Select one or more</small></span><label aria-label="Search classes" class="orange-search-box"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg><input autocomplete="off" id="performanceClassSearch" placeholder="Search class name or grade level..." type="search"/></label>
+<div aria-label="Choose classes for performance task" class="class-checklist" id="performanceSectionChecklist" role="group"></div><p class="section-edit-note" hidden="" id="performanceSectionEditNote">Change the selected classes, then save. New classes receive a separate task and team setup. Unchecked classes no longer see it; their submitted work, scores, and groups remain saved in Archived.</p></div></section>
+<section class="assignment-form-section"><div class="ct-create-field"><label class="ct-label" for="ctPerformanceCompetency">Learning competency (optional)</label><div class="ct-choice"><select id="ctPerformanceCompetency"><option value="">No competency selected</option></select><button type="button" class="btn btn-light" id="ctNewPerformanceCompetency">+ New</button></div><small>Select a saved competency or enter a new name. It will be available for future tasks.</small></div></section><section class="assignment-form-section performance-team-section"><div class="assignment-form-section-head"><div><h3>How will students work?</h3></div></div>
+<div aria-label="Performance task work setup" class="performance-work-mode" id="performanceWorkMode" role="group">
+<label class="performance-mode-option"><input checked="" name="performance_mode" type="radio" value="individual"><span><b>Individual</b><small>Each student submits their own output.</small></span></input></label>
+<label class="performance-mode-option"><input name="performance_mode" type="radio" value="pair"/><span><b>Pair</b><small>Students work in teams of two.</small></span></label>
+<label class="performance-mode-option"><input name="performance_mode" type="radio" value="group"/><span><b>Group</b><small>Students work in teacher-sized groups.</small></span></label>
+<label class="performance-mode-option performance-class-mode"><input name="performance_mode" type="radio" value="class"/><span><b>Whole Class</b><small>One project per section. Choose a class representative to submit for everyone.</small></span></label>
+</div>
+<div class="performance-grouping-options" hidden="" id="performanceGroupingOptions">
+<p class="performance-class-help" id="performanceClassHelp" hidden>Each selected section creates one project. Select its representative in the class list below. The teacher awards one common score and may adjust scores for individual learners.</p>
+<div><p class="field-label">Who creates the teams?</p><div class="performance-creator-options"><label><input checked="" name="grouping_creator" type="radio" value="teacher"/><span>Teacher creates teams</span></label><label><input name="grouping_creator" type="radio" value="students"/><span>Students create their teams</span></label></div></div>
+<label hidden="" id="performanceGroupCountWrap">How many groups per class?<input id="performanceGroupCount" min="1" name="group_count" step="1" type="number" value="4"/><small>Mathside will distribute students as evenly as possible.</small></label>
+<div class="performance-grouping-tools" id="performanceTeacherGroupingTools">
+<div class="performance-grouping-action-row"><button class="btn btn-light" id="generatePerformanceTeamsBtn" type="button">Generate team preview</button><button class="btn btn-orange" id="reshufflePerformanceTeamsBtn" type="button">Reshuffle Groups</button></div>
+<div class="performance-import-groups-row"><label><span>Reuse a past grouping</span><select id="pastPerformanceGroupSource"><option value="">Choose a past performance task</option></select></label><button class="btn btn-light" id="importPastPerformanceGroupsBtn" type="button">Import Groups</button></div>
+<p class="muted">Preview each class, import groups from a past Performance Task or reshuffle, then choose the leader for every pair or group before posting.</p>
+</div>
+<div class="performance-team-preview" id="performanceTeamPreview"></div>
+</div>
+</section>
+<details class="editor-options"><summary><span>Posting &amp; deadline</span><small>Post now · No deadline by default</small></summary><section class="assignment-form-section compact-section"><div class="assignment-deadline-field"><label>Post task <small>Teacher chooses</small><select id="performancePublishMode" name="publish_mode"><option value="now">Post now</option><option value="schedule">Schedule for later</option></select></label><label hidden="" id="performancePublishAtWrap">Publish date &amp; time <small>Automatic</small><input id="performancePublishAt" name="publish_at" type="datetime-local"/></label><label>Deadline <small>Optional</small><input name="due_at" type="datetime-local"/></label><label>Student reminder<select name="reminder_hours_before"><option value="0">No reminder</option><option value="24">1 day before</option><option value="48">2 days before</option><option value="72">3 days before</option></select></label><label class="v10-check-option"><input name="allow_resubmission" type="checkbox"/><span><b>Allow resubmission</b><small>Teacher still approves each new attempt.</small></span></label></div></section></details><details class="editor-options"><summary><span>Reference pictures</span><small>Optional · Add a visual guide</small></summary><section class="assignment-form-section compact-section"><label class="file-drop assignment-file-drop"><input accept="image/*" id="performanceImages" multiple="" name="task_images" type="file"/><span>Choose one or more pictures</span></label><div class="performance-image-preview" id="performanceImagePreview"></div><label class="v10-check-option" hidden="" id="removePerformanceImagesWrap"><input id="removePerformanceImages" type="checkbox"/><span><b>Remove existing pictures</b><small>Use this if the task no longer needs reference pictures.</small></span></label></section></details>
+<details class="editor-options"><summary><span>Rubric</span><small>Optional · Share how the task will be graded</small></summary><section class="assignment-form-section compact-section"><label class="file-drop assignment-file-drop"><input accept="image/*,.pdf,.doc,.docx,.xls,.xlsx" id="performanceRubric" name="rubric" type="file"/><span>Upload a rubric picture, PDF, Word, or Excel file</span></label><div class="performance-rubric-existing" hidden="" id="performanceRubricExisting"></div><label class="v10-check-option" hidden="" id="removePerformanceRubricWrap"><input id="removePerformanceRubric" type="checkbox"/><span><b>Remove existing rubric</b><small>The task will be saved without the current rubric.</small></span></label></section></details>
+<div class="modal-actions assignment-form-actions"><button class="btn btn-light" data-close="performanceTaskModal" type="button">Cancel</button><button class="btn btn-orange" id="performanceTaskSubmitBtn" type="submit">Post performance task</button></div>
+</form>
+</div>
+</dialog>
+<!-- ASSIGNMENT PREVIEW MODAL -->
+<dialog class="modal assignment-preview-modal" id="assignmentPreviewModal">
+<div class="modal-box assignment-preview-box">
+<button aria-label="Close" class="modal-close" data-close="assignmentPreviewModal">×</button>
+<p class="eyebrow">ASSIGNMENT PREVIEW</p>
+<h2 id="assignmentPreviewTitle">Assignment</h2>
+<p class="assignment-preview-lead" id="assignmentPreviewInstructions"></p>
+<section class="assignment-preview-section assignment-preview-details">
+<div class="assignment-preview-section-head">
+<span class="assignment-preview-section-icon">i</span>
+<div><p class="eyebrow">DETAILS</p><h3>Activity information</h3></div>
+</div>
+<div class="assignment-preview-detail-grid" id="assignmentPreviewDetails"></div>
+</section>
+<section class="assignment-preview-section performance-preview-resources" hidden="" id="performancePreviewResources">
+<div class="assignment-preview-section-head"><span class="assignment-preview-section-icon">▣</span><div><p class="eyebrow">RESOURCES</p><h3>Task pictures &amp; rubric</h3></div></div>
+<div class="performance-preview-images" id="performancePreviewImages"></div>
+<div id="performancePreviewRubric"></div>
+<div class="performance-preview-team-manager" hidden="" id="performancePreviewTeamManager"></div>
+</section>
+<section class="assignment-preview-section assignment-preview-questions">
+<div class="assignment-preview-section-head">
+<span class="assignment-preview-section-icon">?</span>
+<div><p class="eyebrow">QUESTIONS</p><h3>Question set</h3></div>
+</div>
+<div class="assignment-preview-question-list" id="assignmentPreviewQuestions"></div>
+</section>
+<div class="modal-actions"><button class="btn btn-orange" data-close="assignmentPreviewModal" type="button">Close</button></div>
+</div>
+</dialog>
+<!-- DELETE ASSIGNMENT MODAL -->
+<dialog class="modal" id="deleteAssignmentModal">
+<div class="modal-box">
+<button aria-label="Close" class="modal-close" data-close="deleteAssignmentModal">×</button>
+<p class="eyebrow">DELETE ACTIVITY</p>
+<h2 id="deleteAssignmentTitle">Assignment</h2>
+<p class="muted" id="deleteAssignmentClass">Class</p>
+<div class="delete-choice">
+<h3>Permanently delete this activity?</h3>
+<p>This removes the assignment, its questions and answer keys, student submissions, and uploaded assignment/proof files from Supabase Storage. This cannot be undone.</p>
+</div>
+<div class="modal-actions">
+<button class="btn btn-light" data-close="deleteAssignmentModal" type="button">Cancel</button>
+<button class="btn btn-danger" id="confirmDeleteAssignmentBtn" type="button">Delete activity permanently</button>
+</div>
+</div>
+</dialog>
+<!-- STUDENT ANSWER MODAL -->
+<dialog class="modal assignment-modal" id="answerModal">
+<div class="modal-box">
+<button aria-label="Close" class="modal-close" data-close="answerModal">×</button>
+<p class="eyebrow">MY ANSWERS</p>
+<h2 id="answerAssignmentTitle">Assignment</h2>
+<p class="muted" id="answerInstructions"></p>
+<img alt="Assignment image" class="student-assignment-image" hidden="" id="studentAssignmentImage"/>
+<form id="answerForm">
+<div id="answerQuestions"></div>
+<label class="file-drop compact required-proof-drop">Upload solution pictures <small>Required</small><input accept="image/*" id="studentSolutionImage" multiple="" required="" type="file"/><span>Choose one or more clear photos of your written solution before submitting.</span></label>
+<div class="v10-draft-status"><span id="studentDraftStatus">Draft saving is ready.</span><small>Typed and selected answers save automatically. Images upload only when you submit.</small></div>
+<div class="modal-actions"><button class="btn btn-light" data-close="answerModal" type="button">Close &amp; continue later</button><button class="btn btn-orange" type="submit">Submit answers</button></div>
+</form>
+</div>
+</dialog>
+<!-- STUDENT PERFORMANCE TASK SUBMISSION -->
+<dialog class="modal assignment-modal" id="performanceSubmitModal">
+<div class="modal-box performance-submit-box">
+<button aria-label="Close" class="modal-close" data-close="performanceSubmitModal">×</button>
+<p class="eyebrow">PERFORMANCE TASK</p><h2 id="performanceStudentTitle">Performance Task</h2><p class="muted" id="performanceStudentInstructions"></p><div class="assignment-meta" id="performanceStudentMeta"></div><div class="performance-preview-images" id="performanceStudentPictures"></div><div class="performance-student-rubric" id="performanceStudentRubric"></div>
+<section class="performance-team-panel" hidden="" id="performanceTeamPanel"></section>
+<section class="performance-team-builder" hidden="" id="performanceStudentTeamBuilder"></section>
+<form class="form-stack" id="performanceSubmitForm"><div class="performance-class-links" id="performanceClassLinks" hidden><label>Video documentation URL (optional)<input id="performanceClassVideoUrl" type="url" maxlength="2048" placeholder="https://... (video of the class playing or presenting)"/></label><label>Digital game / project URL (optional)<input id="performanceClassProjectUrl" type="url" maxlength="2048" placeholder="https://... (playable class project)"/></label><p class="muted">Upload pictures of the class project and optionally link a video or playable game. Only the class representative submits.</p></div><label class="file-drop compact performance-output-upload">Upload pictures of your output<input accept="image/*" id="performanceOutputImages" multiple="" type="file"/><span>Choose one or more clear pictures</span></label><p class="muted" id="performanceOutputHint">At least one picture is required for your first submission.</p><section class="performance-participation-ratings" hidden="" id="performanceParticipationRatings"></section><div class="modal-actions"><button class="btn btn-light" data-close="performanceSubmitModal" type="button">Close</button><button class="btn btn-orange" type="submit">Submit performance task</button></div></form>
+</div>
+</dialog>
+<!-- REVIEW SUBMISSION MODAL -->
+<dialog class="modal assignment-modal" id="reviewSubmissionModal">
+<div class="modal-box">
+<button aria-label="Close" class="modal-close" data-close="reviewSubmissionModal">×</button>
+<p class="eyebrow">REVIEW SUBMISSION</p>
+<h2 id="reviewSubmissionTitle">Activity title</h2>
+<p class="review-submission-student" id="reviewSubmissionStudentName">Student name</p>
+<p class="muted" id="reviewSubmissionMeta"></p>
+<div id="reviewSubmissionAnswers"></div>
+<div class="manual-review-summary" hidden="" id="manualReviewSummary">
+<div><span>Manual review score</span><b id="manualReviewScore">0 / 0</b></div>
+<small>Changing any answer checkbox makes the recomputed manual-review score the teacher score.</small>
+</div>
+<section class="review-performance-team-info" hidden="" id="reviewPerformanceTeamInfo"></section><section class="performance-class-grade-panel" id="reviewClassScoring" hidden></section>
+<div class="proof-wrap" hidden="" id="reviewProofWrap">
+<p class="eyebrow" id="reviewProofLabel">SOLUTION PICTURES</p>
+<div class="proof-link-grid" id="reviewProofLinks"></div>
+<a class="btn btn-light" hidden="" id="reviewProofLink" rel="noopener" target="_blank">Open uploaded solution</a>
+</div>
+<form class="form-stack grade-form" id="gradeForm">
+<div class="grading-input-row">
+<label class="grading-score-field">Teacher score
+            <input id="teacherScoreInput" min="0" name="teacher_score" placeholder="Leave blank to use auto-check score" step="0.01" type="number">
+</input></label>
+<div class="feedback-tools grading-quick-field">
+<label class="feedback-preset-label">Quick feedback
+              <select class="feedback-preset-select" id="teacherFeedbackPreset">
+<option value="">Choose a ready-made feedback…</option>
+<option value="Excellent work! Keep it up.">Excellent work! Keep it up.</option>
+<option value="Great job. Your solution is clear and accurate.">Great job. Your solution is clear and accurate.</option>
+<option value="Good effort. Review the parts you missed and try again.">Good effort. Review the parts you missed and try again.</option>
+<option value="Nice improvement. Keep practicing this skill.">Nice improvement. Keep practicing this skill.</option>
+<option value="Please review your computation and check your final answer.">Please review your computation and check your final answer.</option>
+<option value="Show the complete solution or process next time.">Show the complete solution or process next time.</option>
+<option value="Your answer is correct, but explain your solution more clearly.">Your answer is correct, but explain your solution more clearly.</option>
+<option value="Please submit a clearer solution image or proof of work.">Please submit a clearer solution image or proof of work.</option>
+</select>
+</label>
+<p class="feedback-preset-help">Pick one, then edit it if needed.</p>
+</div>
+<label class="grading-feedback-field">Feedback
+            <textarea id="teacherFeedbackInput" name="feedback" placeholder="Write feedback for the student" rows="3"></textarea>
+</label>
+</div>
+<div class="modal-actions grade-modal-actions"><button class="btn btn-danger-outline" id="clearSubmissionBtn" type="button">Clear submission</button><button class="btn btn-light" data-close="reviewSubmissionModal" type="button">Cancel</button><div class="grade-primary-actions"><button class="btn btn-light allow-resubmit-btn" hidden="" id="allowResubmissionBtn" type="button">Allow student to submit again</button><button class="btn btn-orange save-grade-btn" type="submit">Save grade</button></div></div>
+</form>
+</div>
+</dialog>
+<!-- RESUBMISSION CONFIRMATION MODAL -->
+<dialog class="modal resubmission-confirm-modal" id="resubmissionConfirmModal">
+<div class="modal-box resubmission-confirm-box">
+<button aria-label="Close" class="modal-close" data-close="resubmissionConfirmModal">×</button>
+<div aria-hidden="true" class="resubmission-confirm-icon">↻</div>
+<p class="eyebrow">ALLOW ANOTHER ATTEMPT</p>
+<h2>Allow this student to resubmit?</h2>
+<p class="resubmission-confirm-text" id="resubmissionConfirmText"></p>
+<div class="resubmission-warning-box">
+<b>Important</b>
+<span>The current submission stays visible until the student sends the new attempt. After resubmission, the previous answers and manual score are replaced.</span>
+</div>
+<div class="modal-actions">
+<button class="btn btn-light" data-close="resubmissionConfirmModal" type="button">Cancel</button>
+<button class="btn btn-orange" id="confirmAllowResubmissionBtn" type="button">Allow one new attempt</button>
+</div>
+</div>
+</dialog>
+<!-- ARCHIVE ACTIVITY CONFIRMATION -->
+<dialog class="modal" id="archiveAssignmentModal">
+<div class="modal-box archive-confirm-box">
+<button aria-label="Close" class="modal-close" data-close="archiveAssignmentModal">×</button>
+<div aria-hidden="true" class="archive-confirm-icon">⇩</div>
+<p class="eyebrow">ARCHIVE ACTIVITY</p>
+<h2 id="archiveAssignmentTitle">Archive this activity?</h2>
+<p class="muted" id="archiveAssignmentText"></p>
+<div class="archive-warning danger"><b>Archive without deleting student work</b><span>Archiving preserves submitted answers, teacher feedback, group records, grades, and uploaded file references. An Excel backup downloads before archiving.</span></div>
+<label class="archive-confirm-ack"><input id="archiveDeletionAck" type="checkbox"/><span>I understand archiving keeps submitted work, grades and attachments.</span></label>
+<div class="modal-actions"><button class="btn btn-light" data-close="archiveAssignmentModal" type="button">Cancel</button><button class="btn btn-danger" disabled="" id="confirmArchiveAssignmentBtn" type="button">Download backup &amp; archive</button></div>
+</div>
+</dialog>
+<!-- CLEAR SUBMISSION CONFIRMATION -->
+<dialog class="modal" id="clearSubmissionModal">
+<div class="modal-box archive-confirm-box">
+<button aria-label="Close" class="modal-close" data-close="clearSubmissionModal">×</button>
+<div aria-hidden="true" class="archive-confirm-icon danger">!</div>
+<p class="eyebrow">CLEAR STUDENT SUBMISSION</p>
+<h2>Clear this submission?</h2>
+<p class="muted" id="clearSubmissionText"></p>
+<div class="archive-warning danger"><b>This removes the current response</b><span>The student’s submitted answers, score, feedback, and uploaded solution image will be cleared. The activity itself is not deleted, so the student can submit again if the activity is still open.</span></div>
+<div class="modal-actions"><button class="btn btn-light" data-close="clearSubmissionModal" type="button">Cancel</button><button class="btn btn-danger" id="confirmClearSubmissionBtn" type="button">Clear submission</button></div>
+</div>
+</dialog>
+<!-- ARCHIVE CLASS CONFIRMATION -->
+<dialog class="modal" id="archiveClassModal">
+<div class="modal-box archive-confirm-box">
+<button aria-label="Close" class="modal-close" data-close="archiveClassModal">×</button>
+<div aria-hidden="true" class="archive-confirm-icon danger">⌂</div>
+<p class="eyebrow">END OF TERM</p>
+<h2 id="archiveClassTitle">Archive this class?</h2>
+<p class="muted" id="archiveClassText"></p>
+<div class="archive-warning danger"><b>Important — activities will be removed</b><span>Mathside will first download an Excel archive. After that, every activity and its submission records for this class will be deleted from Mathside. Students will keep their accounts and remain listed in the archived class so you can import them into a new class without creating new accounts.</span></div>
+<div class="modal-actions"><button class="btn btn-light" data-close="archiveClassModal" type="button">Cancel</button><button class="btn btn-danger" id="confirmArchiveClassBtn" type="button">Download archive &amp; end class</button></div>
+</div>
+</dialog>
+<!-- DELETE CLASS CONFIRMATION -->
+<dialog class="modal" id="deleteClassModal">
+<div class="modal-box archive-confirm-box">
+<button aria-label="Close" class="modal-close" data-close="deleteClassModal">×</button>
+<div aria-hidden="true" class="archive-confirm-icon danger">!</div>
+<p class="eyebrow">DELETE CLASS</p>
+<h2 id="deleteClassTitle">Delete this class?</h2>
+<p class="muted" id="deleteClassText"></p>
+<div class="archive-warning danger"><b>This cannot be undone</b><span>The class, its activities and performance tasks, submissions, group records, and related database file references will be removed. Cloudflare R2 object cleanup will be configured separately. Student login accounts are kept. If you only want to end a term and reuse the roster later, use Archive class instead.</span></div>
+<div class="modal-actions"><button class="btn btn-light" data-close="deleteClassModal" type="button">Cancel</button><button class="btn btn-danger" id="confirmDeleteClassBtn" type="button">Delete class permanently</button></div>
+</div>
+</dialog>
+<!-- STUDENT RESPONSE PREVIEW MODAL -->
+<dialog class="modal assignment-modal" id="studentResponseModal">
+<div class="modal-box">
+<button aria-label="Close" class="modal-close" data-close="studentResponseModal">×</button>
+<p class="eyebrow">MY SUBMITTED RESPONSE</p>
+<h2 id="studentResponseTitle">Activity response</h2>
+<p class="muted" id="studentResponseMeta"></p>
+<div class="student-response-score-banner" id="studentResponseScore"></div>
+<div class="student-response-answers" id="studentResponseAnswers"></div>
+<div class="proof-wrap" hidden="" id="studentResponseProofWrap">
+<p class="eyebrow" id="studentResponseProofLabel">MY SOLUTION PICTURES</p>
+<div class="proof-link-grid" id="studentResponseProofLinks"></div>
+<a class="btn btn-light" hidden="" id="studentResponseProofLink" rel="noopener" target="_blank">Open my uploaded solution</a>
+</div>
+<div class="student-response-feedback" hidden="" id="studentResponseFeedback"></div>
+<div class="modal-actions"><button class="btn btn-orange" data-close="studentResponseModal" type="button">Close</button></div>
+</div>
+</dialog>
+<!-- PERSISTENT MESSAGE POPUP: closes only when the user clicks Close -->
+<dialog class="modal message-modal" id="messageDialog">
+<div class="modal-box message-box">
+<div aria-hidden="true" class="message-icon" id="messageIcon"></div>
+<p class="eyebrow" id="messageEyebrow">MATHSIDE</p>
+<h2 id="messageTitle">Message</h2>
+<p class="message-text" id="messageText"></p>
+<div class="modal-actions"><button class="btn btn-orange" id="messageCloseBtn" type="button">Close</button></div>
+</div>
+</dialog>
+
+<script src="js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<!-- Converts iPhone/iPad HEIC photos before Cloudflare upload. -->
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+<script defer="" id="mathliveScript" src="https://cdn.jsdelivr.net/npm/mathlive@0.110.0"></script>
+<script src="js/question-tools.js?v=1.2-per-question-choice-order"></script>
+<script src="js/r2-storage.js?v=2-teacher-attachments"></script>
+<script src="js/app.js?v=25-teacher-attachments"></script>
+<dialog id="ctCreateOverlay" class="ct-create-overlay" aria-labelledby="ctCreateTitle"><section class="ct-create-modal"><button id="ctCreateClose" type="button" class="ct-create-x" aria-label="Close">&times;</button><div class="ct-create-icon">+</div><h2 id="ctCreateTitle">Create New Competency</h2><p>Enter the name of the learning competency.</p><form id="ctCreateForm"><label for="ctCreateName">Competency name</label><input id="ctCreateName" maxlength="180" autocomplete="off" placeholder="e.g., Simplifying Radical Expressions" required><div id="ctCreateError" class="ct-create-error" role="alert" hidden></div><div class="ct-create-actions"><button id="ctCreateCancel" type="button" class="ct-create-cancel">Cancel</button><button id="ctCreateSubmit" type="submit" class="ct-create-submit">Add Competency</button></div></form></section></dialog>
+<dialog id="ctDeleteDialog" class="ct-delete-dialog" aria-labelledby="ctDeleteTitle" aria-describedby="ctDeleteDescription">
+  <section class="ct-delete-card">
+    <div class="ct-delete-icon" aria-hidden="true">!</div>
+    <h2 id="ctDeleteTitle">Delete competency?</h2>
+    <p id="ctDeleteDescription">This competency will be removed from your library and unlinked from associated activities.</p>
+    <div class="ct-delete-preserve"><strong>Student records are safe.</strong> Existing activity scores, submitted work, archived scores, and class records will not be deleted.</div>
+    <p id="ctDeleteError" class="ct-delete-error" role="alert" hidden></p>
+    <div class="ct-delete-actions"><button type="button" class="btn btn-light" id="ctDeleteCancel">Cancel</button><button type="button" class="btn ct-delete-confirm" id="ctDeleteConfirm">Delete competency</button></div>
+  </section>
+</dialog>
+<script src="js/competency-tracker.js?v=21.0-student-repair"></script>
+<script src="js/student-v8.js?v=15.3-overdue-history-fix"></script>
+<script src="js/v10-features.js?v=25-no-notifications"></script>
+<script src="js/design-v9.js?v=9"></script>
+<script src="js/v12-archive-features.js?v=24.18-class-record-retention-1"></script>
+<script src="js/v15-performance-tasks.js?v=25-teacher-attachments"></script>
+<script src="js/friendly-editors.js?v=1"></script>
+<script src="js/orange-exact-forms.js?v=3"></script>
+</body>
+</html>

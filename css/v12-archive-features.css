@@ -1,0 +1,342 @@
+/* Mathside V12 archive + mobile interaction layer */
+.password-input-wrap{position:relative;display:flex;align-items:center}
+.password-input-wrap input{width:100%;padding-right:48px!important}
+.password-eye-btn{position:absolute;right:8px;width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:#765642;display:grid;place-items:center;cursor:pointer;transition:.16s ease}
+.password-eye-btn:hover,.password-eye-btn:focus-visible{background:#fff1e5;color:#ff6b00;outline:none;transform:scale(1.03)}
+.password-eye-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
+.password-eye-btn.is-visible{background:#ffe7d2;color:#b74800}
+.field-help{display:block;margin-top:6px;color:#8b7769;font-size:12px;line-height:1.35}
+
+.class-grid-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.class-card-archived{background:linear-gradient(145deg,#f6f3f0,#fff);border-style:dashed;opacity:.92}
+.class-card-archived .class-icon{filter:grayscale(.35)}
+.archived-class-section{grid-column:1/-1;margin-top:26px;padding-top:24px;border-top:1px dashed #d9c8ba}
+.archived-class-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:14px}.archived-class-heading h3{margin:2px 0 0}.archived-class-heading>span{background:#eee5de;border-radius:999px;padding:6px 11px;font-weight:800;color:#6d5646}
+.class-card-actions{flex-wrap:wrap}
+.class-card-copy h3{overflow-wrap:normal;word-break:normal;hyphens:none}
+
+.btn-archive{border:1px solid #a86a35;background:#fff8f0;color:#7b4218}.btn-archive:hover{background:#f7e5d3;border-color:#8e5225}.btn-archive:disabled{opacity:.45;cursor:not-allowed}
+
+/* V24.3: restore archived activities/performance tasks */
+.btn-unarchive{border:1px solid #7ea78b;background:#f3fbf5;color:#28623a}.btn-unarchive:hover{background:#e3f5e8;border-color:#5f8e6e}.btn-unarchive:disabled{opacity:.45;cursor:not-allowed}
+.assignment-archived{background:linear-gradient(90deg,#f7f3ef,#fff);border-style:dashed}.archived-badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;background:#e9e1da;color:#674e3e;font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.archive-confirm-box{max-width:610px}.archive-confirm-icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:#fff0e3;color:#d85b00;font-size:28px;font-weight:900;margin-bottom:12px}.archive-confirm-icon.danger{background:#fff0f0;color:#a82323}.archive-warning{display:flex;flex-direction:column;gap:6px;padding:14px 15px;border:1px solid #efc49f;background:#fff8f2;border-radius:14px;color:#604736;line-height:1.45}.archive-warning.danger{border-color:#efb8b8;background:#fff5f5;color:#6c3434}.archive-warning b{font-size:13px}.archive-warning span{font-size:12px}
+
+.student-three-state-filters{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.student-three-state-filters .student-filter{min-width:0;white-space:nowrap}.v8-status.missed{background:#ffeded;color:#9e3232}.v8-status.archived{background:#ece7e2;color:#624f42}.v8-activity-row.is-archived{opacity:.82;background:#f8f5f2}.v8-activity-row.is-archived .v8-view-button{background:#eee8e2;color:#655247}
+
+.submission-section-group{display:grid;gap:14px;margin-bottom:28px}.submission-section-group-title{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:#2f2118;color:#fff}.submission-section-group-title>span{width:34px;height:34px;border-radius:10px;background:#ff6b00;display:grid;place-items:center}.submission-section-group-title p,.submission-section-group-title h2,.submission-section-group-title small{margin:0}.submission-section-group-title p{font-size:9px;font-weight:900;letter-spacing:.15em;color:#ffcda8}.submission-section-group-title h2{font-size:20px}.submission-section-group-title small{color:#dfd2c9}
+.submission-activity-group{border:1px solid #ead9cb;border-radius:18px;background:#fff;overflow:hidden}.submission-activity-group>header{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:12px 15px;background:#fff8f1;border-bottom:1px solid #ead9cb}.submission-activity-group>header span{font-size:9px;font-weight:900;letter-spacing:.14em;color:#b9540e}.submission-activity-group>header h3{margin:2px 0 0;font-size:17px}.submission-activity-group>header>div:last-child{text-align:right}.submission-activity-group>header>div:last-child b{display:block;font-size:18px}.submission-activity-group>header>div:last-child small{color:#7b6a5e}.submission-activity-list{display:grid;gap:8px;padding:10px}.submission-activity-list .submission-card{margin:0}
+
+@media (max-width:760px){
+  .class-grid-group{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .class-card{min-width:0}.class-card-copy{min-width:0}.class-card-copy h3{font-size:18px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .class-card footer{gap:6px;flex-wrap:wrap}.class-card-actions{display:grid;grid-template-columns:1fr;gap:6px}.class-card-actions .btn{width:100%;min-width:0}
+  #classStudentsModal .roster-student-card{grid-template-columns:28px minmax(0,1fr)!important;grid-template-areas:"check main" ". progress" ". actions"!important;overflow:visible!important}
+  #classStudentsModal .roster-check{grid-area:check!important}
+  #classStudentsModal .roster-student-main{grid-area:main!important;min-width:0!important}
+  #classStudentsModal .roster-progress{grid-area:progress!important;display:flex!important;visibility:visible!important;opacity:1!important}
+  #classStudentsModal .roster-student-actions{grid-area:actions!important;display:flex!important;visibility:visible!important;opacity:1!important;position:static!important;width:100%!important;justify-content:flex-start!important;gap:8px!important;padding-top:4px!important}
+  #classStudentsModal .roster-student-actions .btn,#classStudentsModal .roster-student-actions .table-delete{display:inline-flex!important;visibility:visible!important;opacity:1!important;min-height:32px!important;padding:6px 12px!important;font-size:11px!important}
+  .student-three-state-filters{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .student-three-state-filters .student-filter{font-size:11px!important;padding:9px 6px!important}
+  .submission-section-group-title{position:sticky;top:0;z-index:2}.submission-activity-group>header h3{font-size:15px}.submission-activity-list{padding:7px}
+  .archive-confirm-box{width:min(94vw,610px)}
+  .password-eye-btn{width:40px;height:40px}
+}
+
+@media (max-width:420px){
+  .class-grid-group{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .class-card{padding:11px!important}.class-card-copy h3{font-size:16px}.grade-pill{font-size:8px!important;padding:4px 6px!important}
+}
+
+/* =====================================================================
+   MATHSIDE STEP 6.1 — logo, destructive borders, mobile roster actions
+   ===================================================================== */
+
+/* Make the new eˣ mark visibly larger everywhere without changing brand text. */
+#publicSite .logo .cap-logo{width:58px!important;height:48px!important;flex:0 0 58px!important}
+#teacherApp .sidebar-logo .cap-logo{width:56px!important;height:48px!important;flex:0 0 56px!important}
+.auth-logo .cap-logo{width:58px!important;height:48px!important}
+#studentApp .v8-logo-icon{width:54px!important;height:46px!important;flex:0 0 54px!important}
+.loading-logo img{width:94px!important;height:74px!important}
+
+/* Destructive and archive controls should never blend into the card/background. */
+.btn-danger,
+.btn-danger-outline,
+.table-delete,
+#clearSubmissionBtn,
+#confirmClearSubmissionBtn,
+#bulkDeleteStudentsBtn,
+#deleteStudentAccountBtn,
+#confirmDeleteAssignmentBtn,
+[data-delete-assignment-group],
+.btn-archive,
+#bulkArchiveAssignmentsBtn,
+#confirmArchiveAssignmentBtn,
+#confirmArchiveClassBtn,
+[data-archive-assignment-group],
+[data-archive-class]{
+  border-width:2px!important;
+  border-style:solid!important;
+  box-shadow:none!important;
+}
+.btn-danger,
+.btn-danger-outline,
+.table-delete,
+#clearSubmissionBtn,
+#confirmClearSubmissionBtn,
+#bulkDeleteStudentsBtn,
+#deleteStudentAccountBtn,
+#confirmDeleteAssignmentBtn,
+[data-delete-assignment-group],
+#confirmArchiveClassBtn{
+  border-color:#b52d3f!important;
+}
+.btn-archive,
+#bulkArchiveAssignmentsBtn,
+#confirmArchiveAssignmentBtn,
+[data-archive-assignment-group],
+[data-archive-class]{
+  border-color:#9d5b25!important;
+}
+
+/* On phones keep Track/Delete in a dedicated right-side action rail. */
+@media (max-width:760px){
+  #classStudentsModal .roster-student-card{
+    grid-template-columns:24px minmax(0,1fr) 66px!important;
+    grid-template-areas:
+      "check main actions"
+      ". progress actions"!important;
+    column-gap:7px!important;
+    row-gap:4px!important;
+    align-items:center!important;
+    padding:8px!important;
+  }
+  #classStudentsModal .roster-check{grid-area:check!important;align-self:start!important;margin-top:8px!important}
+  #classStudentsModal .roster-student-main{grid-area:main!important;min-width:0!important}
+  #classStudentsModal .roster-progress{
+    grid-area:progress!important;
+    grid-column:auto!important;
+    min-width:0!important;
+    display:flex!important;
+    flex-wrap:wrap!important;
+    visibility:visible!important;
+    opacity:1!important;
+    justify-content:flex-start!important;
+  }
+  #classStudentsModal .roster-student-actions{
+    grid-area:actions!important;
+    grid-column:auto!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    justify-content:center!important;
+    gap:6px!important;
+    width:66px!important;
+    min-width:66px!important;
+    margin:0!important;
+    padding:0!important;
+    position:static!important;
+    visibility:visible!important;
+    opacity:1!important;
+    z-index:2!important;
+  }
+  #classStudentsModal .roster-student-actions .btn,
+  #classStudentsModal .roster-student-actions .table-delete{
+    display:flex!important;
+    width:66px!important;
+    min-width:66px!important;
+    height:30px!important;
+    min-height:30px!important;
+    padding:4px 6px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    font-size:9.5px!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+  #classStudentsModal .roster-student-copy{min-width:0!important}
+  #classStudentsModal .roster-student-copy b{
+    display:block!important;
+    max-width:100%!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    white-space:nowrap!important;
+  }
+}
+
+
+/* =====================================================================
+   MATHSIDE STEP 6.2 — student status tabs + mobile breathing room
+   ===================================================================== */
+.student-activity-tabs{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin:0 0 16px;
+}
+.student-activity-tabs .student-filter{
+  min-width:0;
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:11px 13px;
+  border:1px solid #e7d3c3;
+  border-radius:14px;
+  background:#fffaf6;
+  color:#4d3a2d;
+  font-weight:900;
+  font-size:13px;
+  line-height:1;
+  cursor:pointer;
+  transition:.16s ease;
+  white-space:nowrap;
+}
+.student-activity-tabs .student-filter strong{
+  min-width:25px;
+  height:25px;
+  display:grid;
+  place-items:center;
+  padding:0 6px;
+  border-radius:999px;
+  background:#ffe5d1;
+  color:#d85a00;
+  font-size:10px;
+  line-height:1;
+}
+.student-activity-tabs .student-filter:hover{
+  transform:translateY(-1px);
+  border-color:#efa66d;
+  box-shadow:0 7px 18px rgba(112,61,30,.08);
+}
+.student-activity-tabs .student-filter.active{
+  background:#34251c;
+  border-color:#34251c;
+  color:#fff;
+  box-shadow:0 8px 20px rgba(52,37,28,.15);
+}
+.student-activity-tabs .student-filter.active strong{background:#ff6b00;color:#fff}
+
+@media(max-width:760px){
+  /* The mobile top bar should never try to hold the account card or bell. */
+  #studentApp .v8-topbar{
+    min-height:58px!important;
+    height:58px!important;
+    padding:8px 12px!important;
+  }
+  #studentApp .v8-topbar>.v8-user-menu,
+  #studentApp .v8-topbar>.v10-student-notification{display:none!important}
+
+  /* Keep the hero readable instead of allowing art/text to collide. */
+  #studentApp .v8-hero{
+    min-height:205px!important;
+    padding:24px 16px 18px!important;
+  }
+  #studentApp .v8-hero-copy{max-width:62%!important}
+  #studentApp .v8-hero h1{font-size:26px!important;line-height:1.12!important}
+  #studentApp .v8-hero-copy p{max-width:210px!important;font-size:11.5px!important}
+  #studentApp .v8-character{
+    width:170px!important;
+    height:185px!important;
+    right:-18px!important;
+    bottom:0!important;
+    opacity:.95!important;
+  }
+
+  /* Dashboard summary cards get real room on a phone. */
+  #studentApp .v8-metrics{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:9px!important;
+    align-items:stretch!important;
+  }
+  #studentApp .v8-metrics>.v8-metric:last-child{grid-column:1/-1!important}
+  #studentApp .v8-metric{
+    display:grid!important;
+    grid-template-columns:40px minmax(0,1fr)!important;
+    column-gap:9px!important;
+    align-items:center!important;
+    min-height:92px!important;
+    padding:12px!important;
+    overflow:visible!important;
+  }
+  #studentApp .v8-metric-icon{
+    width:40px!important;
+    height:40px!important;
+    margin:0!important;
+    grid-row:1/4!important;
+  }
+  #studentApp .v8-metric-icon>.v8-icon{width:26px!important;height:26px!important}
+  #studentApp .v8-metric>div{min-width:0!important}
+  #studentApp .v8-metric h3{
+    margin:0 0 4px!important;
+    font-size:10.5px!important;
+    line-height:1.22!important;
+    white-space:normal!important;
+  }
+  #studentApp .v8-metric strong{font-size:23px!important;line-height:1!important}
+  #studentApp .v8-metric small{font-size:10px!important;line-height:1.25!important}
+
+  /* Status buttons replace the old disclosure/search control on student Activities. */
+  .student-activity-tabs{
+    gap:7px;
+    margin-bottom:13px;
+  }
+  .student-activity-tabs .student-filter{
+    min-height:48px;
+    padding:9px 10px;
+    border-radius:12px;
+    font-size:11px;
+  }
+  .student-activity-tabs .student-filter strong{
+    min-width:22px;
+    height:22px;
+    font-size:9px;
+  }
+}
+
+@media(max-width:430px){
+  #studentApp .v8-main{padding-left:12px!important;padding-right:12px!important}
+  #studentApp .v8-hero{margin-left:-12px!important;margin-right:-12px!important}
+  #studentApp .v8-hero-copy{max-width:66%!important}
+  #studentApp .v8-hero h1{font-size:24px!important}
+  #studentApp .v8-character{width:150px!important;height:170px!important;right:-20px!important}
+
+  #studentApp .v8-metrics{grid-template-columns:1fr!important;gap:8px!important}
+  #studentApp .v8-metrics>.v8-metric:last-child{grid-column:auto!important}
+  #studentApp .v8-metric{
+    grid-template-columns:42px minmax(0,1fr)!important;
+    min-height:78px!important;
+    padding:10px 12px!important;
+  }
+
+  .student-activity-tabs{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .student-activity-tabs .student-filter{
+    min-height:44px;
+    justify-content:center;
+    gap:5px;
+    padding:8px 6px;
+    font-size:10px;
+  }
+  .student-activity-tabs .student-filter strong{min-width:20px;height:20px;padding:0 4px;font-size:8px}
+}
+
+@media(max-width:350px){
+  .student-activity-tabs{grid-template-columns:1fr}
+  .student-activity-tabs .student-filter{justify-content:space-between}
+}
+
+/* V24.8: dedicated teacher Archive Center */
+.archive-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 18px}.archive-summary-grid article{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid #e7d9ce;border-radius:16px;background:#fff}.archive-summary-grid span{font-size:12px;font-weight:800;color:#745f50}.archive-summary-grid b{font-size:24px;color:#2e2118}.archive-filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.archive-center-list{display:grid;gap:12px}.archive-record{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px;border:1px solid #e5d6ca;border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(62,40,25,.05)}.archive-record-icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:#f5eee8;color:#76523a;font-size:22px}.archive-record-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8}.archive-record-body{min-width:0}.archive-record-title{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.archive-record-title h3{margin:0;font-size:17px;overflow-wrap:anywhere}.archive-record-body>p{margin:6px 0 10px;color:#75685e;font-size:13px;line-height:1.45}.archive-type-pill{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;background:#eee6df;color:#604a3b;font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.archive-record-performance .archive-type-pill{background:#fff0df;color:#934f15}.archive-record-class .archive-type-pill{background:#eef2ff;color:#46528a}.archive-record-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.archive-empty{margin-top:10px}.archive-record .btn{white-space:nowrap}
+@media (max-width:900px){.archive-record{grid-template-columns:auto minmax(0,1fr)}.archive-record-actions{grid-column:1/-1;justify-content:flex-start;padding-left:62px}}
+@media (max-width:620px){.archive-summary-grid{grid-template-columns:1fr}.archive-filter-grid{grid-template-columns:1fr}.archive-record{grid-template-columns:1fr;padding:14px}.archive-record-icon{width:44px;height:44px}.archive-record-actions{grid-column:auto;padding-left:0}.archive-record-actions .btn{flex:1 1 calc(50% - 8px);min-width:0}.archive-record-title{align-items:flex-start;flex-direction:column;gap:6px}}
+
+/* V24.12: irreversible archive confirmation, classic styling retained. */
+.archive-confirm-ack{display:flex!important;flex-direction:row!important;align-items:flex-start;gap:10px;margin:14px 0 5px;font-size:13px;font-weight:700;color:#67362b;line-height:1.45}
+.archive-confirm-ack input{flex:0 0 auto;margin:3px 0 0;width:18px;height:18px;accent-color:#bf2929}
+#confirmArchiveAssignmentBtn:disabled{opacity:.45;cursor:not-allowed}
+#retryArchiveCleanupBtn{font-size:12px;white-space:nowrap}
+@media(max-width:640px){#view-archive>.section-row .row-actions{flex-wrap:wrap;justify-content:flex-start}}

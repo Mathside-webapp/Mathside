@@ -1,0 +1,273 @@
+/* MATHSIDE — EXACT ORANGE CREATION PANEL SYSTEM (v3)
+   Reference-led redesign of the class, assignment, and performance-task dialogs.
+   Illustrations and curves are adapted directly from the approved design artwork.
+   This stylesheet intentionally touches no grading, posting or storage logic. */
+
+.orange-create-modal{
+  --oc-orange:#ff6508; --oc-orange-dark:#e95603; --oc-cream:#fff5e9;
+  --oc-ink:#111b35; --oc-sub:#65738b; --oc-border:#f4d9c3;
+  color:var(--oc-ink); font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+.orange-create-modal .modal-box{
+  background:#fff!important; border:1px solid #f9e1ce!important; border-radius:20px!important;
+  box-shadow:0 24px 75px rgba(44,35,31,.22)!important; padding:0!important;
+  overflow-x:hidden!important; overflow-y:auto!important; max-height:calc(100dvh - 26px)!important;
+  scrollbar-width:thin; scrollbar-color:#ddcebd transparent;
+}
+.orange-create-modal .modal-box h2{font-family:inherit!important;font-weight:850!important;letter-spacing:-.7px!important;line-height:1.12!important;color:var(--oc-ink)!important}
+.orange-create-modal .muted{color:var(--oc-sub);line-height:1.45}
+.orange-create-modal .modal-close{
+  position:absolute!important;top:14px!important;right:14px!important; width:38px!important;height:38px!important;
+  z-index:8!important; color:#111b35!important;background:#fff!important;border:0!important;
+  border-radius:50%!important; display:grid!important;place-items:center!important;font-size:25px!important;
+  box-shadow:0 3px 14px rgba(145,91,47,.09)!important;line-height:1!important;
+}
+.orange-create-modal .modal-close:hover{background:#fff2e5!important;color:var(--oc-orange-dark)!important}
+.orange-create-modal .btn{font-family:inherit!important;border-radius:12px!important;font-weight:750!important;min-height:48px!important;line-height:1.3!important;letter-spacing:0!important}
+.orange-create-modal .btn-orange{background:#ff6508!important;color:#fff!important;border:1px solid #fa6004!important;box-shadow:0 7px 14px rgba(238,91,0,.14)!important}
+.orange-create-modal .btn-orange:hover{background:#ea5700!important;color:#fff!important}
+.orange-create-modal .btn-light{border:1px solid #ffcfac!important;color:var(--oc-orange-dark)!important;background:#fff!important;box-shadow:none!important}
+.orange-create-modal .btn-light:hover{background:#fff7ef!important}
+.orange-create-modal label{color:var(--oc-ink)}
+.orange-create-modal input:not([type=checkbox]):not([type=radio]),
+.orange-create-modal textarea,.orange-create-modal select{
+  background:#fff!important;border:1.3px solid #f2ceb2!important;color:var(--oc-ink)!important;
+  box-shadow:none!important;border-radius:11px!important;min-height:46px!important;padding:12px 13px!important;
+  font-family:inherit!important;font-size:13px!important;line-height:1.4!important;
+}
+.orange-create-modal input::placeholder,.orange-create-modal textarea::placeholder{color:#8792a9!important;font-weight:450!important}
+.orange-create-modal input:focus,.orange-create-modal textarea:focus,.orange-create-modal select:focus{
+  outline:3px solid #ff862b29!important;outline-offset:0!important;border-color:#ff8734!important;
+}
+.orange-create-modal textarea{min-height:78px!important;resize:vertical}
+.orange-create-modal .orange-step{
+  width:29px!important;height:29px!important;min-width:29px!important;border-radius:50%!important;
+  display:inline-grid!important;place-items:center!important; padding:0!important;
+  color:#fff!important;background:linear-gradient(135deg,#ff7b19,#fa5b00)!important;
+  font-size:13px!important;font-weight:850!important;line-height:1!important;margin:0!important;
+  box-shadow:0 2px 6px #ff75001c; flex:0 0 29px!important;
+}
+/* ------- CREATE CLASS ------- */
+#sectionModal .modal-box{width:min(508px,calc(100vw - 25px))!important}
+#sectionModal .orange-class-head{
+  height:225px!important;position:relative;overflow:hidden;border-radius:20px 20px 0 0;
+  background:#fff0df url('../assets/orange-exact/class-hero.png?v=22-header-art') center top / 100% 100% no-repeat!important;
+  margin:0!important;
+}
+#sectionModal .orange-class-header-copy{
+  position:absolute;top:34px;left:110px;right:22px;max-width:260px;z-index:2;
+}
+#sectionModal .orange-class-header-copy h2{font-size:27px!important;margin:0 0 11px!important;white-space:nowrap!important}
+#sectionModal .orange-class-header-copy p{font-size:13px;line-height:1.5;margin:0;max-width:258px;color:#293958;font-weight:450}
+#sectionModal .orange-class-form{display:grid!important;gap:29px!important;padding:23px 27px 22px!important}
+#sectionModal .orange-class-field{display:grid;gap:14px;min-width:0}
+#sectionModal .orange-class-stephead{display:flex;align-items:flex-start;gap:17px;min-width:0}
+#sectionModal .orange-class-stephead strong{display:block;font-size:16px;font-weight:830;letter-spacing:-.3px;line-height:1.3;margin:1px 0 9px}
+#sectionModal .orange-class-stephead p{color:#6b7791;font-size:12.5px;line-height:1.5;margin:0;font-weight:430}
+#sectionModal .orange-class-stephead>div{min-width:0}
+#sectionModal label.orange-icon-input{position:relative;display:block!important;margin:0!important}
+#sectionModal label.orange-icon-input input,#sectionModal label.orange-icon-input select{height:59px!important;min-height:59px!important;padding-left:65px!important;border-color:#f2d4bb!important;border-radius:12px!important;font-size:14px!important;font-weight:650!important;color:#19243b!important}
+#sectionModal .orange-input-symbol{position:absolute;left:20px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:28px;height:28px;color:var(--oc-orange);font-size:25px;line-height:1;pointer-events:none;z-index:2}
+#sectionModal .orange-sr-only{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+#sectionModal .orange-reuse-field{gap:13px}
+#sectionModal .orange-reuse-field .field-help{
+  display:flex;align-items:flex-start;gap:11px;margin:6px 0 0;padding:14px 15px;
+  border:0;border-radius:12px;background:#fff3e4;color:#58473a!important;font-weight:450;
+  line-height:1.55;font-size:11.5px!important;
+}
+#sectionModal .orange-reuse-field .field-help span{flex:0 0 auto;color:#df6300;font-size:20px;line-height:1}
+#sectionModal .orange-class-actions{position:sticky!important;bottom:-22px;z-index:3;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:14px!important;background:#fff!important;margin:0 -27px -22px!important;padding:20px 27px 25px!important;border:0!important;box-shadow:none!important}
+#sectionModal .orange-class-actions:before{
+ content:"";position:absolute;pointer-events:none;z-index:-1;bottom:-5px;left:-3px;
+ width:150px;height:68px;border-radius:0 85px 0 0;opacity:.85;
+ background:radial-gradient(ellipse at 0% 100%,#ffd59d 0 54%,transparent 55%),
+            radial-gradient(ellipse at 12% 100%,#ffb967 0 56%,transparent 57%);
+}
+#sectionModal .orange-class-actions .btn{min-width:117px!important}
+#sectionModal .orange-class-actions .btn-orange{min-width:190px!important}
+#sectionModal .orange-class-actions .btn-orange span{font-size:23px;font-weight:400;vertical-align:-1px;margin-right:4px}
+#sectionModal .modal-box:after{content:"";position:sticky;bottom:0;display:block;pointer-events:none;height:0}
+/* ------- ASSIGNMENT & PERFORMANCE TASK EDITORS ------- */
+.orange-create-modal.friendly-editor .assignment-editor-box{
+  width:min(570px,calc(100vw - 25px))!important;max-height:calc(100dvh - 26px)!important;
+  padding:0!important;background:#fff!important;overflow-y:auto!important;
+}
+.orange-create-modal .assignment-editor-heading{
+  height:212px!important;min-height:212px!important;display:block!important;
+  position:relative;overflow:hidden;margin:0!important;padding:0!important;
+  border-radius:19px 19px 0 0!important;isolation:isolate;
+  background:#fff5e9 url('../assets/orange-exact/assignment-hero.png') center top / 100% 100% no-repeat!important;
+}
+.orange-create-modal .assignment-editor-heading.orange-performance-head{
+  height:220px!important;min-height:220px!important;
+  background-image:url('../assets/orange-exact/performance-hero.png')!important;
+}
+.orange-create-modal .assignment-editor-heading>div{
+  position:absolute!important;left:105px!important;top:34px!important;right:32px!important;
+  max-width:255px!important;z-index:3!important;min-width:0;
+}
+.orange-create-modal .assignment-editor-heading .eyebrow{display:none!important}
+.orange-create-modal .assignment-editor-heading h2{
+  font-size:27px!important;line-height:1.09!important;letter-spacing:-.5px!important;
+  margin:0 0 9px!important;max-width:255px!important;
+}
+.orange-create-modal .assignment-editor-heading .muted{font-size:12px!important;font-weight:460!important;color:#263857!important;line-height:1.45!important;max-width:245px!important;margin:0!important}
+.orange-create-modal .assignment-editor-form{padding:0 21px 0!important;gap:15px!important;display:grid!important;background:white!important}
+.orange-create-modal .assignment-form-section{
+  padding:15px 13px 17px!important;box-shadow:0 2px 10px rgba(91,60,32,.025)!important;
+  border:1px solid #f1dcc8!important;border-radius:16px!important;background:#fff!important;
+}
+.orange-create-modal .assignment-form-section-head,.orange-create-modal .question-builder-head{
+  margin:0 0 14px!important;background:#fff5eb!important;border:0!important;border-radius:11px!important;
+  padding:11px 12px!important;min-height:47px!important;
+}
+.orange-create-modal .assignment-form-section-head h3,.orange-create-modal .question-builder-head h3{
+  display:flex!important;align-items:center!important;gap:12px!important;
+  font-size:15.5px!important;font-weight:820!important;letter-spacing:-.2px!important;
+  line-height:1.2!important;color:var(--oc-ink)!important;margin:0!important;
+}
+.orange-create-modal .assignment-main-fields{display:grid!important;gap:14px!important}
+.orange-create-modal .assignment-main-fields>label{font-size:13px!important;font-weight:800!important;gap:7px!important;color:#111c36!important;min-width:0;}
+.orange-create-modal .assignment-main-fields label small.editor-required{display:none!important}
+.orange-create-modal .assignment-main-fields>label:has([required]):not(:has(textarea)){}
+.orange-create-modal .assignment-heading-grid{display:grid!important;grid-template-columns:1fr!important;gap:14px!important}
+.orange-create-modal .class-picker-field,.orange-create-modal .class-checklist-field{display:grid!important;gap:9px!important;margin-top:12px!important;min-width:0}
+.orange-create-modal .class-picker-field .field-label,
+.orange-create-modal .class-checklist-field>.field-label{
+  display:flex!important;align-items:center!important;gap:12px!important;width:100%!important;margin:0!important;
+  padding:11px 12px!important;border-radius:11px!important;
+  font-size:15.5px!important;line-height:1.2!important;font-weight:820!important;
+  color:var(--oc-ink)!important;background:#fff5eb!important;
+}
+.orange-create-modal .class-picker-field .field-label small,
+.orange-create-modal .class-checklist-field>.field-label small{
+  margin-left:auto!important;font-weight:500!important;color:#68768d!important;
+  font-size:10px!important;white-space:nowrap;
+}
+.orange-create-modal .orange-search-box{
+  position:relative!important;display:block!important;margin:0!important;padding:0!important;min-width:0!important;
+}
+.orange-create-modal .orange-search-box svg{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;
+  fill:none;stroke:#93a0b4;stroke-width:2;stroke-linecap:round;pointer-events:none;z-index:1;
+}
+.orange-create-modal .orange-search-box input{
+  width:100%!important;min-height:43px!important;height:43px!important;padding:10px 13px 10px 43px!important;
+  border-radius:11px!important;font-weight:450!important;font-size:12px!important;
+}
+/* Search padding needs to defeat the older, global input:not([type=checkbox]) rule. */
+.orange-create-modal label.orange-search-box input[type=search]{padding-left:44px!important;padding-right:14px!important;font-weight:450!important}
+/* Override the legacy '.form-stack label { display:grid }' rule, which caused the checkbox stacking bug. */
+.orange-create-modal .class-checklist{
+  display:grid!important;align-content:start!important;gap:2px!important;padding:6px 7px!important;
+  max-height:241px!important;min-height:88px!important;overflow-y:auto!important;overflow-x:hidden!important;
+  border:1px solid #f3d8c2!important;border-radius:11px!important;background:#fff!important;
+  box-shadow:none!important;scrollbar-color:#d9cbbb transparent;scrollbar-width:thin;
+}
+.orange-create-modal .class-checklist label.class-check-option{
+  display:flex!important;flex-direction:row!important;align-items:center!important;gap:11px!important;
+  width:100%!important;min-height:49px!important;margin:0!important;padding:7px 9px!important;
+  border:1px solid transparent!important;border-radius:9px!important;cursor:pointer!important;
+  font-family:inherit!important;line-height:1.15!important;
+}
+.orange-create-modal .class-checklist label.class-check-option:hover{background:#fff8f1!important}
+.orange-create-modal .class-checklist label.class-check-option:has(input:checked){background:#fff5ec!important;border-color:#f9dec7!important;box-shadow:none!important}
+.orange-create-modal .class-checklist .class-check-option>input[type=checkbox]{
+  box-sizing:border-box!important;appearance:none!important;-webkit-appearance:none!important;
+  position:static!important;opacity:1!important;display:block!important;flex:0 0 18px!important;
+  width:18px!important;height:18px!important;min-height:18px!important;max-height:18px!important;
+  margin:0 2px 0 0!important;padding:0!important;border:1.6px solid #c9cfda!important;
+  border-radius:5px!important;background:#fff!important;cursor:pointer!important;
+}
+.orange-create-modal .class-checklist .class-check-option>input[type=checkbox]:checked{
+  background:#ff6508!important;border-color:#ff6508!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m5 12 5 5L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;background-position:center!important;background-size:15px!important;
+}
+.orange-create-modal .class-checklist .class-check-option>input[type=checkbox]:focus-visible{outline:3px solid #ffc89c!important;outline-offset:2px!important}
+.orange-create-modal .class-checklist .orange-grade-badge{
+  display:grid!important;place-items:center!important;flex:0 0 34px!important;
+  width:34px!important;height:34px!important;border-radius:10px!important;
+  color:#e75c06!important;background:#ffe2c9!important;font-weight:850!important;font-size:13px!important;
+}
+.orange-create-modal .class-checklist .orange-grade-badge.grade-11{color:#a04c00!important;background:#ffe7c7!important}
+.orange-create-modal .class-checklist .orange-grade-badge.grade-12{color:#85561c!important;background:#fff0d8!important}
+.orange-create-modal .class-checklist .orange-class-main{
+  display:flex!important;flex-direction:column!important;justify-content:center!important;gap:3px!important;
+  flex:1 1 auto!important;min-width:0!important;text-align:left!important;
+}
+.orange-create-modal .class-checklist .orange-class-main b{
+  display:block!important;font-size:12.5px!important;font-weight:790!important;color:#15203b!important;overflow-wrap:anywhere;
+}
+.orange-create-modal .class-checklist .orange-class-main small{display:block!important;font-size:10.5px!important;color:#717f96!important;font-weight:500!important;margin:0!important}
+.orange-create-modal .class-checklist .orange-student-count{font-size:10.5px!important;color:#73819a!important;font-weight:500!important;white-space:nowrap!important;flex:0 0 auto!important;margin-left:auto!important}
+.orange-create-modal .class-checklist label.class-check-option.orange-class-row-filtered{display:none!important}
+.orange-create-modal .class-checklist .class-checklist-empty{padding:12px;font-size:12px;line-height:1.4;color:#69778e}
+.orange-create-modal .class-checklist .orange-class-empty-search{display:none;margin:6px 8px;color:#748099;font-size:12px}
+.orange-create-modal .class-checklist .orange-class-empty-search:not([hidden]){display:block}
+.orange-create-modal .question-editor-section .question-builder-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;flex-wrap:wrap!important;margin:0 0 12px!important}
+.orange-create-modal .question-builder-head .muted{font-size:10.5px!important;margin:7px 0 0!important;color:#728198!important}
+.orange-create-modal .question-builder-head .btn{min-height:40px!important;padding:8px 11px!important;white-space:nowrap;font-size:12px!important}
+.orange-create-modal .question-block{border-radius:12px!important;border:1px solid #f0dfd1!important;background:#fffdfa!important;padding:13px!important;box-shadow:none!important}
+.orange-create-modal .question-top{color:#ed5c00}
+.orange-create-modal .editor-options{border:1px solid #f2dbc8!important;border-radius:14px!important;background:white!important;box-shadow:none!important;overflow:hidden}
+.orange-create-modal .editor-options summary{color:#17223b!important}
+.orange-create-modal .editor-options summary:hover{background:#fff7f0!important}
+.orange-create-modal .assignment-form-actions{
+  position:sticky!important;bottom:0!important;z-index:9!important;display:flex!important;justify-content:flex-end!important;gap:12px!important;
+  padding:13px 0 15px!important;margin:0!important;background:#fff!important;
+  border:0!important;box-shadow:0 -8px 18px #fff9!important;backdrop-filter:none!important;border-radius:0!important;
+}
+.orange-create-modal .assignment-form-actions .btn{min-width:125px!important;font-size:12.5px!important;padding:10px 14px!important}
+.orange-create-modal .assignment-form-actions .btn-orange{min-width:178px!important}
+.orange-create-modal .orange-performance-classes{margin:0!important}
+.orange-create-modal .orange-performance-classes .class-checklist-field{margin-top:0!important}
+.orange-create-modal .performance-team-section .assignment-form-section-head h3{font-size:15.5px!important}
+.orange-create-modal .performance-work-mode{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+.orange-create-modal .performance-mode-option{display:block!important;min-width:0!important}
+.orange-create-modal .performance-mode-option>span{min-height:94px!important;padding:13px 8px!important;border:1px solid #eadaca!important;border-radius:11px!important;background:#fff!important;gap:7px!important}
+.orange-create-modal .performance-mode-option>input:checked+span{border:2px solid #ff6b12!important;background:#fff4e9!important;box-shadow:none!important}
+.orange-create-modal .performance-mode-option>span b{font-size:12px!important}
+.orange-create-modal .performance-mode-option>span small{font-size:10px!important;line-height:1.4!important}
+.orange-create-modal .section-edit-note{font-size:11px!important;border:1px solid #f7dfc9!important;background:#fff9f1!important;color:#835b39!important}
+@media(max-width:620px){
+ #sectionModal .orange-class-head{height:195px!important;background-position:center top!important}
+ #sectionModal .orange-class-header-copy{left:95px;top:34px;right:22px;max-width:230px}
+ #sectionModal .orange-class-header-copy h2{font-size:24px!important}
+ #sectionModal .orange-class-header-copy p{font-size:11px}
+ #sectionModal .orange-class-form{padding:21px 18px 12px!important;gap:24px!important}
+ #sectionModal .orange-class-actions{margin:0 -18px -12px!important;padding:15px 18px 19px!important}
+ #sectionModal .orange-class-actions .btn{min-width:0!important;flex:1!important}
+ #sectionModal .orange-class-actions .btn-orange{min-width:0!important;flex:1.6!important}
+ .orange-create-modal .assignment-editor-heading{height:190px!important;min-height:190px!important}
+ .orange-create-modal .assignment-editor-heading.orange-performance-head{height:197px!important;min-height:197px!important}
+ .orange-create-modal .assignment-editor-heading>div{left:95px!important;top:32px!important;right:30px!important;max-width:215px!important}
+ .orange-create-modal .assignment-editor-heading h2{font-size:23px!important}
+ .orange-create-modal .assignment-editor-heading .muted{font-size:11px!important}
+ .orange-create-modal .assignment-editor-form{padding:0 13px!important;gap:12px!important}
+ .orange-create-modal .assignment-form-section{padding:13px 11px 15px!important}
+ .orange-create-modal .assignment-form-actions{padding:12px 0!important;gap:8px!important}
+ .orange-create-modal .assignment-form-actions .btn{min-width:0!important;width:auto!important;flex:1!important;padding:10px 8px!important}
+ .orange-create-modal .assignment-form-actions .btn-orange{min-width:0!important;flex:1.35!important}
+}
+@media(max-width:390px){
+ #sectionModal .orange-class-head{height:165px!important}
+ #sectionModal .orange-class-header-copy{left:81px;top:31px;right:20px}
+ #sectionModal .orange-class-header-copy h2{font-size:20px!important}
+ #sectionModal .orange-class-stephead{gap:10px}
+ #sectionModal .orange-class-stephead strong{font-size:14px}
+ .orange-create-modal .assignment-editor-heading>div{left:81px!important;top:31px!important;max-width:195px!important}
+ .orange-create-modal .assignment-editor-heading h2{font-size:21px!important}
+ .orange-create-modal .class-checklist .orange-student-count{display:none!important}
+ .orange-create-modal .class-picker-field .field-label small,.orange-create-modal .class-checklist-field>.field-label small{font-size:9px!important}
+}
+@media(prefers-reduced-motion:reduce){.orange-create-modal *{transition:none!important;scroll-behavior:auto!important}}
+
+/* Keep visually hidden mode radios within their own selectable cards.
+   The legacy absolute positioning otherwise stretches mobile scrollWidth. */
+.orange-create-modal .performance-mode-option{position:relative!important;overflow:hidden!important}
+.orange-create-modal .performance-mode-option>input[type=radio]{
+  position:absolute!important;top:0!important;left:0!important;width:1px!important;height:1px!important;
+  margin:0!important;padding:0!important;opacity:0!important;pointer-events:none!important;
+}
+.orange-create-modal .performance-mode-option>input[type=radio]:focus-visible+span{outline:3px solid #ff9f55!important;outline-offset:-3px!important}

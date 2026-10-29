@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 330" width="640" height="330" role="img" aria-hidden="true">
+    <defs>
+      <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFB044"/><stop offset="1" stop-color="#FF710D"/></linearGradient>
+      <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#263A64"/><stop offset="1" stop-color="#142A4D"/></linearGradient>
+      <linearGradient id="lavender" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B9ACF6"/><stop offset="1" stop-color="#7369BB"/></linearGradient>
+      <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFCF5"/><stop offset="1" stop-color="#FFEBD5"/></linearGradient>
+      <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#72CEC4"/><stop offset="1" stop-color="#2B9EA1"/></linearGradient>
+      <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#729AC8"/><stop offset="1" stop-color="#3B608F"/></linearGradient>
+      <filter id="shadow" x="-30%" y="-40%" width="170%" height="200%"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#9E5625" flood-opacity=".15"/></filter>
+      <filter id="soft" x="-30%" y="-40%" width="170%" height="200%"><feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#5D3C26" flood-opacity=".16"/></filter>
+    </defs>
+    <ellipse cx="330" cy="298" rx="265" ry="18" fill="#BA6E31" opacity=".11"/>
+    <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- modern tablet/laptop dashboard -->
+    <g filter="url(#shadow)" transform="translate(175 46)">
+      <path d="M47 10Q47 0 60 0H293Q306 0 306 13V191H47Z" fill="#3D4867" stroke="#28334D" stroke-width="4"/>
+      <rect x="59" y="14" width="235" height="165" rx="8" fill="#FFFAF4"/>
+      <rect x="75" y="29" width="99" height="12" rx="6" fill="#EFDFCC"/>
+      <rect x="75" y="52" width="87" height="70" rx="11" fill="#FFF0DC"/>
+      <path d="M99 98l13-20 14 7 15-22" stroke="url(#orange)" stroke-width="6" fill="none"/>
+      <circle cx="99" cy="98" r="5" fill="#F59D47"/><circle cx="141" cy="63" r="5" fill="#F59D47"/>
+      <rect x="175" y="54" width="96" height="10" rx="5" fill="#DCD9D8"/>
+      <rect x="175" y="73" width="72" height="8" rx="4" fill="#F8B56F"/>
+      <rect x="175" y="94" width="96" height="10" rx="5" fill="#E5E6E6"/>
+      <rect x="175" y="112" width="61" height="9" rx="5" fill="#89BDBA"/>
+      <rect x="75" y="139" width="196" height="11" rx="5" fill="#EEE2D6"/>
+      <path d="M31 196H327l22 22Q352 229 329 229H27Q5 229 10 218Z" fill="url(#blue)" stroke="#3E5872" stroke-width="3"/>
+      <rect x="143" y="198" width="68" height="11" rx="6" fill="#D1D9D9" opacity=".75"/>
+    </g>
+    <!-- stack of books -->
+    <g transform="translate(70 222)" filter="url(#soft)">
+      <rect x="13" y="48" width="157" height="26" rx="7" fill="#E98235" stroke="#C9682B" stroke-width="2"/>
+      <rect x="23" y="55" width="127" height="12" rx="4" fill="#FFF3DF"/>
+      <rect x="0" y="24" width="150" height="26" rx="7" fill="#576AB2" stroke="#44518E" stroke-width="2"/>
+      <rect x="10" y="30" width="119" height="14" rx="4" fill="#F8F6F5"/>
+      <rect x="19" y="0" width="145" height="27" rx="7" fill="#F6B45C" stroke="#D58C36" stroke-width="2"/>
+      <rect x="30" y="7" width="117" height="12" rx="4" fill="#FFF4DF"/>
+    </g>
+    <!-- pencil container and green plant -->
+    <g transform="translate(550 182)" filter="url(#soft)">
+      <path d="M12 58H60L54 111H20Z" fill="#EE9A4D" stroke="#D27731" stroke-width="2"/>
+      <path d="M18 58Q-6 26 15 5Q44 20 18 58" fill="#5EAD87"/>
+      <path d="M27 58Q14 9 41 0Q61 23 27 58" fill="#318E74"/>
+      <path d="M35 58Q44 18 71 24Q64 56 35 58" fill="#71BB8C"/>
+      <path d="M35 58v-46" stroke="#6C8557" stroke-width="3"/>
+    </g>
+    <g transform="translate(485 227)">
+      <path d="M8 24h56l-5 64H14Z" fill="#E7A867"/>
+      <rect x="16" y="-23" width="8" height="54" rx="3" fill="#536CA1" transform="rotate(-12 16 -23)"/>
+      <rect x="32" y="-30" width="8" height="61" rx="3" fill="#F18E36" transform="rotate(5 32 -30)"/>
+      <rect x="45" y="-12" width="9" height="44" rx="3" fill="#6964A9" transform="rotate(18 45 -12)"/>
+    </g>
+    <g fill="#F2A357"><path d="M142 83l6 14 14 6-14 5-6 14-5-14-14-5 14-6Z"/><circle cx="545" cy="76" r="6"/><circle cx="515" cy="52" r="3"/></g>
+    </g>
+    </svg>

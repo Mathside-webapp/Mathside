@@ -1,0 +1,40 @@
+/* Whole-class performance tasks: retains Mathside orange interface */
+.performance-class-mode:has(input:checked){border-color:#ff7600!important;background:#fff3e5!important;box-shadow:0 0 0 2px #ffb871 inset;}
+.performance-class-help{margin:10px 0;padding:12px 14px;border-radius:12px;background:#fff5e9;border:1px solid #ffcca0;color:#854100;font-size:.94rem;line-height:1.5;}
+.performance-class-links{display:grid;gap:12px;padding:15px;border:1px solid #ffd7b3;background:#fff8f1;border-radius:14px;margin:12px 0;}
+.performance-class-links label{display:grid;gap:6px;font-weight:650;color:#60361c;}
+.performance-class-links input{width:100%;max-width:100%;min-width:0;padding:11px 13px;border:1px solid #e2b28c;border-radius:10px;background:white;color:#292019;}
+.performance-class-grade-panel{border:1px solid #f7ceab;padding:16px;margin:12px 0;border-radius:16px;background:#fffaf5;}
+.performance-class-grade-panel h3{margin:0 0 7px;}
+.performance-class-grade-panel .class-grade-controls{display:grid;gap:7px;max-height:330px;overflow:auto;padding-right:6px;}
+.performance-class-grade-panel .class-grade-person{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #f3e7da;padding:9px 0;}
+.performance-class-grade-panel .class-grade-person span{min-width:0;flex:1;}
+.performance-class-grade-panel input[type=number]{width:105px;min-width:0;padding:8px;border:1px solid #d6b495;border-radius:9px;}
+.performance-class-grade-panel .class-grade-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0 0;}
+.performance-class-grade-panel small{color:#805336;}
+.performance-class-resource-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px;}
+.performance-class-resource-links a{font-size:.88rem;}
+@media(max-width:600px){.performance-class-grade-panel{padding:12px}.performance-class-grade-panel .class-grade-person{align-items:start}.performance-class-grade-panel input[type=number]{width:90px}}
+
+/* A class may have dozens of learners; keep rating and review lists navigable. */
+.class-participation-list,
+.class-review-member-list {
+  max-height: min(46vh, 430px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 6px;
+}
+.performance-class-member-search {
+  width: 100%;
+  margin-top: 10px;
+  padding: 11px 13px;
+  border: 1px solid #f4bd93;
+  border-radius: 12px;
+  background: #fff;
+  color: #252b38;
+  font: inherit;
+}
+.class-rating-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+.class-rating-actions small { color: #6b7280; flex: 1 1 220px; }
+.class-grade-person span small { display: block; color: #9a562b; font-size: 10px; margin-top: 4px; }
+.class-participation-list [hidden] { display: none !important; }

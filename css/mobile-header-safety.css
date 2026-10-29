@@ -1,0 +1,190 @@
+/* Mathside v19: responsive teacher-header safety.
+   Presentation-only; no JavaScript, account, score, or Supabase changes.
+   All seven teacher workspaces use the same readable stacked layout on phones
+   and smaller tablets. The image remains inside its own row, AFTER all text. */
+@media (max-width: 760px) {
+  #teacherApp .ms-panel-hero,
+  #teacherApp #view-competencies .ct-page-hero.ms-panel-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 12px;
+    grid-template-columns: none;
+    height: auto;
+    min-height: 0;
+    padding: 22px 20px 18px;
+    overflow: hidden;
+  }
+  #teacherApp .ms-panel-hero .ms-hero-copy,
+  #teacherApp #view-competencies .ct-page-hero .ms-hero-copy {
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #teacherApp .ms-panel-hero h2,
+  #teacherApp #view-competencies .ct-page-hero h2 {
+    max-width: 100%;
+    font-size: clamp(29px, 6.8vw, 39px) !important;
+    line-height: 1.08;
+    letter-spacing: -1.15px;
+    overflow-wrap: break-word;
+  }
+  #teacherApp .ms-panel-hero p,
+  #teacherApp #view-competencies .ct-page-hero p {
+    max-width: 100%;
+    line-height: 1.55;
+    font-size: 13px;
+  }
+  #teacherApp .ms-panel-hero .ms-hero-tags,
+  #teacherApp #view-competencies .ct-hero-stats {
+    max-width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+  #teacherApp .ms-panel-hero .ms-hero-art,
+  #teacherApp #view-competencies .ct-page-hero .ct-hero-art,
+  #teacherApp .ms-hero-classes .ms-hero-art,
+  #teacherApp .ms-hero-performance .ms-hero-art,
+  #teacherApp .ms-hero-archive .ms-hero-art {
+    position: relative;
+    inset: auto;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    align-self: center;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+    width: min(100%, 390px);
+    min-width: 0;
+    height: clamp(152px, 42vw, 218px);
+    min-height: 0;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transform: none;
+    overflow: visible;
+    z-index: 1;
+  }
+  #teacherApp .ms-panel-hero .ms-hero-art img,
+  #teacherApp #view-competencies .ct-page-hero .ct-hero-art img,
+  #teacherApp .ms-hero-classes .ms-hero-art img,
+  #teacherApp .ms-hero-performance .ms-hero-art img,
+  #teacherApp .ms-hero-archive .ms-hero-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+  #teacherApp #view-competencies .ct-hero-stats {gap: 8px;margin-top: 16px;}
+  #teacherApp #view-competencies .ct-hero-stat {flex: 1 1 124px;min-width: 0;}
+  #teacherApp .ms-hero-assignments .ms-hero-copy {padding-left: 12px;}
+}
+
+@media (max-width: 360px) {
+  #teacherApp .ms-panel-hero,
+  #teacherApp #view-competencies .ct-page-hero.ms-panel-hero {padding: 20px 17px 16px;gap: 10px;}
+  #teacherApp .ms-panel-hero .ms-hero-kicker {font-size: 10px;letter-spacing: 1.35px;}
+  #teacherApp .ms-panel-hero .ms-hero-tags {gap: 7px;}
+  #teacherApp .ms-panel-hero .ms-hero-tags span {font-size: 9.5px;padding: 6px 9px;}
+  #teacherApp #view-competencies .ct-hero-stat small {max-width: none;}
+}
+
+/* The compact teacher topbar previously truncated "Performance Tasks"
+   and "Competency Tracker" with ellipses on 320–390px phones. Allow two lines. */
+@media (max-width: 600px) {
+  #teacherApp .workspace-topbar {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 78px;
+    padding: 11px 15px;
+    gap: 12px;
+    align-items: center;
+  }
+  #teacherApp .workspace-topbar > div {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #teacherApp .workspace-topbar h1,
+  #teacherApp #teacherPageTitle {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    overflow-wrap: normal;
+    font-size: clamp(18px, 5.25vw, 24px);
+    line-height: 1.12;
+    letter-spacing: -0.45px;
+  }
+  #teacherApp .workspace-topbar .eyebrow {
+    white-space: nowrap;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+  #teacherApp .workspace-topbar #teacherMenuBtn,
+  #teacherApp .workspace-topbar #teacherNotificationBtn {flex: 0 0 auto;}
+  #teacherApp .workspace-topbar #teacherNotificationBtn {margin-left: auto;}
+}
+
+/* Student overview header: prevent the welcome artwork/caption from being
+   cropped off the right edge of a small phone. */
+@media (max-width: 530px) {
+  #studentApp .v8-hero {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: 12px;
+    padding: 21px 15px 16px !important;
+  }
+  #studentApp .v8-hero-copy {
+    max-width: 100% !important;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+  }
+  #studentApp .v8-hero-copy p {max-width: 100% !important;}
+  #studentApp .v8-character {
+    position: relative;
+    inset: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    top: auto !important;
+    align-self: center;
+    width: min(100%, 235px) !important;
+    height: 112px !important;
+    margin: 0 auto;
+    opacity: 1 !important;
+    overflow: hidden;
+  }
+  #studentApp .v8-character img {object-fit: contain;object-position: center bottom;}
+  #studentApp .v8-neutral-hero {
+    flex-direction: row;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.3;
+    justify-content: center;
+    overflow-wrap: anywhere;
+  }
+  #studentApp .v8-neutral-hero .v8-icon {
+    width: 64px !important;
+    height: 64px !important;
+    flex: 0 0 64px;
+  }
+}

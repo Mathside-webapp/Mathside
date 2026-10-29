@@ -1,0 +1,15 @@
+/* Mathside activity tools - teacher-controlled shuffle and supervised MC suggestions */
+.mathside-shuffle-field {border:1px solid #ffcc9b;border-radius:14px;background:#fff4e7;padding:13px !important;margin-top:10px;}
+.mathside-shuffle-field input {accent-color:#ff7800;flex:none;}
+.mathside-choice-helper {background:#fff7ee;border:1px solid #ffd9b7;border-radius:13px;padding:12px;margin:4px 0 14px;}
+.mathside-choice-helper .q-auto-choices {background:white;color:#9d3c00;border:1px solid #ffb978;font-weight:750;min-height:38px;}
+.mathside-choice-helper small {display:block;color:#85583f;line-height:1.45;margin-top:6px;}
+.mathside-choice-result {font-size:12px;color:#aa5000;line-height:1.4;margin:7px 0 0;}
+.mathside-choice-result:empty {display:none;}
+@media(max-width:600px){.mathside-choice-helper{padding:10px}.mathside-choice-helper .q-auto-choices{width:100%;}}
+
+/* Student MC choices: label the shuffled display position, not the answer key. */
+.answer-question label.mathside-student-choice{display:flex;align-items:flex-start;gap:9px;width:100%;box-sizing:border-box;min-width:0;}
+.answer-question label.mathside-student-choice input[type="radio"]{flex:none;margin-top:5px;}
+.mathside-student-choice-letter{flex:none;min-width:21px;font-weight:800;color:#a54d12;}
+.answer-question label.mathside-student-choice .math-content{flex:1;min-width:0;overflow-wrap:anywhere;}

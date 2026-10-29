@@ -1,0 +1,516 @@
+/* Mathside Teacher Studio: distinct identities for six workspaces.
+   Presentation only. Retains existing controls, IDs, data attributes and handlers. */
+#teacherApp {
+  --ms-ink: #302219;
+  --ms-muted: #786b60;
+  --ms-edge: #ead9c8;
+  --ms-ease: cubic-bezier(.2,.75,.2,1);
+}
+#teacherApp .workspace-content {max-width: 1550px; padding: 28px 32px 56px; background: transparent;}
+#teacherApp .workspace-main {background: radial-gradient(circle at 86% 10%, #fff1df 0, transparent 27%), #fffaf4;}
+#teacherApp .workspace-topbar {background: rgba(255,251,247,.96); box-shadow: 0 5px 26px rgba(116,70,29,.035); backdrop-filter: blur(14px);}
+#teacherApp .sidebar {background:linear-gradient(170deg,#2c211c 0%,#32251e 63%,#251d19 100%);}
+#teacherApp .side-nav {gap:7px;}
+#teacherApp .side-nav .side-link {min-height:45px; border-radius:12px; position:relative; transition: background .2s, transform .2s;}
+#teacherApp .side-nav .side-link:hover {transform:translateX(2px);}
+#teacherApp .side-nav .side-link.active {box-shadow: inset 3px 0 rgba(255,255,255,.9), 0 6px 18px rgba(0,0,0,.10);}
+#teacherApp .side-nav .side-link[data-view="classes"].active {background:#D97712;}
+#teacherApp .side-nav .side-link[data-view="assignments"].active {background:#DB5E2B;}
+#teacherApp .side-nav .side-link[data-view="performance"].active {background:#7550A5;}
+#teacherApp .side-nav .side-link[data-view="submissions"].active {background:#178B74;}
+#teacherApp .side-nav .side-link[data-view="archive"].active {background:#586675;}
+#teacherApp .app-view {animation: ms-enter .3s var(--ms-ease) both;}
+@keyframes ms-enter {from {opacity:.65; transform:translateY(7px)} to {opacity:1; transform:none}}
+@media (prefers-reduced-motion:reduce){#teacherApp .app-view{animation:none}#teacherApp .side-nav .side-link{transition:none}}
+
+/* Shared hero foundation: each view owns its color, illustration and patterns. */
+#teacherApp .ms-panel-hero {
+  --ms-accent:#FF730E; --ms-panel-ink:#392214;
+  position:relative; isolation:isolate; overflow:hidden; min-height:250px;
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(240px,37%);
+  align-items:center; padding:30px 35px 31px 39px;
+  border:1px solid rgba(154,97,47,.09); border-radius:25px;
+  margin:0 0 22px;
+  box-shadow: 0 18px 38px rgba(125,73,29,.075);
+  background:#fff1dd; color:var(--ms-panel-ink);
+}
+#teacherApp .ms-panel-hero::before {
+  content:""; pointer-events:none; position:absolute; z-index:-1;
+  right:-55px; bottom:-135px; width:480px; height:290px;
+  border-radius:50%; background:rgba(255,255,255,.34); transform:rotate(-18deg);
+}
+#teacherApp .ms-panel-hero::after {
+  content:""; pointer-events:none; position:absolute; z-index:-1;
+  top:-135px; right:-60px; width:385px; height:255px;
+  border:2px solid rgba(255,255,255,.35); border-radius:50%; transform:rotate(-23deg);
+}
+#teacherApp .ms-hero-copy {position:relative; z-index:2; max-width:660px;}
+#teacherApp .ms-hero-kicker {display:inline-flex;align-items:center;gap:9px;color:var(--ms-accent);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;}
+#teacherApp .ms-hero-kicker::before {content:"";width:23px;height:4px;border-radius:7px;background:currentColor;}
+#teacherApp .ms-panel-hero h2 {font-family:Georgia, 'Times New Roman', serif; margin:12px 0 12px; font-size:clamp(33px,3.2vw,52px); line-height:1.02; letter-spacing:-1.9px; font-weight:700; color:var(--ms-panel-ink);}
+#teacherApp .ms-panel-hero h2 em {font-style:italic; font-weight:500; color:var(--ms-accent);}
+#teacherApp .ms-panel-hero p {margin:0; max-width:535px; color:#6f5d50; line-height:1.52; font-size:14px;}
+#teacherApp .ms-hero-tags {display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+#teacherApp .ms-hero-tags span {font-size:10px;letter-spacing:.18px;font-weight:800;border:1px solid rgba(100,53,17,.11);background:rgba(255,255,255,.68);color:var(--ms-panel-ink);padding:7px 12px;border-radius:999px;}
+#teacherApp .ms-hero-tags span::before {content:"✦";display:inline-block;color:var(--ms-accent);margin-right:6px;font-size:10px;}
+#teacherApp .ms-hero-art {height:226px;z-index:1; position:relative; display:flex;align-items:center;justify-content:center;}
+#teacherApp .ms-hero-art img {max-width:100%;width:365px;height:226px;object-fit:contain;display:block;filter:drop-shadow(0 6px 12px rgba(59,29,12,.08));}
+#teacherApp .ms-hero-corner {position:absolute;pointer-events:none;display:block;border-radius:50%;}
+#teacherApp .ms-hero-corner-one {width:11px;height:11px;top:25px;right:36%;background:var(--ms-accent);opacity:.55;}
+#teacherApp .ms-hero-corner-two {width:8px;height:8px;bottom:32px;right:19%;background:var(--ms-accent);opacity:.48;}
+
+/* Six separate visual worlds connected by orange-first branding. */
+#teacherApp .ms-hero-classes {--ms-accent:#D96710;--ms-panel-ink:#472612;background:linear-gradient(110deg,#fff3e2 0%,#ffe8cc 66%,#ffdbad 100%);}
+#teacherApp .ms-hero-classes::before {background:rgba(255,187,97,.27);}
+#teacherApp .ms-hero-assignments {--ms-accent:#EF6721;--ms-panel-ink:#47251A;background:linear-gradient(105deg,#fff1e7 0%,#ffe1cc 65%,#ffd0b5 100%);}
+#teacherApp .ms-hero-assignments::before {background:rgba(255,119,51,.12);}
+#teacherApp .ms-hero-assignments .ms-hero-copy {padding-left:14px;border-left:4px solid #fa8753;}
+#teacherApp .ms-hero-performance {--ms-accent:#7852AA;--ms-panel-ink:#342847;background:linear-gradient(110deg,#f6f0ff 0%,#eee6ff 65%,#e7d9fb 100%);}
+#teacherApp .ms-hero-performance p {color:#625771;}
+#teacherApp .ms-hero-performance .ms-hero-art {transform:translateY(5px);}
+#teacherApp .ms-hero-submissions {--ms-accent:#168E72;--ms-panel-ink:#173E36;background:linear-gradient(110deg,#e9fbf2 0%,#d7f6e7 65%,#c7eedb 100%);}
+#teacherApp .ms-hero-submissions p {color:#4b7062;}
+#teacherApp .ms-hero-submissions .ms-hero-tags span {background:#ffffffad;}
+#teacherApp .ms-hero-archive {--ms-accent:#637181;--ms-panel-ink:#2D3741;background:linear-gradient(110deg,#f5f6f8 0%,#eaeef2 65%,#dce2e9 100%);}
+#teacherApp .ms-hero-archive p {color:#617080;}
+#teacherApp .ms-hero-archive .ms-hero-art img {transform:scale(.96);}
+
+/* Elegant action bars: original dynamic buttons/IDs remain untouched. */
+#teacherApp .section-row.ms-panel-toolbar {display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin:0 0 15px;padding:0 1px;min-height:43px;}
+#teacherApp .ms-panel-toolbar .ms-original-heading {display:none!important;}
+#teacherApp .ms-toolbar-label {font-size:13px;font-weight:900;letter-spacing:.3px;color:#403128;}
+#teacherApp #view-classes .ms-toolbar-label::before,#teacherApp #view-assignments .ms-toolbar-label::before,#teacherApp #view-performance .ms-toolbar-label::before,#teacherApp #view-submissions .ms-toolbar-label::before,#teacherApp #view-archive .ms-toolbar-label::before {content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:9px;background:#fb780f;vertical-align:1px;}
+#teacherApp #view-performance .ms-toolbar-label::before {background:#8664AE;}
+#teacherApp #view-submissions .ms-toolbar-label::before {background:#1DAD86;}
+#teacherApp #view-archive .ms-toolbar-label::before {background:#778493;}
+#teacherApp .ms-panel-toolbar .row-actions {display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end;align-items:center;}
+#teacherApp .ms-panel-toolbar .btn {min-height:41px;border-radius:12px;}
+#teacherApp .ms-panel-toolbar .btn-orange {box-shadow:0 8px 17px rgba(240,106,23,.13);}
+#teacherApp .ms-panel-toolbar .btn:focus-visible {outline:3px solid #e9a671; outline-offset:2px;}
+
+/* Dashboard: the bright 'home base' focal point. */
+#teacherApp .welcome-panel.ms-dashboard-hero {isolation:isolate;position:relative;min-height:210px;border-radius:27px;padding:31px 37px;overflow:hidden;background:radial-gradient(circle at 81% 13%,#ffc36e 0,transparent 27%),linear-gradient(105deg,#fa5c0c 0%,#ff8628 62%,#ffa745 100%);box-shadow:0 20px 38px rgba(241,103,24,.17);}
+#teacherApp .ms-dashboard-hero::before {content:"";position:absolute;width:360px;height:360px;border-radius:50%;border:38px solid rgba(255,255,255,.13);right:85px;top:-145px;pointer-events:none;}
+#teacherApp .ms-dashboard-hero::after {content:"f(x)";font-family:Georgia,serif;font-size:95px;font-style:italic;color:#ffffff19;position:absolute;bottom:-23px;left:55%;pointer-events:none;}
+#teacherApp .ms-dashboard-hero .welcome-mark {position:relative;overflow:visible;width:150px;height:135px;border:2px solid rgba(255,255,255,.4);border-radius:34px;transform:rotate(-8deg);background:rgba(255,255,255,.12);}
+#teacherApp .ms-dashboard-hero .welcome-mark svg {transform:rotate(8deg);}
+#teacherApp .ms-orbit-number {position:absolute;right:-14px;top:-21px;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#fff5d7;color:#E4671F;font-family:Georgia,serif;font-size:25px;font-style:italic;box-shadow:0 8px 20px #ba50164f;}
+#teacherApp #view-dashboard .stats-grid {gap:15px;margin-top:17px;}
+#teacherApp #view-dashboard .stats-grid article {position:relative;overflow:hidden;border:1px solid #f2e1d2;border-radius:18px;box-shadow:0 10px 24px rgba(83,44,16,.06);background:white;transition:transform .18s,box-shadow .18s;}
+#teacherApp #view-dashboard .stats-grid article:hover {transform:translateY(-2px);box-shadow:0 13px 28px rgba(83,44,16,.1);}
+#teacherApp #view-dashboard .stats-grid article::after {content:"";position:absolute;width:66px;height:66px;border-radius:50%;right:-25px;bottom:-34px;background:#fff0e0;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(2)::after {background:#fff4d8;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(3)::after {background:#ffe9e4;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(4)::after {background:#f0eaff;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(2) .stat-icon {color:#C78A12;background:#fff5dd;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(3) .stat-icon {color:#e9674a;background:#ffebe6;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(4) .stat-icon {color:#8653ad;background:#f5eaff;}
+#teacherApp #view-dashboard .ms-dashboard-toolbar {margin:27px 0 15px;}
+#teacherApp #view-dashboard .class-grid .class-card {background:#fff;}
+
+/* Class catalogue: alternating orange identity stripes and grade chips. */
+#teacherApp #view-classes #classGrid {gap:16px;}
+#teacherApp #view-classes .class-grid-group {gap:16px;}
+#teacherApp #view-classes .class-card {position:relative;border:1px solid #f1d9c0;border-radius:19px;background:linear-gradient(#fff,#fffdfa);box-shadow:0 9px 24px rgba(91,47,12,.075);}
+#teacherApp #view-classes .class-card::before {content:"";position:absolute;top:0;left:23px;width:61px;height:5px;border-radius:0 0 6px 6px;background:#F7AB55;}
+#teacherApp #view-classes .class-card:nth-child(2n)::before {background:#E58A36;}
+#teacherApp #view-classes .grade-pill {font-weight:900;}
+
+/* Activities: ruled-paper look, clear calls to action. */
+#teacherApp #view-assignments .assignment-card {border:1px solid #f3d8c7;border-left:4px solid #f7874b;border-radius:18px;background:linear-gradient(90deg,#fffaf6,#fff 32%);box-shadow:0 7px 21px rgba(107,51,18,.055);transition:transform .2s,border-color .2s;}
+#teacherApp #view-assignments .assignment-card:hover {transform:translateY(-2px);border-color:#f4aa78;}
+#teacherApp #view-assignments .assignment-thumb {border:1px solid #ffdbc0;background:#fff0e6;}
+#teacherApp #view-assignments .meta-chip {background:#fff1e7;}
+
+/* Project lab: plum borders and project-style cards, orange remains the primary CTA. */
+#teacherApp #view-performance .performance-task-card {border:1px solid #e6d9f2!important;border-left:4px solid #9774C4!important;border-radius:18px;background:linear-gradient(98deg,#fefbff,#fff 55%);box-shadow:0 9px 23px rgba(62,37,94,.065);}
+#teacherApp #view-performance .performance-task-card .assignment-thumb {background:#f4eeff;}
+#teacherApp #view-performance .assignment-empty, #teacherApp #view-performance .v9-empty {border-color:#d8c6ed;background:#fdfaff;}
+#teacherApp #view-performance #performanceTaskList > :first-child {margin-top:0;}
+
+/* Review desk: grouped sections and soft mint checks. */
+#teacherApp #view-submissions .submission-kind-tabs {border-radius:13px;box-shadow:0 6px 15px rgba(46,85,63,.045);}
+#teacherApp #view-submissions .submission-kind-tab.active {color:#128667;border-color:#98d8ba;background:#eafaf2;}
+#teacherApp #view-submissions .submission-section-group, #teacherApp #view-submissions .submission-activity-group {border-color:#d7ede1;border-radius:18px;overflow:hidden;}
+#teacherApp #view-submissions .submission-section-group-title, #teacherApp #view-submissions .submission-activity-group>header {background:#234b40;color:white;}
+#teacherApp #view-submissions .submission-card {border:1px solid #dceee3;border-radius:16px;box-shadow:0 7px 18px rgba(22,91,66,.055);}
+#teacherApp #view-submissions .submission-status-icon {background:#e2f8ed;color:#138d6b;}
+#teacherApp #view-submissions .submission-review-btn:not(:disabled) {border-radius:11px;}
+
+/* Memory shelf: lower-intensity cards and stronger recovery controls. */
+#teacherApp #view-archive .archive-summary-grid {gap:13px;margin:0 0 18px;}
+#teacherApp #view-archive .archive-summary-grid article {position:relative;overflow:hidden;min-height:80px;border:1px solid #dfe5eb;border-radius:16px;background:#fff;box-shadow:0 7px 18px rgba(54,68,82,.04);padding:18px;}
+#teacherApp #view-archive .archive-summary-grid article::before {content:"";position:absolute;inset:0 auto 0 0;width:5px;background:#a4aebb;}
+#teacherApp #view-archive .archive-summary-grid article:nth-child(2)::before {background:#f09b67;}
+#teacherApp #view-archive .archive-summary-grid article:nth-child(3)::before {background:#8b81ab;}
+#teacherApp #view-archive .archive-record {border:1px solid #e0e4e9;border-radius:17px;box-shadow:0 6px 16px rgba(47,63,78,.035);}
+#teacherApp #view-archive .archive-record-icon {background:#eef1f5;color:#546475;}
+#teacherApp #view-archive .archive-record-actions .btn {min-height:40px;}
+
+/* Unified interaction cues: no changes to business logic. */
+#teacherApp .btn:focus-visible,#teacherApp .side-link:focus-visible {outline:3px solid #ffc08c;outline-offset:2px;}
+#teacherApp .compact-filter-panel {border-radius:18px;box-shadow:0 15px 35px rgba(90,48,20,.08);}
+#teacherApp .ms-panel-hero *,#teacherApp .ms-panel-hero {box-sizing:border-box;}
+
+@media (max-width:1100px){
+  #teacherApp .workspace-content {padding:22px 20px 42px;}
+  #teacherApp .ms-panel-hero {grid-template-columns:minmax(0,1fr) 37%;padding:27px 26px;min-height:223px;}
+  #teacherApp .ms-panel-hero h2 {font-size:clamp(32px,3.4vw,45px);}
+  #teacherApp .ms-hero-art {height:195px;}
+  #teacherApp .ms-hero-art img {height:195px;}
+}
+@media (max-width:780px){
+  #teacherApp .workspace-content {padding:16px 13px 35px;}
+  #teacherApp .ms-panel-hero {min-height:255px;grid-template-columns:minmax(0,1fr) 140px;padding:22px 16px 20px 21px;gap:0;margin-bottom:18px;border-radius:22px;}
+  #teacherApp .ms-panel-hero h2 {font-size:clamp(29px,5vw,39px);letter-spacing:-1.3px;}
+  #teacherApp .ms-panel-hero p {font-size:12px;line-height:1.5;}
+  #teacherApp .ms-hero-kicker {font-size:9px;letter-spacing:1.1px;}
+  #teacherApp .ms-hero-kicker::before {width:13px;height:3px;}
+  #teacherApp .ms-hero-tags {margin-top:12px;gap:5px;}
+  #teacherApp .ms-hero-tags span {font-size:9px;padding:5px 8px;}
+  #teacherApp .ms-hero-art,#teacherApp .ms-hero-art img {height:175px;}
+  #teacherApp .ms-dashboard-hero .welcome-mark {display:none;}
+  #teacherApp .welcome-panel.ms-dashboard-hero {padding:24px;min-height:205px;}
+  #teacherApp .section-row.ms-panel-toolbar {margin-bottom:14px;gap:10px;}
+  #teacherApp .ms-panel-toolbar .row-actions {flex-wrap:wrap;}
+  #teacherApp .ms-panel-toolbar .btn {padding:9px 12px;}
+}
+@media (max-width:520px){
+  #teacherApp .workspace-content {padding:13px 10px 26px;}
+  #teacherApp .ms-panel-hero {display:block;min-height:293px;padding:22px 20px 18px;}
+  #teacherApp .ms-hero-copy {max-width:100%;}
+  #teacherApp .ms-panel-hero h2 {font-size:34px;margin:9px 0;max-width:270px;}
+  #teacherApp .ms-panel-hero p {max-width:300px;}
+  #teacherApp .ms-hero-tags {position:relative;z-index:2;max-width:225px;}
+  #teacherApp .ms-hero-art {position:absolute;right:-23px;bottom:-19px;width:194px;height:163px;opacity:.84;}
+  #teacherApp .ms-hero-art img {width:100%;height:162px;}
+  #teacherApp .ms-hero-classes .ms-hero-art {right:-29px;bottom:-10px;}
+  #teacherApp .ms-hero-submissions .ms-hero-art {right:-22px;bottom:-5px;}
+  #teacherApp .ms-hero-assignments .ms-hero-copy {padding-left:9px;}
+  #teacherApp .ms-panel-toolbar .ms-toolbar-label {font-size:12px;}
+  #teacherApp .section-row.ms-panel-toolbar {flex-direction:column;align-items:stretch;}
+  #teacherApp .ms-panel-toolbar .row-actions {width:100%;justify-content:flex-start;}
+  #teacherApp .ms-panel-toolbar .row-actions .btn {flex:1 1 auto;}
+  #teacherApp .ms-panel-toolbar>.btn {width:100%;}
+  #teacherApp #view-archive .archive-summary-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;}
+  #teacherApp #view-archive .archive-summary-grid article {padding:12px 7px;display:block;min-height:75px;}
+  #teacherApp #view-archive .archive-summary-grid span {font-size:10px;}
+  #teacherApp #view-archive .archive-summary-grid b {display:block;margin-top:4px;font-size:22px;}
+  #teacherApp #view-dashboard .stats-grid {gap:8px;}
+}
+
+
+/* ===============================================
+   ALL-ORANGE IDENTITY UPDATE — v24.21
+   Class illustration enlarged; no white floating worksheet.
+   CSS-only presentation; original business logic unchanged.
+   =============================================== */
+#teacherApp .side-nav .side-link[data-view="classes"].active,
+#teacherApp .side-nav .side-link[data-view="assignments"].active,
+#teacherApp .side-nav .side-link[data-view="performance"].active,
+#teacherApp .side-nav .side-link[data-view="submissions"].active,
+#teacherApp .side-nav .side-link[data-view="archive"].active {background:#FF6B05;}
+
+#teacherApp .ms-panel-hero {
+  --ms-accent:#ED6C14;
+  --ms-panel-ink:#412718;
+  min-height:313px;
+  grid-template-columns:minmax(0,1fr) minmax(390px,45%);
+  padding:32px 30px 32px 40px;
+  border-color:#F4C89F;
+  box-shadow:0 18px 36px rgba(135,71,15,.085);
+}
+#teacherApp .ms-panel-hero::before {background:rgba(255,145,28,.16);}
+#teacherApp .ms-panel-hero::after {border-color:rgba(255,174,83,.35);}
+#teacherApp .ms-hero-copy {max-width:625px;}
+#teacherApp .ms-hero-art {height:288px;width:100%;min-width:0;}
+#teacherApp .ms-hero-art img {
+  width:100%;max-width:none;height:287px;object-fit:contain;
+  filter:drop-shadow(0 10px 16px rgba(105,49,10,.11));
+}
+#teacherApp .ms-hero-classes {--ms-accent:#D65B00;--ms-panel-ink:#482712;background:linear-gradient(105deg,#FFF1DD 0%,#FFE1B9 62%,#FFC98C 100%);}
+#teacherApp .ms-hero-classes::before {background:rgba(255,149,30,.14);}
+#teacherApp .ms-hero-classes .ms-hero-art {height:303px;align-self:end;transform:translate(17px,32px);}
+#teacherApp .ms-hero-classes .ms-hero-art img {height:303px;filter:none;}
+#teacherApp .ms-hero-assignments {--ms-accent:#E85B0C;--ms-panel-ink:#452516;background:linear-gradient(110deg,#FFF1E3 0%,#FFDDC5 60%,#FFC6A8 100%);}
+#teacherApp .ms-hero-performance {--ms-accent:#C85B04;--ms-panel-ink:#492A12;background:linear-gradient(110deg,#FFF2DD 0%,#FFE5BC 59%,#FFD09A 100%);}
+#teacherApp .ms-hero-performance p {color:#705843;}
+#teacherApp .ms-hero-performance .ms-hero-art {transform:translateY(7px);}
+#teacherApp .ms-hero-submissions {--ms-accent:#D66008;--ms-panel-ink:#49301C;background:linear-gradient(110deg,#FFF1E2 0%,#FFDFC4 59%,#FFC392 100%);}
+#teacherApp .ms-hero-submissions p {color:#725746;}
+#teacherApp .ms-hero-archive {--ms-accent:#A64C0B;--ms-panel-ink:#443026;background:linear-gradient(110deg,#FFF3E5 0%,#FFE9CB 59%,#FFDBB0 100%);}
+#teacherApp .ms-hero-archive p {color:#785D46;}
+#teacherApp .ms-hero-archive .ms-hero-art img {transform:scale(1.05);}
+#teacherApp #view-performance .ms-toolbar-label::before,
+#teacherApp #view-submissions .ms-toolbar-label::before,
+#teacherApp #view-archive .ms-toolbar-label::before {background:#F47B11;}
+
+/* Orange identity also extends below the headers, never lavender/mint/gray. */
+#teacherApp #view-dashboard .stats-grid article:nth-child(2)::after {background:#FFF0D6;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(3)::after {background:#FFE7D2;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(4)::after {background:#FFE2BD;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(2) .stat-icon {color:#D76D09;background:#FFF0D8;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(3) .stat-icon {color:#EA6C13;background:#FFEDD9;}
+#teacherApp #view-dashboard .stats-grid article:nth-child(4) .stat-icon {color:#A95213;background:#FFE6C7;}
+#teacherApp #view-performance .performance-task-card {
+  border:1px solid #F1D6BA!important;
+  border-left:4px solid #F18820!important;
+  background:linear-gradient(98deg,#FFFBF5,#FFF 55%);
+  box-shadow:0 9px 23px rgba(105,53,14,.065);
+}
+#teacherApp #view-performance .performance-task-card .assignment-thumb {background:#FFECDA;}
+#teacherApp #view-performance .assignment-empty,
+#teacherApp #view-performance .v9-empty {border-color:#F1CDA8;background:#FFFCF5;}
+#teacherApp #view-submissions .submission-kind-tabs {box-shadow:0 6px 15px rgba(125,66,19,.05);}
+#teacherApp #view-submissions .submission-kind-tab.active {color:#B8540C;border-color:#FFD2A4;background:#FFF0DF;}
+#teacherApp #view-submissions .submission-section-group,
+#teacherApp #view-submissions .submission-activity-group {border-color:#F3D7B9;}
+#teacherApp #view-submissions .submission-section-group-title,
+#teacherApp #view-submissions .submission-activity-group>header {background:#55301C;color:#FFF7ED;}
+#teacherApp #view-submissions .submission-card {border-color:#F2DDC7;box-shadow:0 7px 18px rgba(114,64,24,.06);}
+#teacherApp #view-submissions .submission-status-icon {background:#FFF0D9;color:#E87016;}
+#teacherApp #view-archive .archive-summary-grid article {border-color:#F0DDC7;box-shadow:0 7px 18px rgba(86,52,24,.04);}
+#teacherApp #view-archive .archive-summary-grid article::before {background:#E78132;}
+#teacherApp #view-archive .archive-summary-grid article:nth-child(2)::before {background:#FFAC55;}
+#teacherApp #view-archive .archive-summary-grid article:nth-child(3)::before {background:#C65F16;}
+#teacherApp #view-archive .archive-record {border-color:#F1DCC6;box-shadow:0 6px 16px rgba(85,47,12,.055);}
+#teacherApp #view-archive .archive-record-icon {background:#FFF0DF;color:#BD5D14;}
+#teacherApp .ms-panel-hero .ms-hero-tags span {background:rgba(255,252,244,.78);border-color:#EDC69E;}
+
+@media (min-width:781px) and (max-width:1190px) {
+  #teacherApp .ms-panel-hero {grid-template-columns:minmax(0,1fr) minmax(305px,43%);min-height:290px;padding:24px 24px 24px 30px;}
+  #teacherApp .ms-hero-art,#teacherApp .ms-hero-art img {height:260px;}
+  #teacherApp .ms-hero-classes .ms-hero-art,#teacherApp .ms-hero-classes .ms-hero-art img {height:279px;}
+}
+@media (max-width:780px) {
+  #teacherApp .ms-panel-hero {min-height:266px;grid-template-columns:minmax(0,1fr) minmax(175px,42%);padding:20px 16px 18px 22px;}
+  #teacherApp .ms-hero-art,#teacherApp .ms-hero-art img {height:210px;}
+  #teacherApp .ms-hero-classes .ms-hero-art,#teacherApp .ms-hero-classes .ms-hero-art img {height:230px;}
+  #teacherApp .ms-hero-classes .ms-hero-art {transform:translate(17px,19px);}
+}
+@media (max-width:520px) {
+  #teacherApp .ms-panel-hero {display:block;min-height:323px;padding:21px 17px 16px;}
+  #teacherApp .ms-panel-hero h2 {font-size:33px;max-width:260px;}
+  #teacherApp .ms-panel-hero p {max-width:250px;}
+  #teacherApp .ms-panel-hero .ms-hero-tags {max-width:206px;}
+  #teacherApp .ms-hero-art {width:220px;height:205px;right:-19px;bottom:-13px;opacity:.95;}
+  #teacherApp .ms-hero-art img {height:205px;}
+  #teacherApp .ms-hero-classes .ms-hero-art {width:244px;height:206px;right:-27px;bottom:-19px;transform:none;}
+  #teacherApp .ms-hero-classes .ms-hero-art img {height:206px;}
+  #teacherApp .ms-hero-performance .ms-hero-art {transform:none;}
+  #teacherApp .ms-hero-archive .ms-hero-art img {transform:scale(1.05);}
+}
+
+/* Competency/Archive numbering and cohesive high-resolution editorial artwork.
+   No business logic or database changes. */
+#teacherApp .ms-hero-classes .ms-hero-art,
+#teacherApp .ms-hero-performance .ms-hero-art,
+#teacherApp .ms-hero-archive .ms-hero-art {
+  align-items:flex-end;
+  justify-content:center;
+  overflow:visible;
+}
+#teacherApp .ms-hero-classes .ms-hero-art img,
+#teacherApp .ms-hero-performance .ms-hero-art img,
+#teacherApp .ms-hero-archive .ms-hero-art img {
+  width:122%;
+  max-width:none;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
+  filter:drop-shadow(0 8px 11px rgba(87,46,23,.04));
+  transform:none;
+  mix-blend-mode:multiply;
+}
+#teacherApp .ms-hero-classes .ms-hero-art img {width:130%;}
+#teacherApp .ms-hero-performance .ms-hero-art img {width:136%;}
+#teacherApp .ms-hero-archive .ms-hero-art img {width:137%;}
+@media(max-width:780px) {
+ #teacherApp .ms-hero-classes .ms-hero-art img {width:135%;}
+ #teacherApp .ms-hero-performance .ms-hero-art img,
+ #teacherApp .ms-hero-archive .ms-hero-art img {width:140%;}
+}
+@media(max-width:520px) {
+ #teacherApp .ms-hero-classes .ms-hero-art img {width:150%;height:100%;}
+ #teacherApp .ms-hero-performance .ms-hero-art img,
+ #teacherApp .ms-hero-archive .ms-hero-art img {width:150%;height:100%;}
+}
+@media(max-width:520px){
+ #teacherApp .ms-hero-classes .ms-hero-art img {width:188%;height:100%;object-fit:cover;}
+ #teacherApp .ms-hero-performance .ms-hero-art img,
+ #teacherApp .ms-hero-archive .ms-hero-art img {width:222%;height:100%;object-fit:cover;}
+}
+/* Stack artwork BELOW the text on narrow screens: no labels over faces. */
+@media(max-width:520px){
+ #teacherApp .ms-hero-classes,
+ #teacherApp .ms-hero-performance,
+ #teacherApp .ms-hero-archive {
+   display:flex;
+   flex-direction:column;
+   align-items:stretch;
+   gap:6px;
+   min-height:0;
+   padding-bottom:0;
+ }
+ #teacherApp .ms-hero-classes .ms-hero-art,
+ #teacherApp .ms-hero-performance .ms-hero-art,
+ #teacherApp .ms-hero-archive .ms-hero-art {
+   position:relative;
+   right:auto;
+   bottom:auto;
+   align-self:stretch;
+   flex:none;
+   margin-top:8px;
+   width:100%;
+   height:174px;
+   transform:none;
+   opacity:1;
+   overflow:hidden;
+ }
+ #teacherApp .ms-hero-classes .ms-hero-art img,
+ #teacherApp .ms-hero-performance .ms-hero-art img,
+ #teacherApp .ms-hero-archive .ms-hero-art img {
+   width:100%;height:100%;object-fit:cover;
+   object-position:center bottom;
+ }
+}
+
+
+/* ==========================================================
+   V18 — CENTERED EDITORIAL ART / COHESIVE TEACHER HOME
+   Purely presentational. SVG illustrations are scalable and
+   deliberately contain no people, titles, or embedded photos.
+   Existing view identifiers, JS actions and data are unchanged.
+   ========================================================== */
+#teacherApp .ms-hero-dashboard {
+  --ms-accent:#D86917;
+  --ms-panel-ink:#482817;
+  background:linear-gradient(108deg,#FFF3E3 0%,#FFE6C8 60%,#FFD6AA 100%);
+}
+#teacherApp .ms-hero-dashboard p {color:#725A45;}
+#teacherApp .ms-hero-dashboard .ms-hero-art img {mix-blend-mode:normal;}
+
+/* Artwork sits in the vertical center of its own right column,
+   instead of being pushed against the bottom edge. */
+#teacherApp .ms-hero-dashboard,
+#teacherApp .ms-hero-classes,
+#teacherApp .ms-hero-performance,
+#teacherApp .ms-hero-archive {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(340px,44%);
+  align-items:center;
+  min-height:307px;
+  padding:32px 33px 32px 40px;
+}
+#teacherApp .ms-hero-dashboard .ms-hero-art,
+#teacherApp .ms-hero-classes .ms-hero-art,
+#teacherApp .ms-hero-performance .ms-hero-art,
+#teacherApp .ms-hero-archive .ms-hero-art {
+  position:relative;
+  inset:auto;
+  margin:0;
+  width:100%;
+  min-width:0;
+  height:258px;
+  align-self:center;
+  display:flex;
+  flex:none;
+  justify-content:center;
+  align-items:center;
+  overflow:visible;
+  transform:none;
+  opacity:1;
+}
+#teacherApp .ms-hero-dashboard .ms-hero-art img,
+#teacherApp .ms-hero-classes .ms-hero-art img,
+#teacherApp .ms-hero-performance .ms-hero-art img,
+#teacherApp .ms-hero-archive .ms-hero-art img {
+  display:block;
+  width:100%;
+  height:100%;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  object-position:center center;
+  transform:none;
+  filter:none;
+  mix-blend-mode:normal;
+}
+@media (min-width:781px) and (max-width:1160px) {
+  #teacherApp .ms-hero-dashboard,
+  #teacherApp .ms-hero-classes,
+  #teacherApp .ms-hero-performance,
+  #teacherApp .ms-hero-archive {
+    grid-template-columns:minmax(0,1fr) minmax(260px,43%);
+    padding:27px 24px 27px 28px;
+    min-height:285px;
+  }
+  #teacherApp .ms-hero-dashboard .ms-hero-art,
+  #teacherApp .ms-hero-classes .ms-hero-art,
+  #teacherApp .ms-hero-performance .ms-hero-art,
+  #teacherApp .ms-hero-archive .ms-hero-art {height:235px;}
+}
+@media (min-width:521px) and (max-width:780px) {
+  #teacherApp .ms-hero-dashboard,
+  #teacherApp .ms-hero-classes,
+  #teacherApp .ms-hero-performance,
+  #teacherApp .ms-hero-archive {
+    grid-template-columns:minmax(0,1fr) 40%;
+    min-height:252px;
+    padding:24px 18px;
+  }
+  #teacherApp .ms-hero-dashboard .ms-hero-art,
+  #teacherApp .ms-hero-classes .ms-hero-art,
+  #teacherApp .ms-hero-performance .ms-hero-art,
+  #teacherApp .ms-hero-archive .ms-hero-art {height:185px;}
+}
+@media (max-width:520px) {
+  /* Deliberate stacking on phones keeps copy and artwork readable. */
+  #teacherApp .ms-hero-dashboard,
+  #teacherApp .ms-hero-classes,
+  #teacherApp .ms-hero-performance,
+  #teacherApp .ms-hero-archive {
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+    min-height:0;
+    padding:23px 20px 17px;
+  }
+  #teacherApp .ms-hero-dashboard .ms-hero-copy,
+  #teacherApp .ms-hero-classes .ms-hero-copy,
+  #teacherApp .ms-hero-performance .ms-hero-copy,
+  #teacherApp .ms-hero-archive .ms-hero-copy {width:100%;max-width:100%;}
+  #teacherApp .ms-hero-dashboard h2,
+  #teacherApp .ms-hero-classes h2,
+  #teacherApp .ms-hero-performance h2,
+  #teacherApp .ms-hero-archive h2 {max-width:100%;font-size:clamp(30px,8vw,36px);}
+  #teacherApp .ms-hero-dashboard p,
+  #teacherApp .ms-hero-classes p,
+  #teacherApp .ms-hero-performance p,
+  #teacherApp .ms-hero-archive p {max-width:100%;}
+  #teacherApp .ms-hero-dashboard .ms-hero-tags,
+  #teacherApp .ms-hero-classes .ms-hero-tags,
+  #teacherApp .ms-hero-performance .ms-hero-tags,
+  #teacherApp .ms-hero-archive .ms-hero-tags {max-width:100%;}
+  #teacherApp .ms-hero-dashboard .ms-hero-art,
+  #teacherApp .ms-hero-classes .ms-hero-art,
+  #teacherApp .ms-hero-performance .ms-hero-art,
+  #teacherApp .ms-hero-archive .ms-hero-art {
+    position:relative;
+    inset:auto;
+    margin:2px auto 0;
+    align-self:center;
+    width:100%;
+    height:174px;
+    overflow:visible;
+    opacity:1;
+    transform:none;
+  }
+  #teacherApp .ms-hero-dashboard .ms-hero-art img,
+  #teacherApp .ms-hero-classes .ms-hero-art img,
+  #teacherApp .ms-hero-performance .ms-hero-art img,
+  #teacherApp .ms-hero-archive .ms-hero-art img {
+    width:100%;height:100%;object-fit:contain;object-position:center center;
+  }
+}

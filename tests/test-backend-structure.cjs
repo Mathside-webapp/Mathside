@@ -1,0 +1,20 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.resolve(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const sqlFiles=fs.readdirSync(path.join(root,'supabase/sql')).filter(x=>x.endsWith('.sql')).sort();
+assert.deepEqual(sqlFiles.filter(n => /^\d\d-/.test(n)).map(n=>n.slice(0,2)), ['01','02','03','04','05','06','07']);
+const sql=sqlFiles.map(n=>read('supabase/sql/'+n)).join('\n');
+assert(!/create\s+table.*mathside_notifications/i.test(sql),'notification table forbidden');
+assert(!/create\s+table.*mathside_teacher_allowlist/i.test(sql),'teacher allowlist forbidden');
+assert(!/storage\.objects|storage\.buckets/i.test(sql),'Supabase storage policies forbidden');
+for(const table of ['mathside_profiles','mathside_sections','mathside_section_members','mathside_assignments','mathside_submissions','mathside_questions','mathside_question_keys','mathside_ct_competencies','mathside_ct_links','mathside_ct_reviews','mathside_file_records']) assert(new RegExp('create\\s+table\\s+(?:if\\s+not\\s+exists\\s+)?public\\.'+table+'\\b','i').test(sql),'missing table '+table);
+const expected=['create-students','delete-student','delete-assignment','reset-student-passwords','r2-upload-url','r2-files','r2-teacher-files'];
+assert.deepEqual(fs.readdirSync(path.join(root,'supabase/functions')).sort(),expected.slice().sort());
+for(const fn of expected) {let src=read('supabase/functions/'+fn+'/index.ts');assert(src.includes("auth: 'user'"),fn+' missing authenticated handler');}
+const app=read('js/app.js');assert(!app.includes('cleanupGradedSubmissionProofs('),'grading still deletes proofs');
+const archive=sqlFiles.find(x=>x.startsWith('05'));assert(read('supabase/sql/'+archive).includes("set status='archived'"));
+assert(!fs.existsSync(path.join(root,'manifest.webmanifest')),'PWA manifest still installed');
+assert(!/db\.from\(['\"]mathside_notifications/.test(read('js/v10-features.js')), 'obsolete notification fetch remains');
+assert(!/db\.rpc\(['\"]mathside_cleanup_old_notifications/.test(read('js/v10-features.js')), 'obsolete notification cleanup remains');
+assert(!/db\.storage\.from\(['\"]mathside-assignment-images['\"]\)\.upload/.test(read('js/app.js') + read('js/v15-performance-tasks.js')), 'teacher upload still using Supabase Storage');
+console.log('PASS: 7 replacement SQL scripts; 7 authenticated Edge Functions; obsolete notifications removed; no PWA; grading keeps proofs; teacher uploads use R2.');

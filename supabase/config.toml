@@ -1,0 +1,9 @@
+# Require valid user JWT for every teacher-only function.
+[functions.create-students]
+verify_jwt = true
+[functions.delete-student]
+verify_jwt = true
+[functions.delete-assignment]
+verify_jwt = true
+[functions.reset-student-passwords]
+verify_jwt = true

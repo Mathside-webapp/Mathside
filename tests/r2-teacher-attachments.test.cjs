@@ -1,0 +1,33 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const teacherId = 'b2345678-1234-4abc-8abc-123456789abc';
+const assignmentId = 'c2345678-1234-4abc-8abc-123456789abc';
+const objectId = 'd2345678-1234-4abc-8abc-123456789abc';
+const objectKey = `assignments/${assignmentId}/${teacherId}/${objectId}.pdf`;
+const calls = [];
+const context = {window:{}, Response, fetch:async (url, options) => {calls.push(['PUT',options]);return {ok:true};}};
+vm.createContext(context);
+vm.runInContext(fs.readFileSync('js/r2-storage.js','utf8'),context);
+const client = {functions:{invoke:async (name, args) => {
+  calls.push([name,args.body]);
+  if (name === 'r2-upload-url') return {data:{uploadUrl:'https://r2.example/upload',objectKey}};
+  if (name === 'r2-teacher-files' && args.body.action === 'confirm') return {data:{confirmed:true}};
+  if (name === 'r2-teacher-files' && args.body.action === 'read') return {data:{url:'https://r2.example/read'}};
+  throw Error('Unexpected request');
+}}};
+(async () => {
+  const file = {type:'application/pdf',name:'rubric.pdf',size:250};
+  const ref = await context.window.MathsideR2.uploadTeacherFile(client,{assignmentId,userId:teacherId,file});
+  assert.equal(ref, 'r2-teacher:' + objectKey);
+  assert(context.window.MathsideR2.isR2TeacherPath(ref));
+  assert(!context.window.MathsideR2.isR2TeacherPath('teacher-assets/random'));
+  assert.equal(calls[0][0], 'r2-upload-url');
+  assert.equal(calls[1][0], 'PUT');
+  assert.equal(calls[1][1].headers['Content-Type'], 'application/pdf');
+  assert.equal(calls[2][0], 'r2-teacher-files');
+  assert.equal(calls[2][1].action, 'confirm');
+  assert.equal(await context.window.MathsideR2.signedTeacherUrl(client, ref),'https://r2.example/read');
+  assert.equal(calls[3][1].action, 'read');
+  console.log('PASS: teacher PDF signed upload, R2 PUT, authenticated confirmation and private read');
+})().catch(error => {console.error(error);process.exitCode=1});

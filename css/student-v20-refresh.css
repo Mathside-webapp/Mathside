@@ -1,0 +1,165 @@
+/* Mathside V20: Unified student workspace refresh. Student-only styles.
+   Teacher workspace, grade calculations, submissions, RLS and Supabase untouched. */
+#studentApp.v8-shell {--v20-orange:#f67416;--v20-dark:#3a271a;--v20-border:#efdac6;--v20-latte:#fff8f0;--v20-text:#30251f;--v20-muted:#786655;background:#fff9f3;color:var(--v20-text);font-family:Inter,'Segoe UI',system-ui,sans-serif}
+#studentApp .v8-main{background:linear-gradient(180deg,#fffaf5 0%,#fff6ef 54%,#fff9f4 100%);padding:24px 27px 36px;box-sizing:border-box;min-width:0}
+#studentApp .v8-nav-link{border-radius:12px;transition:background-color .15s ease,color .15s ease;letter-spacing:0}
+#studentApp .v8-nav-link.active{background:linear-gradient(105deg,#ff8c27,#ee6310);color:white;box-shadow:0 8px 18px #e16b1d24}
+#studentApp .v8-nav-link:focus-visible,#studentApp button:focus-visible{outline:3px solid #ffbf75;outline-offset:3px}
+#studentApp .v8-topbar{border-bottom:1px solid #f7deca}
+#studentApp .v8-page-heading.v20-student-heading{isolation:isolate;overflow:hidden;position:relative;box-sizing:border-box;display:flex;align-items:center;gap:19px;width:100%;min-height:210px;border:1px solid #f4d9b8;border-radius:26px;margin:0 0 24px!important;padding:28px 285px 30px 31px;background:linear-gradient(110deg,#fff2df 0%,#ffe4c1 61%,#ffd49a 100%);box-shadow:0 9px 32px #b9783d12}
+#studentApp .v8-page-heading.v20-student-heading::before{content:"";position:absolute;inset:auto -55px -135px auto;width:350px;height:245px;border-radius:50%;border:1px solid #ffbd73;background:radial-gradient(circle,#ffb35a35,transparent 70%);z-index:-1;pointer-events:none}
+#studentApp .v8-page-heading.v20-student-heading::after{content:"";position:absolute;display:block;right:16px;top:50%;transform:translateY(-50%);height:194px;width:242px;background-repeat:no-repeat;background-size:contain;background-position:center center;pointer-events:none;opacity:1;z-index:0}
+#studentApp .v8-page-heading.v20-student-heading>div{min-width:0;position:relative;z-index:1;flex:1}
+#studentApp .v8-page-heading.v20-student-heading .v8-page-icon{width:58px;height:58px;border-radius:16px;flex:0 0 58px;align-self:center;box-shadow:0 8px 16px #ea89312a;background:linear-gradient(135deg,#ff9952,#f16c16)}
+#studentApp .v8-page-heading.v20-student-heading .v8-page-icon .v8-icon{width:29px!important;height:29px!important}
+#studentApp .v8-page-heading.v20-student-heading h1{font-family:Georgia,'Times New Roman',serif!important;font-weight:800!important;font-size:clamp(27px,3.1vw,40px)!important;line-height:1.13!important;letter-spacing:-.035em!important;color:#482a17!important;margin:11px 0 10px!important;overflow-wrap:anywhere}
+#studentApp .v8-page-heading.v20-student-heading p{color:#76553e!important;font:500 14px/1.6 Inter,'Segoe UI',sans-serif!important;max-width:530px;margin:0!important}
+#studentApp .v20-student-eyebrow{display:block;color:#a94f0b;font-size:11px;font-weight:850;letter-spacing:.14em;line-height:1.3}
+#studentApp .v20-student-eyebrow b{font-family:Inter,'Segoe UI',sans-serif;color:#fd791c;letter-spacing:0;font-size:15px;margin-right:6px}
+#studentApp [data-student-panel-view="activities"] .v20-student-heading::after{background-image:url('../assets/panel-identity/activities.svg')}
+#studentApp [data-student-panel-view="performance"] .v20-student-heading::after{background-image:url('../assets/panel-identity/performance-project.svg')}
+#studentApp [data-student-panel-view="competencies"] .v20-student-heading::after{background-image:url('../assets/panel-identity/competencies.svg')}
+#studentApp [data-student-panel-view="grades"] .v20-student-heading::after{background-image:url('../assets/panel-identity/submissions.svg')}
+#studentApp [data-student-panel-view="todo"] .v20-student-heading::after{background-image:url('../assets/panel-identity/activities.svg')}
+#studentApp [data-student-panel-view="calendar"] .v20-student-heading::after{background-image:url('../assets/panel-identity/dashboard-workspace.svg')}
+#studentApp [data-student-panel-view="feedback"] .v20-student-heading::after{background-image:url('../assets/panel-identity/archive-records.svg')}
+#studentApp [data-student-panel-view="account"] .v20-student-heading::after{background-image:url('../assets/panel-identity/classes-study.svg')}
+/* Overview: same style family as the numbered headers, without changing the live name. */
+#studentApp .v8-hero{box-sizing:border-box;isolation:isolate;margin:0 0 20px!important;height:290px;min-height:290px;overflow:hidden;padding:33px 31px!important;border-radius:26px;border:1px solid #f6d8b4;background:linear-gradient(118deg,#fff1df 10%,#ffe2bc 68%,#ffd29d 100%);box-shadow:0 8px 25px #b9783d13}
+#studentApp .v8-hero::after{width:230px;height:260px;opacity:.35}
+#studentApp .v8-hero-copy{max-width:54%;padding-top:0}
+#studentApp .v8-hero h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(28px,3.5vw,44px);line-height:1.14;margin-top:14px;margin-bottom:15px;letter-spacing:-.028em;color:#442d21}
+#studentApp .v8-hero-copy p{font-size:15px;line-height:1.6;color:#705443}
+#studentApp .v8-character{height:298px;width:340px;right:109px;bottom:0}
+#studentApp .v8-encouragement{top:55px;right:15px;transform:rotate(3deg) scale(.86);transform-origin:top right}
+#studentApp .v8-metrics{gap:15px;margin:0 0 19px}
+#studentApp .v8-metric{min-height:124px;box-sizing:border-box;border:1px solid #f3dfce;background:linear-gradient(150deg,#fff,#fff9f2);border-radius:19px;padding:19px;box-shadow:0 5px 17px #8e5c3010;min-width:0}
+#studentApp .v8-metric:nth-child(2){background:linear-gradient(135deg,#fff9ee,#ffeed6)}
+#studentApp .v8-metric:nth-child(3){background:linear-gradient(135deg,#fff,#f5f0ff)}
+#studentApp .v8-metric h3{font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:#806854}
+#studentApp .v8-metric strong{color:#5b310f;font-family:Georgia,serif}
+#studentApp .v8-paper{background:#fff;border:1px solid #f1dfcd;border-radius:20px;box-shadow:0 5px 19px #a5713a0b}
+#studentApp .v8-upcoming{padding:3px 20px 10px}
+#studentApp .v8-section-heading{min-height:65px}
+#studentApp .v8-section-heading h2{font-family:Georgia,serif;font-weight:800;color:#402819}
+#studentApp .v8-activity-list{gap:13px}
+#studentApp .v8-activity-row{border:1px solid #efddc9;background:#fff;border-radius:17px;box-shadow:0 5px 18px #a5713a0b;margin:0}
+#studentApp .v8-activity-row:hover{border-color:#f6bb83}
+#studentApp .student-activity-tabs{background:#fff9f3;border:1px solid #efd9c0;padding:8px;border-radius:18px;gap:8px;margin-bottom:20px}
+#studentApp .student-filter{border-radius:12px;transition:background-color .15s ease,color .15s ease}
+#studentApp .student-filter.active{background:linear-gradient(135deg,#ff8c30,#f16d13);color:#fff;border-color:#e97518;box-shadow:0 5px 13px #f37b2a32}
+#studentApp .v8-feedback{padding:2px 20px 14px}
+#studentApp .v8-feedback-row{border-color:#f2e4d7}
+#studentApp .v8-account-layout{align-items:stretch}
+#studentApp .v8-account-details>article{border-radius:16px;background:#fffaf6;border:1px solid #f1e3d5}
+#studentApp .v10-todo-summary article,#studentApp .v10-todo-card,#studentApp .v10-calendar-card,#studentApp .v10-calendar-agenda,#studentApp .v10-feedback-card{background:#fff;border:1px solid #f0dbc9;border-radius:19px;box-shadow:0 6px 21px #8f5a2c0d}
+#studentApp .v10-calendar-day{border-radius:12px}
+/* Student Competency Tracker: single-line milestones, detailed scores and history. */
+#studentApp .ct-student-content{padding:0;min-width:0}
+#studentApp .v20-ct-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:16px}
+#studentApp .v20-ct-stat{border-radius:19px;background:#fff;border:1px solid #f1dcc8;padding:22px;box-shadow:0 5px 17px #81562d0b;min-width:0}
+#studentApp .v20-ct-stat:nth-child(2){background:#fff1db}
+#studentApp .v20-ct-stat:nth-child(3){background:#f6f0ff}
+#studentApp .v20-ct-stat span{display:block;font-weight:750;font-size:12px;color:#785d47;letter-spacing:.02em}
+#studentApp .v20-ct-stat strong{display:block;font:800 34px/1.2 Georgia,serif;color:#512d16;margin:12px 0 5px}
+#studentApp .v20-ct-stat small{display:block;color:#856f5f;font:500 12px/1.4 Inter,system-ui,sans-serif}
+#studentApp .v20-ct-journey,#studentApp .v20-ct-detail{background:#fff;border:1px solid #f0dac5;box-shadow:0 6px 23px #8e5b2e0d;border-radius:22px;padding:24px;min-width:0}
+#studentApp .v20-ct-journey-head,#studentApp .v20-ct-detail-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+#studentApp .v20-ct-overline{font-weight:850;letter-spacing:.12em;font-size:10px;color:#b95c11}
+#studentApp .v20-ct-journey h2{font:800 clamp(20px,2vw,29px) Georgia,serif;color:#492b1a;margin:8px 0}
+#studentApp .v20-ct-journey p,#studentApp .v20-ct-explainer{font-size:13px;line-height:1.6;color:#7b6451;margin:0}
+#studentApp .v20-ct-retry{border:1px solid #f5c79a;border-radius:11px;background:#fff6eb;padding:10px 14px;font:750 12px Inter,system-ui,sans-serif;color:#a95816;cursor:pointer;white-space:nowrap}
+#studentApp .v20-ct-retry:hover{background:#ffebd2}
+#studentApp .ct-line-scroll{margin:13px 0 10px;padding:26px 4px;max-width:100%;scrollbar-color:#efb878 #fff1e3}
+#studentApp .ct-line{min-width:max-content;max-width:none}
+#studentApp .ct-node{width:148px;min-height:100px;padding:0 5px;box-sizing:border-box}
+#studentApp .ct-circle{height:58px;width:58px;border:3px solid #f8b878;background:#ffe4be;color:#884008;box-shadow:0 4px 8px #b16a1a13}
+#studentApp .ct-node:not(:last-child):after{top:27px;left:calc(50% + 29px);width:calc(100% - 58px)}
+#studentApp .ct-mastered .ct-circle{background:#f77b1b;border-color:#e56d14;color:#fff}
+#studentApp .ct-node-name{font-weight:720;font-size:12px;line-height:1.4;overflow-wrap:anywhere}
+#studentApp .v20-ct-legend{display:flex;flex-wrap:wrap;gap:18px;border-top:1px solid #f3e7db;padding-top:16px;color:#79624f;font-size:12px}
+#studentApp .v20-ct-legend span{display:flex;align-items:center;gap:7px}
+#studentApp .v20-ct-legend i{width:10px;height:10px;border-radius:50%;background:#e5e0db;border:1px solid #c2bcb8}
+#studentApp .v20-ct-legend .is-mastered{background:#f77b1b;border-color:#f77b1b}
+#studentApp .v20-ct-legend .is-developing{background:#ffe4be;border-color:#f3ad61}
+#studentApp .v20-ct-detail{margin-top:16px}
+#studentApp .v20-ct-detail h3{font:800 clamp(21px,2vw,29px) Georgia,serif;margin:7px 0 12px;color:#472b1d}
+#studentApp .v20-ct-level{display:inline-flex;border-radius:99px;background:#fff1df;border:1px solid #f5d9b8;padding:7px 13px;font-size:12px;color:#a95c13;font-weight:760}
+#studentApp .v20-ct-score{display:flex;flex-direction:column;align-items:flex-end;gap:3px;min-width:85px}
+#studentApp .v20-ct-score strong{font:800 37px/1 Georgia,serif;color:#ef7419}
+#studentApp .v20-ct-score small{font-size:11px;color:#826b5b}
+#studentApp .v20-ct-progress-track{height:10px;border-radius:99px;background:#f1e9e2;overflow:hidden;margin:22px 0 13px}
+#studentApp .v20-ct-progress-track>span{display:block;height:100%;background:linear-gradient(90deg,#ffb65a,#f17517);border-radius:99px;transition:width .25s ease}
+#studentApp .v20-ct-history-title{display:flex;justify-content:space-between;align-items:center;margin:22px 0 8px;gap:15px}
+#studentApp .v20-ct-history-title h4{font:800 17px Georgia,serif;margin:0}
+#studentApp .v20-ct-history-title span{font-size:12px;color:#876e58}
+#studentApp .v20-ct-history{border-top:1px solid #f2e5d8}
+#studentApp .ct-history{padding:14px 0;align-items:center}
+#studentApp .ct-history>div{min-width:0}
+#studentApp .ct-history strong{display:block;font-size:13px;font-weight:750;color:#3c2c22;overflow-wrap:anywhere}
+#studentApp .ct-history small{display:block;font-size:11px;color:#987d63;margin-top:4px}
+#studentApp .ct-history b{white-space:nowrap;color:#a9510e;font-size:13px}
+#studentApp .v20-ct-no-history{color:#8b745f;font-size:13px}
+#studentApp .v20-ct-state{min-height:230px;border:1px dashed #e9c8ab;border-radius:20px;background:linear-gradient(140deg,#fffaf5,#fff0df);text-align:center;padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;box-sizing:border-box}
+#studentApp .v20-ct-state-icon{display:grid;place-items:center;width:62px;height:62px;border-radius:19px;background:#ffecd5;color:#e5711a;font-size:31px;font-weight:800}
+#studentApp .v20-ct-state h3{font:800 22px Georgia,serif;margin:0}
+#studentApp .v20-ct-state p{font-size:13px;line-height:1.65;color:#785f4a;max-width:480px;margin:0}
+#studentApp .v20-ct-state small{line-height:1.6;color:#9b5f3a;max-width:550px}
+#studentApp .v20-ct-spinner{width:31px;height:31px;border-radius:50%;border:3px solid #f2d0ad;border-top-color:#ef781d;animation:v20spinner .75s linear infinite}
+@keyframes v20spinner{to{transform:rotate(360deg)}}
+/* Tablet: preserve artwork but never allow it over heading text. */
+@media(max-width:1050px){
+ #studentApp .v8-page-heading.v20-student-heading{padding:26px 220px 28px 25px;min-height:195px}
+ #studentApp .v8-page-heading.v20-student-heading::after{width:190px;height:166px;right:6px}
+ #studentApp .v8-hero-copy{max-width:58%}
+ #studentApp .v8-character{width:280px;right:55px}
+ #studentApp .v8-encouragement{display:none}
+}
+/* Mobile: illustrations appear UNDER text, not beside/behind it. */
+@media(max-width:760px){
+ #studentApp .v8-main{padding:14px 12px 25px!important}
+ #studentApp .v8-page-heading.v20-student-heading{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:11px!important;padding:22px 19px 0!important;min-height:unset!important;margin:0 0 16px!important;border-radius:20px;overflow:hidden}
+ #studentApp .v8-page-heading.v20-student-heading>div{width:100%!important;max-width:100%!important}
+ #studentApp .v8-page-heading.v20-student-heading::after{position:relative!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;transform:none!important;width:min(255px,90%)!important;height:128px!important;align-self:center!important;background-position:center bottom!important;margin:6px auto 0!important;flex-shrink:0}
+ #studentApp .v8-page-heading.v20-student-heading .v8-page-icon{width:44px!important;height:44px!important;flex-basis:44px!important}
+ #studentApp .v8-page-heading.v20-student-heading .v8-page-icon .v8-icon{width:23px!important;height:23px!important}
+ #studentApp .v8-page-heading.v20-student-heading h1{font-size:clamp(24px,7vw,33px)!important;margin:8px 0 7px!important;line-height:1.17!important}
+ #studentApp .v8-page-heading.v20-student-heading p{font-size:12px!important;line-height:1.55!important;max-width:100%!important}
+ #studentApp .v20-student-eyebrow{font-size:9px!important;letter-spacing:.1em!important}
+ #studentApp .v20-student-eyebrow b{font-size:13px!important}
+ #studentApp .v8-hero{margin:0 0 15px!important;height:auto!important;min-height:0!important;padding:21px 19px 0!important;border-radius:20px!important;display:flex;flex-direction:column;gap:0}
+ #studentApp .v8-hero-copy{max-width:100%!important;width:100%!important}
+ #studentApp .v8-hero h1{font-size:clamp(27px,7vw,37px)!important;letter-spacing:-.025em!important;margin:10px 0!important}
+ #studentApp .v8-hero-copy p{max-width:100%!important;font-size:12px!important;line-height:1.55!important}
+ #studentApp .v8-character{position:relative!important;bottom:auto!important;right:auto!important;left:auto!important;width:min(275px,100%)!important;height:160px!important;align-self:center!important;overflow:hidden}
+ #studentApp .v8-encouragement{display:none!important}
+ #studentApp .v8-metrics{gap:9px!important;grid-template-columns:repeat(3,minmax(0,1fr))}
+ #studentApp .v8-metric{padding:12px!important;min-height:110px!important;border-radius:14px!important;gap:7px!important}
+ #studentApp .v8-upcoming{padding:0 12px 9px}
+ #studentApp .v20-ct-overview{gap:8px;grid-template-columns:repeat(3,minmax(0,1fr))}
+ #studentApp .v20-ct-stat{padding:14px 10px;min-height:125px;border-radius:15px}
+ #studentApp .v20-ct-stat span{font-size:10px}
+ #studentApp .v20-ct-stat strong{font-size:27px;margin:8px 0 4px}
+ #studentApp .v20-ct-stat small{font-size:10px}
+ #studentApp .v20-ct-journey,#studentApp .v20-ct-detail{padding:16px;border-radius:17px}
+ #studentApp .v20-ct-journey-head{align-items:flex-start}
+ #studentApp .v20-ct-journey h2{font-size:20px}
+ #studentApp .v20-ct-retry{padding:9px;font-size:11px}
+ #studentApp .ct-node{width:120px}
+ #studentApp .ct-node-name{font-size:11px}
+ #studentApp .ct-detail h3{font-size:22px}
+}
+@media(max-width:400px){
+ #studentApp .v8-page-heading.v20-student-heading{padding:18px 15px 0!important}
+ #studentApp .v8-page-heading.v20-student-heading::after{height:112px!important}
+ #studentApp .v8-metrics{grid-template-columns:1fr 1fr!important}
+ #studentApp .v8-metric:last-child{grid-column:1/-1}
+ #studentApp .v20-ct-overview{grid-template-columns:1fr 1fr}
+ #studentApp .v20-ct-stat:last-child{grid-column:1/-1;min-height:0}
+ #studentApp .v20-ct-stat{min-height:0}
+ #studentApp .v20-ct-detail-top{align-items:flex-start}
+ #studentApp .v20-ct-score strong{font-size:28px}
+ #studentApp .v20-ct-score{min-width:75px}
+ #studentApp .v20-ct-journey-head{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){#studentApp .v20-ct-spinner{animation:none}#studentApp .v20-ct-progress-track span{transition:none}}

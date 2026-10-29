@@ -1,0 +1,92 @@
+/* Mathside v22: Student Dashboard CT + true stacked mobile header cards.
+   Student-only presentation. No teacher SQL, grade, or archive mutations. */
+#studentApp .v22-mobile-illustration{display:none}
+#studentApp .v22-header-label{display:contents}
+#studentApp .v22-dashboard-competencies{
+  margin:0 0 19px;padding:21px 21px 23px;min-width:0;
+  border:1px solid #f1dac4;border-radius:22px;background:#fff;
+  box-shadow:0 6px 19px #a5713a0c;overflow:hidden;
+}
+#studentApp .v22-competency-heading{display:flex;align-items:center;justify-content:flex-start;margin-bottom:15px;min-height:0;padding:0 0 13px;border-bottom:1px solid #f4e6d8}
+#studentApp .v22-competency-heading>div{min-width:0}
+#studentApp .v22-section-kicker{font:800 10px/1.4 Inter,system-ui,sans-serif;letter-spacing:.13em;color:#b65c12}
+#studentApp .v22-competency-heading h2{display:flex;align-items:center;gap:9px;font:800 clamp(21px,2.5vw,28px)/1.18 Georgia,serif;color:#412817;margin:7px 0}
+#studentApp .v22-competency-heading h2 svg{color:#ee7515;width:24px;height:24px;flex:0 0 24px}
+#studentApp .v22-competency-heading p{color:#7d6758;font-size:13px;line-height:1.45;margin:0}
+#studentApp .v22-dashboard-competencies .v20-ct-journey,#studentApp .v22-dashboard-competencies .v20-ct-detail{box-shadow:none;border-color:#f1e3d4}
+#studentApp .v22-dashboard-competencies .v20-ct-state{min-height:175px}
+/* No full-page panel called Competencies remains; the exact same scorer renders above Upcoming Tasks. */
+@media(max-width:760px){
+ /* Each student section heading becomes two distinct rounded containers. */
+ #studentApp .v8-page-heading.v20-student-heading{
+   display:flex!important;flex-direction:column!important;align-items:stretch!important;
+   gap:9px!important;padding:0!important;background:transparent!important;
+   border:0!important;box-shadow:none!important;border-radius:0!important;
+   overflow:visible!important;min-height:0!important;margin-bottom:17px!important;
+ }
+ #studentApp .v8-page-heading.v20-student-heading::before,
+ #studentApp .v8-page-heading.v20-student-heading::after{display:none!important;content:none!important}
+ #studentApp .v8-page-heading.v20-student-heading .v22-mobile-illustration{
+   display:block!important;order:0;position:relative!important;z-index:1;
+   align-self:stretch!important;width:100%!important;max-width:100%!important;
+   height:clamp(138px,40vw,205px)!important;min-height:138px;
+   border:1px solid #f5d6b7;box-sizing:border-box;border-radius:20px;
+   background-color:#ffe8cc;background-repeat:no-repeat;background-position:center center;
+   background-size:contain;overflow:hidden;flex:0 0 auto;
+ }
+ #studentApp [data-student-panel-view="activities"] .v22-mobile-illustration{background-image:url('../assets/panel-identity/activities.svg')}
+ #studentApp [data-student-panel-view="performance"] .v22-mobile-illustration{background-image:url('../assets/panel-identity/performance-project.svg')}
+ #studentApp [data-student-panel-view="grades"] .v22-mobile-illustration{background-image:url('../assets/panel-identity/submissions.svg')}
+ #studentApp [data-student-panel-view="todo"] .v22-mobile-illustration{background-image:url('../assets/panel-identity/activities.svg')}
+ #studentApp [data-student-panel-view="calendar"] .v22-mobile-illustration{background-image:url('../assets/panel-identity/dashboard-workspace.svg')}
+ #studentApp [data-student-panel-view="feedback"] .v22-mobile-illustration{background-image:url('../assets/panel-identity/archive-records.svg')}
+ #studentApp [data-student-panel-view="account"] .v22-mobile-illustration{background-image:url('../assets/panel-identity/classes-study.svg')}
+ #studentApp .v8-page-heading.v20-student-heading .v22-header-label{
+   display:flex!important;order:1;flex-direction:row;align-items:center;gap:13px;
+   width:100%!important;max-width:100%!important;min-width:0;box-sizing:border-box;
+   background:linear-gradient(110deg,#fff9f2,#ffe6c8);border:1px solid #f1d8bb;
+   border-radius:19px;padding:19px 17px!important;position:relative;
+ }
+ #studentApp .v8-page-heading.v20-student-heading .v22-header-label>div{
+   flex:1 1 auto;min-width:0;max-width:100%;width:auto!important
+ }
+ #studentApp .v8-page-heading.v20-student-heading .v8-page-icon{align-self:flex-start!important;margin-top:4px;flex-shrink:0}
+ #studentApp .v8-page-heading.v20-student-heading h1{overflow-wrap:anywhere;font-size:clamp(24px,6.6vw,32px)!important;line-height:1.17!important}
+ /* Overview: same two containers, artwork ABOVE the welcome text. */
+ #studentApp .v8-hero{
+   display:flex!important;flex-direction:column!important;align-items:stretch!important;
+   height:auto!important;min-height:0!important;gap:9px!important;
+   margin:0 0 16px!important;padding:0!important;background:transparent!important;
+   border:0!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important
+ }
+ #studentApp .v8-hero::after{display:none!important}
+ #studentApp .v8-hero .v8-character{
+   display:block!important;order:0;position:relative!important;inset:auto!important;
+   align-self:stretch!important;width:100%!important;height:clamp(138px,40vw,205px)!important;
+   box-sizing:border-box;background:#ffe5c6 url('../assets/panel-identity/dashboard-workspace.svg') center center / contain no-repeat!important;
+   border:1px solid #f5d6b7;border-radius:20px!important;opacity:1!important;overflow:hidden!important
+ }
+ #studentApp .v8-hero .v8-character>*{display:none!important}
+ #studentApp .v8-hero .v8-hero-copy{
+   display:block!important;order:1;max-width:100%!important;width:100%!important;
+   box-sizing:border-box;flex:0 0 auto!important;z-index:1;
+   padding:20px 18px!important;border:1px solid #f1d8bb;border-radius:19px;
+   background:linear-gradient(120deg,#fff9f2,#ffe6c8);
+ }
+ #studentApp .v8-hero .v8-hero-sparks,#studentApp .v8-hero .v8-encouragement{display:none!important}
+ #studentApp .v22-dashboard-competencies{padding:14px 12px 15px;margin-bottom:14px;border-radius:19px}
+ #studentApp .v22-competency-heading{margin-bottom:10px;padding:1px 2px 12px}
+ #studentApp .v22-competency-heading h2{font-size:23px}
+ #studentApp .v22-competency-heading p{font-size:12px}
+ #studentApp .v22-dashboard-competencies .v20-ct-detail:not(.v22-detail-open){display:none!important}
+ #studentApp .v22-dashboard-competencies .v20-ct-overview{gap:7px}
+ #studentApp .v22-dashboard-competencies .v20-ct-journey,
+ #studentApp .v22-dashboard-competencies .v20-ct-detail{padding:13px 11px}
+}
+@media(max-width:360px){
+ #studentApp .v8-page-heading.v20-student-heading .v22-header-label{padding:16px 13px!important;gap:9px}
+ #studentApp .v8-page-heading.v20-student-heading .v8-page-icon{width:39px!important;height:39px!important;flex-basis:39px!important}
+ #studentApp .v8-page-heading.v20-student-heading h1{font-size:24px!important}
+ #studentApp .v8-hero .v8-hero-copy{padding:17px 14px!important}
+ #studentApp .v22-dashboard-competencies{padding:12px 10px}
+}
