@@ -33,7 +33,16 @@ const isConfigured = Boolean(
 
 const db = isConfigured
   ? window.supabase.createClient(config.SUPABASE_URL, config.SUPABASE_PUBLISHABLE_KEY, {
-      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: !window.MathsideAuthStorage?.isNative(),
+        // Android: use native Preferences to keep the Supabase refresh token across
+        // app closes / WebView storage eviction. Browsers keep the normal behavior.
+        ...(window.MathsideAuthStorage?.isNative()
+          ? { storage: window.MathsideAuthStorage.storage }
+          : {})
+      }
     })
   : null;
 
@@ -927,16 +936,24 @@ async function loadCurrentIdentity() {
 async function routeAuthenticatedUser() {
   if (!db) return;
   await loadCurrentIdentity();
-  // Enable Firebase registration only on native Android. Never block login if offline.
-  window.MathsidePush?.signIn(db, state.user.id).catch(error => console.warn('Push registration:', error));
+  // Only prepare notification controls here. Do NOT launch an Android permission
+  // request during login or startup: it can interrupt WebView initialization.
+  // The user explicitly enables push from the teacher/student dashboard.
+  try {
+    window.MathsidePush?.signIn(db, state.user.id)?.catch(error => console.warn('Push setup:', error));
+  } catch (error) {
+    console.warn('Optional push setup skipped:', error);
+  }
   if (state.profile.role === 'teacher') {
     await loadTeacherData();
     openTeacherApp();
+    if ($('#mathsideRestoreRetry')) $('#mathsideRestoreRetry').hidden = true;
     return;
   }
   if (state.profile.role === 'student') {
     await loadStudentData();
     openStudentApp();
+    if ($('#mathsideRestoreRetry')) $('#mathsideRestoreRetry').hidden = true;
     return;
   }
   throw new Error('This account has no valid Mathside role.');
@@ -993,6 +1010,8 @@ function openStudentApp() {
 }
 
 function returnPublic() {
+  const restoreRetry = $('#mathsideRestoreRetry');
+  if (restoreRetry) restoreRetry.hidden = true;
   closeTeacherSidebar?.();
   $('#teacherApp').hidden = true;
   $('#studentApp').hidden = true;
@@ -4469,24 +4488,36 @@ $('#gradeForm').addEventListener('submit', async event => {
 });
 
 // ---------- STARTUP / SESSION RESTORE ----------
-(async function restoreSession() {
-  if (!db) {
-    if (window.MATHSIDE_PREVIEW) return;
-    setTimeout(() => toast('Mathside is ready for Supabase. Edit js/config.js before signing in.', 'orange'), 500);
-    return;
-  }
+// Network errors must NEVER erase a valid saved login. Only clicking Sign out
+// or Supabase explicitly reporting SIGNED_OUT should clear the native session.
+let restoreBusy = false;
+async function restoreSession() {
+  if (!db || restoreBusy) return;
+  restoreBusy = true;
+  const retry = $('#mathsideRestoreRetry');
+  if (retry) retry.hidden = true;
   try {
-    const { data } = await db.auth.getSession();
-    if (!data?.session) return;
-    await withLoading('Restoring your Mathside…', 'Loading your Supabase classroom.', routeAuthenticatedUser);
+    const { data, error } = await db.auth.getSession();
+    if (error) throw error;
+    if (!data?.session) return; // first login or explicit sign-out
+    await withLoading('Restoring your Mathside…', 'Opening your saved classroom.', routeAuthenticatedUser);
   } catch (error) {
-    console.error(error);
-    try { await db.auth.signOut({ scope: 'local' }); } catch {}
-    resetState();
-    returnPublic();
-    toast('Your previous session could not be restored. Please sign in again.', 'orange');
+    console.warn('Mathside saved session restore deferred:', error?.message || error);
+    // Preserve the Supabase refresh token and show a retry action instead of
+    // wiping the session or asking for the password again.
+    if (retry) retry.hidden = false;
+  } finally {
+    restoreBusy = false;
   }
-})();
+}
+$('#mathsideRestoreRetry')?.addEventListener('click', restoreSession);
+if (!db) {
+  if (!window.MATHSIDE_PREVIEW) {
+    setTimeout(() => toast('Mathside is ready for Supabase. Edit js/config.js before signing in.', 'orange'), 500);
+  }
+} else {
+  restoreSession();
+}
 
 if (db) {
   db.auth.onAuthStateChange((event) => {

@@ -111,9 +111,21 @@
     root.document?.querySelectorAll('[data-mathside-push-enable]')?.forEach(button => {
       if (boundButtons.has(button)) return;
       boundButtons.add(button);
-      button.addEventListener('click', () => { enable(); });
+      button.addEventListener('click', async () => {
+        if (registrationBusy) return;
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+        try { await enable(); }
+        finally {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+        }
+      });
     });
-    return enable();
+    // Crucial: don't request Android notification permission during login,
+    // dashboard restore, or app startup. Permission is explicitly requested
+    // only when the user taps "Enable notifications" in the dashboard.
+    return true;
   }
 
   async function signOut() {

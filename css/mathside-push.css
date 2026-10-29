@@ -15,3 +15,7 @@
   font: 22px/1 sans-serif; cursor:pointer; min-height: 32px; min-width: 32px; color:#536070;
 }
 @media (prefers-reduced-motion: reduce) { #mathside-push-banner { transition: none; } }
+
+/* Offline dashboard restoration: keep the saved credentials, allow retry. */
+.mathside-restore-retry { position: fixed; z-index: 10000; left: 12px; right: 12px; bottom: max(18px, env(safe-area-inset-bottom)); display: flex; justify-content: center; pointer-events: none; }
+#mathsideRestoreRetry:not([hidden]) { pointer-events: auto; cursor: pointer; max-width: 490px; padding: 13px 17px; border: 2px solid #df730e; background: #fff8ed; color: #58371a; border-radius: 14px; box-shadow: 0 9px 28px #0002; font: 600 14px/1.4 system-ui, sans-serif; }
