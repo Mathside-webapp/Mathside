@@ -1,0 +1,95 @@
+
+name: Build Mathside Android APK
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout Mathside
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Prepare Mathside website and Capacitor
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f index.html || { echo "index.html must be at the repository root"; exit 1; }
+
+          if [ ! -f package.json ]; then
+            npm init -y
+          fi
+
+          npm install --no-audit --no-fund --save-exact @capacitor/core@8.5.3 @capacitor/android@8.5.3
+          npm install --no-audit --no-fund --save-exact --save-dev @capacitor/cli@8.5.3
+
+          mkdir -p www
+          cp index.html www/index.html
+
+          for folder in js css assets downloads; do
+            if [ -d "$folder" ]; then
+              cp -R "$folder" www/
+            fi
+          done
+
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.mathside.app",
+            "appName": "Mathside",
+            "webDir": "www",
+            "server": {
+              "androidScheme": "https"
+            }
+          }
+          EOF
+
+      - name: Create and sync Android project
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ ! -d android ]; then
+            npx cap add android
+          fi
+
+          npx cap sync android
+
+      - name: Build debug APK
+        working-directory: android
+        shell: bash
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Upload Mathside APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mathside-Android-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
